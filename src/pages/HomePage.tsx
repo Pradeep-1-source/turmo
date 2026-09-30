@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from '@/components/Hero';
 import TrustSection from '@/components/TrustSection';
 import AboutSection from '@/components/AboutSection';
@@ -16,19 +16,50 @@ import {
   fetchQualityContent,
   fetchSiteSettings,
 } from '@/lib/supabase';
+import {
+  defaultHomepageContent,
+  defaultProducts,
+  defaultCategories,
+  defaultContactSettings,
+  defaultQualityContent,
+  defaultSiteSettings,
+} from '@/lib/defaultData';
+import {
+  HomepageContent,
+  Product,
+  Category,
+  ContactSettings,
+  QualityContent,
+  SiteSettings,
+} from '@/types/database';
 
-// Revalidate every 60 seconds
-export const revalidate = 60;
+export default function HomePage() {
+  const [homepage, setHomepage] = useState<HomepageContent>(defaultHomepageContent);
+  const [products, setProducts] = useState<Product[]>(defaultProducts);
+  const [categories, setCategories] = useState<Category[]>(defaultCategories);
+  const [contact, setContact] = useState<ContactSettings>(defaultContactSettings);
+  const [quality, setQuality] = useState<QualityContent>(defaultQualityContent);
+  const [site, setSite] = useState<SiteSettings>(defaultSiteSettings);
 
-export default async function HomePage() {
-  const [homepage, products, categories, contact, quality, site] = await Promise.all([
-    fetchHomepageContent(),
-    fetchProducts(),
-    fetchCategories(),
-    fetchContactSettings(),
-    fetchQualityContent(),
-    fetchSiteSettings(),
-  ]);
+  useEffect(() => {
+    Promise.all([
+      fetchHomepageContent(),
+      fetchProducts(),
+      fetchCategories(),
+      fetchContactSettings(),
+      fetchQualityContent(),
+      fetchSiteSettings(),
+    ]).then(([h, p, c, ct, q, s]) => {
+      setHomepage(h);
+      setProducts(p);
+      setCategories(c);
+      setContact(ct);
+      setQuality(q);
+      setSite(s);
+    }).catch(err => {
+      console.warn('Using default content:', err);
+    });
+  }, []);
 
   return (
     <>

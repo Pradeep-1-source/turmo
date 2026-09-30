@@ -5,7 +5,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+import { Outlet } from 'react-router-dom';
+
+export default function AdminLayout({ children }: { children?: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -62,7 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   // If on login page, render children without sidebar
   if (isLoginPage) {
-    return <div className="min-h-screen bg-navy-dark text-slate-100">{children}</div>;
+    return <div className="min-h-screen bg-navy-dark text-slate-100">{children || <Outlet />}</div>;
   }
 
   // Loading or checking authentication
@@ -84,7 +86,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen bg-navy-dark text-slate-100 flex flex-col md:flex-row">
       <AdminSidebar onLogout={handleLogout} />
       <div className="flex-1 flex flex-col overflow-y-auto min-h-screen bg-navy-deep">
-        {children}
+        {children || <Outlet />}
       </div>
     </div>
   );

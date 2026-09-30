@@ -1,24 +1,27 @@
-import React from 'react';
-import type { Metadata } from 'next';
+import React, { useState, useEffect } from 'react';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import CTASection from '@/components/CTASection';
 import { fetchProducts, fetchCategories, fetchSiteSettings } from '@/lib/supabase';
+import { defaultProducts, defaultCategories, defaultSiteSettings } from '@/lib/defaultData';
+import { Product, Category, SiteSettings } from '@/types/database';
 import { Sparkles } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Export Product Catalogue | Urban Fresh B2B Agricultural Exports',
-  description:
-    'Browse our export-grade Indian agricultural commodities: High-curcumin Turmeric, Raw Virgin Coconut Oil, and Cold-Pressed Groundnut Oil. Inquire directly on WhatsApp.',
-};
+export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>(defaultProducts);
+  const [categories, setCategories] = useState<Category[]>(defaultCategories);
+  const [site, setSite] = useState<SiteSettings>(defaultSiteSettings);
 
-export const revalidate = 60;
-
-export default async function ProductsPage() {
-  const [products, categories, site] = await Promise.all([
-    fetchProducts(),
-    fetchCategories(),
-    fetchSiteSettings(),
-  ]);
+  useEffect(() => {
+    Promise.all([
+      fetchProducts(),
+      fetchCategories(),
+      fetchSiteSettings(),
+    ]).then(([p, c, s]) => {
+      setProducts(p);
+      setCategories(c);
+      setSite(s);
+    }).catch(err => console.warn(err));
+  }, []);
 
   return (
     <div className="pt-28 pb-16 bg-navy-dark min-h-screen">

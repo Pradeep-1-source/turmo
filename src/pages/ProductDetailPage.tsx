@@ -1,8 +1,7 @@
-import React from 'react';
-import type { Metadata } from 'next';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { useParams } from 'react-router-dom';
 import {
   MessageCircle,
   ArrowLeft,
@@ -15,57 +14,69 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { fetchProductBySlug, fetchProducts, fetchSiteSettings } from '@/lib/supabase';
+import { defaultProducts, defaultSiteSettings } from '@/lib/defaultData';
 import { generateWhatsAppProductEnquiry } from '@/lib/whatsapp';
 import ProductCard from '@/components/ProductCard';
+import { Product, SiteSettings } from '@/types/database';
 
-interface PageProps {
-  params: { slug: string };
-}
+export default function ProductDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+  
+  // Find initial fallback product matching slug if available
+  const initialProduct = defaultProducts.find((p) => p.slug === slug) || defaultProducts[0];
+  const [product, setProduct] = useState<Product | null>(initialProduct);
+  const [allProducts, setAllProducts] = useState<Product[]>(defaultProducts);
+  const [site, setSite] = useState<SiteSettings>(defaultSiteSettings);
+  const [loading, setLoading] = useState(true);
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const product = await fetchProductBySlug(params.slug);
-  if (!product) {
-    return {
-      title: 'Product Not Found | Urban Fresh',
-    };
+  useEffect(() => {
+    if (!slug) return;
+    setLoading(true);
+    Promise.all([
+      fetchProductBySlug(slug),
+      fetchProducts(),
+      fetchSiteSettings(),
+    ])
+      .then(([prod, prods, s]) => {
+        if (prod) {
+          setProduct(prod);
+        }
+        setAllProducts(prods);
+        setSite(s);
+      })
+      .catch((err) => console.warn(err))
+      .finally(() => setLoading(false));
+  }, [slug]);
+
+  if (!product && !loading) {
+    return (
+      <div className="pt-32 pb-20 bg-navy-dark min-h-screen text-center">
+        <h1 className="text-3xl font-bold text-white mb-4">Product Not Found</h1>
+        <p className="text-slate-400 mb-8">The requested export product could not be found.</p>
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-green text-navy-dark font-bold"
+        >
+          <ArrowLeft className="w-4 h-4" /> Return to Products
+        </Link>
+      </div>
+    );
   }
 
-  return {
-    title: product.seo_title || `${product.title} | Urban Fresh Export`,
-    description:
-      product.seo_description ||
-      product.tagline ||
-      `Export specifications, MOQ, and packaging details for ${product.title}.`,
-    openGraph: {
-      title: product.title,
-      description: product.tagline || product.description.slice(0, 160),
-      images: product.images?.[0]?.image_url ? [product.images[0].image_url] : [],
-    },
-  };
-}
-
-export const revalidate = 60;
-
-export default async function ProductDetailPage({ params }: PageProps) {
-  const [product, allProducts, site] = await Promise.all([
-    fetchProductBySlug(params.slug),
-    fetchProducts(),
-    fetchSiteSettings(),
-  ]);
-
-  if (!product) {
-    notFound();
-  }
+  const currentProduct = product || initialProduct;
 
   const primaryImage =
-    product.images && product.images.length > 0
-      ? product.images[0].image_url
+    currentProduct.images && currentProduct.images.length > 0
+      ? currentProduct.images[0].image_url
       : '/images/turmeric.jpg';
 
-  const whatsappUrl = generateWhatsAppProductEnquiry(product.title, site.whatsapp_number);
+  const whatsappUrl = generateWhatsAppProductEnquiry(
+    currentProduct.title,
+    site.whatsapp_number
+  );
 
   const relatedProducts = allProducts
-    .filter((p) => p.id !== product.id)
+    .filter((p) => p.id !== currentProduct.id)
     .slice(0, 2);
 
   return (
@@ -82,7 +93,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </Link>
           <span>/</span>
           <span className="text-brand-lime font-medium truncate max-w-[200px] sm:max-w-none">
-            {product.title}
+            {currentProduct.title}
           </span>
         </nav>
 
@@ -93,7 +104,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-navy-card border border-white/10 shadow-card-dark group">
               <Image
                 src={primaryImage}
-                alt={product.title}
+                alt={currentProduct.title}
                 fill
                 priority
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -104,22 +115,22 @@ export default async function ProductDetailPage({ params }: PageProps) {
               {/* Tag / Category Badge */}
               <div className="absolute top-5 left-5">
                 <span className="px-3.5 py-1.5 rounded-full bg-navy-dark/90 border border-brand-green/30 text-xs font-bold text-brand-lime uppercase tracking-wider backdrop-blur-md">
-                  {product.category?.name || 'Export Commodity'}
+                  {currentProduct.category?.name || 'Export Commodity'}
                 </span>
               </div>
             </div>
 
             {/* Thumbnail selector placeholder if multiple images */}
-            {product.images && product.images.length > 1 && (
+            {currentProduct.images && currentProduct.images.length > 1 && (
               <div className="flex items-center gap-3">
-                {product.images.map((img, idx) => (
+                {currentProduct.images.map((img, idx) => (
                   <div
                     key={idx}
                     className="relative w-20 h-20 rounded-xl overflow-hidden border border-brand-green/30 bg-navy-surface cursor-pointer"
                   >
                     <Image
                       src={img.image_url}
-                      alt={img.alt_text || product.title}
+                      alt={img.alt_text || currentProduct.title}
                       fill
                       className="object-cover"
                     />
@@ -147,12 +158,12 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 Verified Commercial Batch
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3">
-                {product.title}
+                {currentProduct.title}
               </h1>
 
-              {product.tagline && (
+              {currentProduct.tagline && (
                 <p className="text-base sm:text-lg text-brand-lime/90 font-medium leading-snug">
-                  {product.tagline}
+                  {currentProduct.tagline}
                 </p>
               )}
             </div>
@@ -187,62 +198,62 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <h3 className="text-sm uppercase tracking-wider font-bold text-slate-300">
                 Commodity Overview
               </h3>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                {product.description}
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed whitespace-pre-line">
+                {currentProduct.description}
               </p>
             </div>
 
             {/* Core Export Specifications Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-              {product.grade && (
+              {currentProduct.grade && (
                 <div className="p-4 rounded-xl bg-navy-surface/80 border border-white/5">
                   <div className="flex items-center gap-2 text-brand-lime text-xs uppercase font-bold tracking-wider mb-1">
                     <Award className="w-3.5 h-3.5" />
                     Grade / Quality
                   </div>
-                  <p className="text-sm text-white font-medium">{product.grade}</p>
+                  <p className="text-sm text-white font-medium">{currentProduct.grade}</p>
                 </div>
               )}
 
-              {product.moq && (
+              {currentProduct.moq && (
                 <div className="p-4 rounded-xl bg-navy-surface/80 border border-white/5">
                   <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
                     <Package className="w-3.5 h-3.5" />
                     Minimum Order Quantity (MOQ)
                   </div>
-                  <p className="text-sm text-white font-medium">{product.moq}</p>
+                  <p className="text-sm text-white font-medium">{currentProduct.moq}</p>
                 </div>
               )}
 
-              {product.packaging && (
+              {currentProduct.packaging && (
                 <div className="p-4 rounded-xl bg-navy-surface/80 border border-white/5 sm:col-span-2">
                   <div className="flex items-center gap-2 text-brand-lime text-xs uppercase font-bold tracking-wider mb-1">
                     <Layers className="w-3.5 h-3.5" />
                     Packaging Options
                   </div>
-                  <p className="text-sm text-white font-medium">{product.packaging}</p>
+                  <p className="text-sm text-white font-medium">{currentProduct.packaging}</p>
                 </div>
               )}
 
-              {product.certifications && (
+              {currentProduct.certifications && (
                 <div className="p-4 rounded-xl bg-navy-surface/80 border border-white/5 sm:col-span-2">
                   <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
                     <ShieldCheck className="w-3.5 h-3.5" />
                     Certifications & Compliance
                   </div>
-                  <p className="text-sm text-white font-medium">{product.certifications}</p>
+                  <p className="text-sm text-white font-medium">{currentProduct.certifications}</p>
                 </div>
               )}
             </div>
 
             {/* Dynamic Export Highlights List */}
-            {product.highlights && product.highlights.length > 0 && (
+            {currentProduct.highlights && currentProduct.highlights.length > 0 && (
               <div className="pt-4 border-t border-white/10 space-y-3">
                 <h3 className="text-sm uppercase tracking-wider font-bold text-slate-300">
                   Export Highlights & Technical Data
                 </h3>
                 <div className="space-y-2">
-                  {product.highlights.map((h, i) => (
+                  {currentProduct.highlights.map((h, i) => (
                     <div
                       key={i}
                       className="p-3 rounded-xl bg-navy-surface/50 border border-white/5 flex items-start gap-3"

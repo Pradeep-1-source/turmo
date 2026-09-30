@@ -1,23 +1,24 @@
-import React from 'react';
-import type { Metadata } from 'next';
+import React, { useState, useEffect } from 'react';
 import { fetchContactSettings, fetchSiteSettings } from '@/lib/supabase';
+import { defaultContactSettings, defaultSiteSettings } from '@/lib/defaultData';
+import { ContactSettings, SiteSettings } from '@/types/database';
 import ContactSection from '@/components/ContactSection';
 import CTASection from '@/components/CTASection';
 import { Sparkles } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Contact Us | Urban Fresh - B2B Agricultural Exports Desk',
-  description:
-    'Contact Urban Fresh in Erode, Tamil Nadu. Connect directly via WhatsApp or telephone for B2B export quotes, container quantities, and product specifications.',
-};
+export default function ContactPage() {
+  const [contact, setContact] = useState<ContactSettings>(defaultContactSettings);
+  const [site, setSite] = useState<SiteSettings>(defaultSiteSettings);
 
-export const revalidate = 60;
-
-export default async function ContactPage() {
-  const [contact, site] = await Promise.all([
-    fetchContactSettings(),
-    fetchSiteSettings(),
-  ]);
+  useEffect(() => {
+    Promise.all([
+      fetchContactSettings(),
+      fetchSiteSettings(),
+    ]).then(([c, s]) => {
+      setContact(c);
+      setSite(s);
+    }).catch(err => console.warn(err));
+  }, []);
 
   return (
     <div className="pt-28 pb-20 bg-navy-dark min-h-screen">
