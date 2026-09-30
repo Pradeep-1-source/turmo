@@ -50,12 +50,12 @@ Urban Fresh is a premium, international export-focused digital platform connecti
 
 ## 🚀 Technology Stack
 
-- **Framework:** Next.js 14 (App Router) + React 18
+- **Framework:** Vite + React 18 + React Router
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + Custom Brand Tokens
 - **Icons:** Lucide React
 - **Database & Storage:** Supabase PostgreSQL + Supabase Storage + Row Level Security (RLS)
-- **Deployment:** Vercel Ready
+- **Deployment:** Vercel Ready (Single Page Application with SPA Rewrites)
 
 ---
 
@@ -70,15 +70,15 @@ Urban Fresh is a premium, international export-focused digital platform connecti
    - Seed the initial categories and 3 flagship commodities.
 4. Copy your Supabase credentials into `.env.local`:
    ```bash
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
+   VITE_SUPABASE_URL=https://your-project-id.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key
    ```
 
 ---
 
 ## 🔐 Admin Dashboard Access
 
-- **URL:** [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
+- **URL:** [http://localhost:5173/admin/login](http://localhost:5173/admin/login)
 - **Default Email:** `admin@urbanfresh.in`
 - **Default Password:** `UrbanFreshExport2026!`
 - *(A one-click "Autofill Default Administrator Credentials" button is provided on the login page for rapid access).*
@@ -91,11 +91,14 @@ Urban Fresh is a premium, international export-focused digital platform connecti
 # Install dependencies
 npm install
 
+# Start Vite development server
+npm run dev
+
 # Build production bundle
 npm run build
 
-# Start production server
-npm run start
+# Preview production build locally
+npm run preview
 ```
 
-Server runs on: [http://localhost:3000](http://localhost:3000)
+Server runs on: [http://localhost:5173](http://localhost:5173)
