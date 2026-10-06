@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import { AdminProvider } from '@/components/admin/AdminContext';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-
 import { Outlet } from 'react-router-dom';
 
 export default function AdminLayout({ children }: { children?: React.ReactNode }) {
@@ -70,7 +70,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
   // Loading or checking authentication
   if (isAuthenticated === null) {
     return (
-      <div className="min-h-screen bg-navy-dark flex items-center justify-center">
+      <div className="min-h-screen bg-navy-dark flex items-center justify-center p-4">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
           <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
@@ -81,13 +81,15 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
     );
   }
 
-  // If authenticated, render full dashboard layout
+  // If authenticated, render full responsive dashboard layout
   return (
-    <div className="min-h-screen bg-navy-dark text-slate-100 flex flex-col md:flex-row">
-      <AdminSidebar onLogout={handleLogout} />
-      <div className="flex-1 flex flex-col overflow-y-auto min-h-screen bg-navy-deep">
-        {children || <Outlet />}
+    <AdminProvider>
+      <div className="min-h-screen bg-navy-dark text-slate-100 flex flex-col md:flex-row w-full overflow-x-hidden">
+        <AdminSidebar onLogout={handleLogout} />
+        <div className="flex-1 flex flex-col min-w-0 min-h-screen bg-navy-deep overflow-y-auto">
+          {children || <Outlet />}
+        </div>
       </div>
-    </div>
+    </AdminProvider>
   );
 }

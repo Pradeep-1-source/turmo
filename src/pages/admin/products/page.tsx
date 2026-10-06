@@ -155,10 +155,10 @@ export default function AdminProductsPage() {
         </div>
       )}
 
-      <main className="p-6 sm:p-8 space-y-8 flex-1">
+      <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         {/* Top Control Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
               Select Product:
             </span>
@@ -171,7 +171,7 @@ export default function AdminProductsPage() {
                   setIsEditing(false);
                 }
               }}
-              className="py-2 px-4 rounded-xl bg-navy-card border border-white/10 text-white text-xs font-semibold focus:outline-none focus:border-brand-green"
+              className="py-2.5 px-3.5 rounded-xl bg-navy-card border border-white/10 text-white text-xs font-semibold focus:outline-none focus:border-brand-green w-full sm:w-auto"
             >
               {products.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -181,32 +181,32 @@ export default function AdminProductsPage() {
             </select>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               onClick={handleAddNew}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-xs shadow-glow-green hover:scale-105 transition-all"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-xs shadow-glow-green hover:scale-105 active:scale-95 transition-all"
             >
               <Plus className="w-4 h-4" />
-              <span>Add New Product</span>
+              <span>Add New</span>
             </button>
 
             {selectedProduct && (
               <button
                 onClick={() => setIsEditing(!isEditing)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-navy-surface border border-white/10 hover:border-brand-green text-white font-semibold text-xs transition-all"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-navy-surface border border-white/10 hover:border-brand-green text-white font-semibold text-xs transition-all active:scale-95"
               >
                 <Edit className="w-4 h-4 text-brand-green" />
-                <span>{isEditing ? 'Cancel Edit' : 'Edit Product'}</span>
+                <span>{isEditing ? 'Cancel Edit' : 'Edit'}</span>
               </button>
             )}
 
             {selectedProduct && (
               <button
                 onClick={() => handleDelete(selectedProduct.id)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-300 font-semibold text-xs transition-all"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-300 font-semibold text-xs transition-all active:scale-95"
               >
                 <Trash2 className="w-4 h-4" />
-                <span>Delete</span>
+                <span className="hidden xs:inline">Delete</span>
               </button>
             )}
           </div>
@@ -214,9 +214,9 @@ export default function AdminProductsPage() {
 
         {/* Split Screen Layout: Left Form / Right Live Preview */}
         {selectedProduct ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             {/* LEFT: Product Form / Editor */}
-            <div className="lg:col-span-7 bg-navy-card rounded-2xl border border-white/10 p-6 sm:p-8 shadow-card-dark">
+            <div className="lg:col-span-7 bg-navy-card rounded-2xl border border-white/10 p-5 sm:p-8 shadow-card-dark">
               <form onSubmit={handleSave} className="space-y-6">
                 <div className="flex items-center justify-between pb-4 border-b border-white/10">
                   <h3 className="text-base font-bold text-white flex items-center gap-2">

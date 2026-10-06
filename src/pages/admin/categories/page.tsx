@@ -77,7 +77,7 @@ export default function AdminCategoriesPage() {
         </div>
       )}
 
-      <main className="p-6 sm:p-8 space-y-8 flex-1">
+      <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <Layers className="w-5 h-5 text-brand-lime" />

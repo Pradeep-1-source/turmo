@@ -113,7 +113,7 @@ export default function AdminContentPage() {
         </div>
       )}
 
-      <main className="p-6 sm:p-8 space-y-8 flex-1">
+      <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         {/* Navigation Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-white/10 no-scrollbar">
           <button

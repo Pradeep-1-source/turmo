@@ -11,7 +11,6 @@ import {
   Mail,
   ShieldCheck,
   Globe2,
-  Lock,
   ArrowRight,
 } from 'lucide-react';
 import { generateWhatsAppGeneralEnquiry } from '@/lib/whatsapp';
@@ -202,17 +201,17 @@ export default function Footer({
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-12 pt-8 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} <strong className="text-slate-200">Urban Fresh</strong>. All
             rights reserved. B2B Agricultural Exports.
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link href="/admin/login" className="flex items-center gap-1.5 hover:text-brand-green transition-colors text-slate-400">
-              <Lock className="w-3.5 h-3.5" />
-              <span>Admin Portal</span>
-            </Link>
+          <div className="flex items-center gap-6 text-slate-400">
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
+              <span>FSSAI & APEDA Export Compliant</span>
+            </span>
           </div>
         </div>
       </div>

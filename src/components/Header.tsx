@@ -40,6 +40,18 @@ export default function Header({
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   if (isAdmin) {
     return null; // Header is handled by Admin layout
   }
@@ -59,14 +71,14 @@ export default function Header({
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled || !isHome
-            ? 'glass-header py-3 shadow-card-dark'
-            : 'bg-transparent py-5'
+            ? 'glass-header py-2.5 sm:py-3 shadow-card-dark'
+            : 'bg-transparent py-4 sm:py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm group-hover:border-brand-green transition-all">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm group-hover:border-brand-green transition-all shrink-0">
               <Image
                 src="/images/urban-fresh-logo.jpg"
                 alt="Urban Fresh Logo"
@@ -76,10 +88,10 @@ export default function Header({
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-xl sm:text-2xl tracking-wider text-white flex items-center gap-1.5">
+              <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-white flex items-center gap-1.5 leading-none">
                 URBAN <span className="text-brand-green">FRESH</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] tracking-widest text-slate-300 uppercase font-medium">
+              <span className="text-[8px] sm:text-[10px] tracking-widest text-slate-300 uppercase font-medium mt-1">
                 Grown with Care • Delivered Worldwide
               </span>
             </div>
@@ -123,23 +135,23 @@ export default function Header({
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex md:hidden items-center gap-2.5">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full bg-brand-green text-navy-dark shadow-glow-green"
+              className="p-2 sm:p-2.5 rounded-full bg-brand-green text-navy-dark shadow-glow-green"
               aria-label="Enquire on WhatsApp"
             >
-              <MessageCircle className="w-5 h-5 fill-navy-dark text-navy-dark" />
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-navy-dark text-navy-dark" />
             </a>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-navy-surface border border-navy-border text-slate-200 hover:text-white"
+              className="p-2 sm:p-2.5 rounded-xl bg-navy-surface border border-navy-border text-slate-200 hover:text-white"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
@@ -147,10 +159,10 @@ export default function Header({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden bg-navy-dark/95 backdrop-blur-xl pt-24 px-6 pb-8 flex flex-col justify-between animate-fadeIn">
-          <div className="space-y-4">
-            <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-4">
-              Navigation
+        <div className="fixed inset-0 z-40 md:hidden bg-navy-dark/98 backdrop-blur-2xl pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-fadeIn">
+          <div className="space-y-3 pt-4">
+            <div className="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-3 px-1">
+              Menu Navigation
             </div>
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -159,9 +171,9 @@ export default function Header({
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-3 px-4 rounded-xl text-lg font-medium transition-all ${
+                  className={`block py-3 px-4 rounded-xl text-base sm:text-lg font-medium transition-all ${
                     isActive
-                      ? 'bg-navy-surface text-brand-green border-l-4 border-brand-green font-semibold'
+                      ? 'bg-navy-surface text-brand-green border-l-4 border-brand-green font-semibold shadow-sm'
                       : 'text-slate-200 hover:bg-navy-surface/50'
                   }`}
                 >
@@ -171,18 +183,18 @@ export default function Header({
             })}
           </div>
 
-          <div className="pt-6 border-t border-navy-border space-y-4">
+          <div className="pt-6 mt-6 border-t border-navy-border space-y-3.5">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-base shadow-glow-green"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-sm sm:text-base shadow-glow-green active:scale-95 transition-transform"
             >
               <MessageCircle className="w-5 h-5 fill-navy-dark text-navy-dark" />
               <span>Enquire on WhatsApp</span>
             </a>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+            <div className="flex items-center justify-center gap-2 text-xs text-slate-400 py-1">
               <Phone className="w-3.5 h-3.5 text-brand-green" />
               <span>{phoneNumber}</span>
             </div>

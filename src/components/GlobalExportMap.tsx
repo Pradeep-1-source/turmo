@@ -103,14 +103,14 @@ export default function GlobalExportMap({
             </svg>
 
             {/* Top Status */}
-            <div className="relative z-10 flex items-center justify-between">
+            <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
                   Active Ocean & Air Corridors
                 </span>
               </div>
-              <div className="flex items-center gap-4 text-xs text-slate-400">
+              <div className="flex items-center gap-3 sm:gap-4 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <Ship className="w-3.5 h-3.5 text-brand-green" /> FCL & LCL Ocean
                 </span>
@@ -121,25 +121,25 @@ export default function GlobalExportMap({
             </div>
 
             {/* Origin Callout */}
-            <div className="relative z-10 self-center my-auto p-4 rounded-2xl glass-panel border border-brand-green/40 shadow-glow-green-sm max-w-sm text-center">
+            <div className="relative z-10 self-center my-4 sm:my-auto p-4 rounded-2xl glass-panel border border-brand-green/40 shadow-glow-green-sm max-w-sm text-center">
               <span className="text-[10px] uppercase font-bold tracking-widest text-brand-lime block">
                 Primary Origin & Port Dispatch
               </span>
-              <h4 className="text-base font-extrabold text-white mt-0.5">
+              <h4 className="text-sm sm:text-base font-extrabold text-white mt-0.5">
                 Erode, Tamil Nadu ➔ Chennai / Tuticorin Ports
               </h4>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-[11px] sm:text-xs text-slate-300 mt-1">
                 Phytosanitary inspection, customs clearance, and global bill of lading logistics.
               </p>
             </div>
 
             {/* Hubs Grid Footer */}
-            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/5">
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 pt-4 border-t border-white/5">
               {hubs.slice(1).map((hub, i) => (
                 <div key={i} className="p-2.5 rounded-xl bg-navy-surface/80 border border-white/5">
                   <p className="text-xs font-bold text-white flex items-center gap-1">
-                    <Navigation className="w-3 h-3 text-brand-green" />
-                    {hub.name}
+                    <Navigation className="w-3 h-3 text-brand-green shrink-0" />
+                    <span>{hub.name}</span>
                   </p>
                   <p className="text-[11px] text-slate-400 truncate">{hub.coords}</p>
                 </div>

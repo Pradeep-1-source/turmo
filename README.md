@@ -79,9 +79,9 @@ Urban Fresh is a premium, international export-focused digital platform connecti
 ## 🔐 Admin Dashboard Access
 
 - **URL:** [http://localhost:5173/admin/login](http://localhost:5173/admin/login)
-- **Default Email:** `admin@urbanfresh.in`
-- **Default Password:** `UrbanFreshExport2026!`
-- *(A one-click "Autofill Default Administrator Credentials" button is provided on the login page for rapid access).*
+- **Admin Email:** `admin@urbanfresh.in`
+- **Admin Password:** `Urban112`
+- *(Credentials are secured and not displayed on the public website or login interface).*
 
 ---
 

@@ -80,7 +80,7 @@ export default function Hero({
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.1] mb-6">
           {headline.split('\n').map((line, i) => (
             <span key={i} className="block">
               {i === 1 ? (
@@ -93,43 +93,43 @@ export default function Hero({
         </h1>
 
         {/* Tagline */}
-        <p className="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 font-normal leading-relaxed mb-10">
+        <p className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-slate-300 font-normal leading-relaxed mb-8 sm:mb-10 px-2">
           {tagline}
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6">
           <Link
             href="/products"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-base shadow-glow-green hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-sm sm:text-base shadow-glow-green hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 group"
           >
             <span>Explore Products</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-navy-surface/90 hover:bg-navy-surface border border-brand-green/40 hover:border-brand-green text-white font-semibold text-base backdrop-blur-md hover:scale-105 transition-all duration-300 group shadow-lg"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-navy-surface/90 hover:bg-navy-surface border border-brand-green/40 hover:border-brand-green text-white font-semibold text-sm sm:text-base backdrop-blur-md hover:scale-105 active:scale-95 transition-all duration-300 group shadow-lg"
           >
-            <MessageCircle className="w-5 h-5 fill-brand-green text-brand-green group-hover:scale-110 transition-transform" />
+            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-brand-green text-brand-green group-hover:scale-110 transition-transform" />
             <span>Enquire on WhatsApp</span>
           </a>
         </div>
 
         {/* Trust Badges under CTA */}
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs sm:text-sm text-slate-400">
+        <div className="mt-12 sm:mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-xs sm:text-sm text-slate-400">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-brand-green" />
+            <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
             <span>Certified NABL Lab COA</span>
           </div>
           <div className="flex items-center gap-2">
-            <Globe className="w-4 h-4 text-brand-green" />
+            <Globe className="w-4 h-4 text-brand-green shrink-0" />
             <span>Direct Ocean Port Clearance</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-green animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-brand-green animate-ping shrink-0" />
             <span>100% Pure & Traceable Origin</span>
           </div>
         </div>

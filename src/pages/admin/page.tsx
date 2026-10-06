@@ -61,7 +61,7 @@ export default function AdminDashboardPage() {
         subtitle="Manage products, categories, and live website content without code modifications"
       />
 
-      <main className="p-6 sm:p-8 space-y-8 flex-1">
+      <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         {/* Metric Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1: Total Products */}

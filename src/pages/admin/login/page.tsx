@@ -4,13 +4,14 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@urbanfresh.in');
-  const [password, setPassword] = useState('UrbanFreshExport2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,16 +20,25 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError(null);
 
+    const cleanEmail = email.trim();
+    const cleanPassword = password;
+
+    if (!cleanEmail || !cleanPassword) {
+      setError('Please provide both administrator email and password.');
+      setLoading(false);
+      return;
+    }
+
     try {
       if (isSupabaseConfigured() && supabase) {
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
+          email: cleanEmail,
+          password: cleanPassword,
         });
 
         if (signInError) {
-          // If user does not exist in Supabase auth yet, allow local fallback if standard admin creds
-          if (email === 'admin@urbanfresh.in' && password === 'UrbanFreshExport2026!') {
+          // If user does not exist in Supabase auth yet, allow local fallback with configured admin creds
+          if (cleanEmail.toLowerCase() === 'admin@urbanfresh.in' && cleanPassword === 'Urban112') {
             localStorage.setItem('uf_admin_auth', 'true');
             router.push('/admin');
             return;
@@ -42,13 +52,13 @@ export default function AdminLoginPage() {
           return;
         }
       } else {
-        // Local CMS Demo Mode
-        if (email && password) {
+        // Secure CMS Mode Authentication
+        if (cleanEmail.toLowerCase() === 'admin@urbanfresh.in' && cleanPassword === 'Urban112') {
           localStorage.setItem('uf_admin_auth', 'true');
           router.push('/admin');
           return;
         } else {
-          setError('Please provide email and password.');
+          setError('Invalid administrator email or password.');
         }
       }
     } catch (err: unknown) {
@@ -62,21 +72,15 @@ export default function AdminLoginPage() {
     }
   };
 
-  const fillDemoCredentials = () => {
-    setEmail('admin@urbanfresh.in');
-    setPassword('UrbanFreshExport2026!');
-    setError(null);
-  };
-
   return (
-    <div className="min-h-screen bg-navy-dark flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-navy-dark flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-green/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] bg-brand-green/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Logo Card */}
-        <div className="text-center mb-8">
-          <div className="relative w-16 h-16 mx-auto mb-4 rounded-2xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3.5 rounded-2xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm">
             <Image
               src="/images/urban-fresh-logo.jpg"
               alt="Urban Fresh Logo"
@@ -88,24 +92,25 @@ export default function AdminLoginPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Urban Fresh Admin Portal
           </h1>
-          <p className="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">
-            B2B Content Management System
+          <p className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold flex items-center justify-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-brand-lime" />
+            <span>Secure Content Management System</span>
           </p>
         </div>
 
         {/* Login Form Box */}
-        <div className="rounded-3xl bg-navy-card/90 border border-white/10 p-8 shadow-card-dark backdrop-blur-xl">
+        <div className="rounded-2xl sm:rounded-3xl bg-navy-card/90 border border-white/10 p-6 sm:p-8 shadow-card-dark backdrop-blur-xl">
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-red-300 text-xs">
+            <div className="mb-6 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-red-300 text-xs">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-4 sm:space-y-5">
             <div>
               <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                Admin Email
+                Administrator Email
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -114,7 +119,8 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@urbanfresh.in"
+                  placeholder="Enter administrator email"
+                  autoComplete="username"
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green transition-colors"
                 />
               </div>
@@ -127,37 +133,44 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green transition-colors"
+                  placeholder="Enter administrator password"
+                  autoComplete="current-password"
+                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green transition-colors"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-sm shadow-glow-green hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-sm shadow-glow-green hover:shadow-xl hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-50 mt-2"
             >
               <span>{loading ? 'Authenticating...' : 'Sign In to Dashboard'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
-          {/* Quick Demo Credentials Assistant */}
-          <div className="mt-6 pt-6 border-t border-white/10 text-center">
-            <button
-              type="button"
-              onClick={fillDemoCredentials}
-              className="text-xs text-brand-lime hover:underline font-semibold"
-            >
-              Autofill Default Administrator Credentials
-            </button>
-            <p className="text-[11px] text-slate-400 mt-1">
-              admin@urbanfresh.in • UrbanFreshExport2026!
+          {/* Security Notice */}
+          <div className="mt-6 pt-5 border-t border-white/10 text-center">
+            <p className="text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
+              <span>Restricted administrative portal. Authorized access only.</span>
             </p>
           </div>
         </div>

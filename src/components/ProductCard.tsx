@@ -86,10 +86,10 @@ export default function ProductCard({
         </div>
 
         {/* Actions Bar: NO CART, NO CHECKOUT - ONLY DETAILS + WHATSAPP */}
-        <div className="pt-4 border-t border-navy-border/60 flex items-center gap-3">
+        <div className="pt-4 border-t border-navy-border/60 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
           <Link
             href={`/products/${product.slug}`}
-            className="flex-1 py-2.5 px-3 rounded-xl bg-navy-surface hover:bg-navy-surface/80 border border-white/10 hover:border-white/20 text-slate-200 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1 group/btn text-center"
+            className="flex-1 py-2.5 px-3 rounded-xl bg-navy-surface hover:bg-navy-surface/80 border border-white/10 hover:border-white/20 text-slate-200 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1.5 group/btn text-center"
           >
             <span>View Details</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -103,7 +103,7 @@ export default function ProductCard({
             title="Enquire on WhatsApp with product details"
           >
             <MessageCircle className="w-3.5 h-3.5 fill-navy-dark text-navy-dark shrink-0" />
-            <span className="truncate">Enquire on WhatsApp</span>
+            <span className="truncate">WhatsApp Quote</span>
           </a>
         </div>
       </div>
