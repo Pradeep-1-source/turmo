@@ -11,6 +11,7 @@ import {
   Mail,
   ShieldCheck,
   Globe2,
+  Lock,
   ArrowRight,
 } from 'lucide-react';
 import { generateWhatsAppGeneralEnquiry } from '@/lib/whatsapp';
@@ -207,11 +208,20 @@ export default function Footer({
             rights reserved. B2B Agricultural Exports.
           </div>
 
-          <div className="flex items-center gap-6 text-slate-400">
+          <div className="flex items-center gap-5 sm:gap-6 text-slate-400">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
               <span>FSSAI & APEDA Export Compliant</span>
             </span>
+
+            <Link
+              href="/admin/login"
+              className="flex items-center gap-1.5 text-slate-400 hover:text-brand-green transition-colors font-medium px-2.5 py-1 rounded-lg hover:bg-navy-surface border border-transparent hover:border-white/10"
+              title="Secure Administrator Access"
+            >
+              <Lock className="w-3.5 h-3.5 text-brand-lime" />
+              <span>Admin Access</span>
+            </Link>
           </div>
         </div>
       </div>

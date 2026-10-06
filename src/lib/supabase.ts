@@ -435,3 +435,45 @@ export async function deleteCategory(categoryId: string): Promise<boolean> {
   }
   return true;
 }
+
+export async function uploadProductImage(file: File): Promise<string> {
+  // 1. Try Supabase Storage if configured
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const fileExt = file.name.split('.').pop() || 'jpg';
+      const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+      const filePath = `products/${cleanFileName}`;
+
+      const { data, error } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: true,
+        });
+
+      if (!error && data) {
+        const { data: publicData } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(filePath);
+        if (publicData?.publicUrl) {
+          return publicData.publicUrl;
+        }
+      }
+    } catch (e) {
+      console.warn('Supabase storage upload failed, converting to local data URI', e);
+    }
+  }
+
+  // 2. Client-side local image reader (returns base64 data URI for instant preview & persistence)
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+

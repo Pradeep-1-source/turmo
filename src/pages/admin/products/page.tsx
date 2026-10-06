@@ -8,6 +8,7 @@ import {
   fetchAllCategoriesAdmin,
   saveProduct,
   deleteProduct,
+  uploadProductImage,
 } from '@/lib/supabase';
 import { Product, Category, ProductHighlight } from '@/types/database';
 import {
@@ -22,6 +23,9 @@ import {
   ExternalLink,
   Layers,
   Sparkles,
+  Upload,
+  Image as ImageIcon,
+  Loader2,
 } from 'lucide-react';
 import { generateWhatsAppProductEnquiry } from '@/lib/whatsapp';
 
@@ -32,6 +36,7 @@ export default function AdminProductsPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -133,6 +138,39 @@ export default function AdminProductsPage() {
     if (!selectedProduct || !selectedProduct.highlights) return;
     const updated = selectedProduct.highlights.filter((_, i) => i !== index);
     setSelectedProduct({ ...selectedProduct, highlights: updated });
+  };
+
+  const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedProduct) return;
+
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size exceeds 10MB limit. Please select a smaller image.');
+      return;
+    }
+
+    try {
+      setIsUploadingImage(true);
+      const uploadedUrl = await uploadProductImage(file);
+      const newImages = [...(selectedProduct.images || [])];
+      if (newImages.length > 0) {
+        newImages[0] = { ...newImages[0], image_url: uploadedUrl };
+      } else {
+        newImages.push({
+          id: `img-${Date.now()}`,
+          image_url: uploadedUrl,
+          sort_order: 1,
+        });
+      }
+      setSelectedProduct({ ...selectedProduct, images: newImages });
+      showToast('Product image uploaded successfully!');
+    } catch (err) {
+      console.error('Image upload failed', err);
+      alert('Failed to upload image. Please try another file or enter an image URL.');
+    } finally {
+      setIsUploadingImage(false);
+      e.target.value = '';
+    }
   };
 
   const primaryImage =
@@ -300,32 +338,133 @@ export default function AdminProductsPage() {
                     />
                   </div>
 
-                  {/* Image URL */}
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
-                      Product Image Path / URL
-                    </label>
-                    <input
-                      type="text"
-                      value={primaryImage}
-                      onChange={(e) => {
-                        const newImages = [...(selectedProduct.images || [])];
-                        if (newImages.length > 0) {
-                          newImages[0] = { ...newImages[0], image_url: e.target.value };
-                        } else {
-                          newImages.push({
-                            id: `img-${Date.now()}`,
-                            image_url: e.target.value,
-                            sort_order: 1,
-                          });
-                        }
-                        setSelectedProduct({ ...selectedProduct, images: newImages });
-                      }}
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green font-mono text-xs"
-                    />
-                    <p className="text-[10px] text-slate-400 mt-1">
-                      Available presets: /images/turmeric.jpg, /images/coconut-oil.jpg, /images/groundnut-oil.jpg
-                    </p>
+                  {/* Product Image Upload & Settings */}
+                  <div className="sm:col-span-2 space-y-3 p-4 rounded-2xl bg-navy-surface/60 border border-white/5">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                        Product Visual & Image Upload
+                      </label>
+                      <span className="text-[10px] text-brand-lime font-semibold uppercase tracking-wider">
+                        Live Preview Enabled
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                      {/* Image Preview Thumbnail */}
+                      <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-navy-surface border-2 border-brand-green/30 shrink-0 shadow-md group">
+                        <Image
+                          src={primaryImage}
+                          alt={selectedProduct.title || 'Product'}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <ImageIcon className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+
+                      {/* Upload Button & Dropzone */}
+                      <div className="flex-1 w-full space-y-2">
+                        <label
+                          className={`w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl border-2 border-dashed ${
+                            isUploadingImage
+                              ? 'border-brand-green bg-brand-green/10'
+                              : 'border-brand-green/40 hover:border-brand-green bg-navy-surface hover:bg-navy-surface/80'
+                          } cursor-pointer transition-all text-xs font-semibold text-slate-200 group active:scale-[0.99]`}
+                        >
+                          {isUploadingImage ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-brand-green" />
+                              <span className="text-brand-lime">Uploading and processing image...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Upload className="w-4 h-4 text-brand-green group-hover:scale-110 transition-transform" />
+                              <span className="text-white group-hover:text-brand-lime transition-colors">
+                                Upload Product Image from Device
+                              </span>
+                            </>
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            disabled={isUploadingImage}
+                            onChange={handleImageFileChange}
+                            className="hidden"
+                          />
+                        </label>
+                        <p className="text-[11px] text-slate-400">
+                          Supports JPG, PNG, WEBP, AVIF. Selected file instantly uploads & updates catalogue.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Presets or Direct Path */}
+                    <div className="pt-2 border-t border-white/5 space-y-2">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400 font-medium">Or choose high-res commodity preset:</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          { label: 'Turmeric Fingers', url: '/images/turmeric.jpg' },
+                          { label: 'Virgin Coconut Oil', url: '/images/coconut-oil.jpg' },
+                          { label: 'Groundnut Cold Pressed', url: '/images/groundnut-oil.jpg' },
+                          { label: 'Export Quality Lab', url: '/images/export-quality.jpg' },
+                        ].map((preset) => (
+                          <button
+                            key={preset.url}
+                            type="button"
+                            onClick={() => {
+                              const newImages = [...(selectedProduct.images || [])];
+                              if (newImages.length > 0) {
+                                newImages[0] = { ...newImages[0], image_url: preset.url };
+                              } else {
+                                newImages.push({
+                                  id: `img-${Date.now()}`,
+                                  image_url: preset.url,
+                                  sort_order: 1,
+                                });
+                              }
+                              setSelectedProduct({ ...selectedProduct, images: newImages });
+                              showToast(`Applied preset: ${preset.label}`);
+                            }}
+                            className={`px-2.5 py-1 rounded-lg text-[10px] font-semibold border transition-all ${
+                              primaryImage === preset.url
+                                ? 'bg-brand-green text-navy-dark border-brand-green'
+                                : 'bg-navy-surface border-white/10 text-slate-300 hover:text-white hover:border-brand-green/40'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Manual Image Path Input */}
+                      <div className="pt-1">
+                        <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                          Direct Image URL / Path (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          value={primaryImage}
+                          onChange={(e) => {
+                            const newImages = [...(selectedProduct.images || [])];
+                            if (newImages.length > 0) {
+                              newImages[0] = { ...newImages[0], image_url: e.target.value };
+                            } else {
+                              newImages.push({
+                                id: `img-${Date.now()}`,
+                                image_url: e.target.value,
+                                sort_order: 1,
+                              });
+                            }
+                            setSelectedProduct({ ...selectedProduct, images: newImages });
+                          }}
+                          placeholder="/images/your-image.jpg or https://..."
+                          className="w-full py-2 px-3 rounded-xl bg-navy-surface border border-white/10 text-white text-xs focus:outline-none focus:border-brand-green font-mono"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Description */}
