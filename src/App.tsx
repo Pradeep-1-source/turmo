@@ -24,7 +24,7 @@ import AdminContentPage from '@/pages/admin/content/page';
 
 function PublicLayout() {
   return (
-    <div className="min-h-screen bg-navy-dark text-slate-100 flex flex-col antialiased selection:bg-brand-green selection:text-navy-dark">
+    <div className="min-h-screen bg-navy-dark text-stone-800 flex flex-col antialiased selection:bg-brand-green selection:text-white">
       <Header />
       <main className="flex-1">
         <Outlet />

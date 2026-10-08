@@ -28,14 +28,14 @@ export default function FloatingWhatsApp({ whatsappNumber = '919884449843' }: Fl
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-sm shadow-glow-green hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20"
+        className="flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
         title="Chat with Urban Fresh on WhatsApp"
       >
         <span className="relative flex h-6 w-6 items-center justify-center">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-navy-dark opacity-20"></span>
-          <MessageCircle className="relative w-6 h-6 fill-navy-dark text-navy-dark" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-25"></span>
+          <MessageCircle className="relative w-6 h-6 fill-white text-white" />
         </span>
-        <span className="hidden sm:inline-block font-extrabold tracking-wide">
+        <span className="hidden sm:inline-block font-bold tracking-wide">
           Enquire on WhatsApp
         </span>
       </a>

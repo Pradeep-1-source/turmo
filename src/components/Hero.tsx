@@ -37,10 +37,10 @@ export default function Hero({
           priority
           className="object-cover object-center opacity-30 transform scale-105 transition-transform duration-1000 ease-out"
         />
-        {/* Multitier Vignette and Dark Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/80 to-navy-dark/60" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-navy-dark/60 to-navy-dark" />
-        {/* Soft Green Glow */}
+        {/* Multitier Vignette and Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-[#FAF8F5]/50" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#FAF8F5]/40 to-[#FAF8F5]" />
+        {/* Soft Terracotta Glow */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-brand-green/10 rounded-full blur-[140px] pointer-events-none animate-glow-pulse" />
       </div>
 
@@ -72,15 +72,15 @@ export default function Hero({
       {/* Main Content */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface/80 border border-brand-green/30 backdrop-blur-md mb-8 shadow-glow-green-sm animate-fadeIn">
-          <Sparkles className="w-4 h-4 text-brand-lime" />
-          <span className="text-xs sm:text-sm font-semibold tracking-widest text-slate-200 uppercase">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-brand-green/30 backdrop-blur-md mb-8 shadow-sm animate-fadeIn">
+          <Sparkles className="w-4 h-4 text-brand-green" />
+          <span className="text-xs sm:text-sm font-semibold tracking-widest text-stone-700 uppercase">
             {badge}
           </span>
         </div>
 
         {/* Headline */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.1] mb-6">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-stone-900 leading-[1.15] sm:leading-[1.1] mb-6">
           {headline.split('\n').map((line, i) => (
             <span key={i} className="block">
               {i === 1 ? (
@@ -93,7 +93,7 @@ export default function Hero({
         </h1>
 
         {/* Tagline */}
-        <p className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-slate-300 font-normal leading-relaxed mb-8 sm:mb-10 px-2">
+        <p className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-stone-600 font-normal leading-relaxed mb-8 sm:mb-10 px-2">
           {tagline}
         </p>
 
@@ -101,7 +101,7 @@ export default function Hero({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6">
           <Link
             href="/products"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-sm sm:text-base shadow-glow-green hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 group"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-brand-green hover:bg-[#984C34] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 group"
           >
             <span>Explore Products</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -111,15 +111,15 @@ export default function Hero({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-navy-surface/90 hover:bg-navy-surface border border-brand-green/40 hover:border-brand-green text-white font-semibold text-sm sm:text-base backdrop-blur-md hover:scale-105 active:scale-95 transition-all duration-300 group shadow-lg"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-stone-900 hover:bg-black text-white font-semibold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all duration-300 group shadow-md"
           >
-            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-brand-green text-brand-green group-hover:scale-110 transition-transform" />
+            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-white group-hover:scale-110 transition-transform" />
             <span>Enquire on WhatsApp</span>
           </a>
         </div>
 
         {/* Trust Badges under CTA */}
-        <div className="mt-12 sm:mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-xs sm:text-sm text-slate-400">
+        <div className="mt-12 sm:mt-14 pt-8 border-t border-stone-200 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-xs sm:text-sm text-stone-500">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
             <span>Certified NABL Lab COA</span>

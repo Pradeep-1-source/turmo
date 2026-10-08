@@ -78,7 +78,7 @@ export default function Header({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-            <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm group-hover:border-brand-green transition-all shrink-0">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-brand-green/30 bg-white shadow-sm group-hover:border-brand-green transition-all shrink-0">
               <Image
                 src="/images/urban-fresh-logo.jpg"
                 alt="Urban Fresh Logo"
@@ -88,10 +88,10 @@ export default function Header({
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-white flex items-center gap-1.5 leading-none">
+              <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-stone-900 flex items-center gap-1.5 leading-none">
                 URBAN <span className="text-brand-green">FRESH</span>
               </span>
-              <span className="text-[8px] sm:text-[10px] tracking-widest text-slate-300 uppercase font-medium mt-1">
+              <span className="text-[8px] sm:text-[10px] tracking-widest text-stone-500 uppercase font-medium mt-1">
                 Grown with Care • Delivered Worldwide
               </span>
             </div>
@@ -107,13 +107,13 @@ export default function Header({
                   href={link.href}
                   className={`text-sm tracking-wide font-medium transition-colors relative py-1 ${
                     isActive
-                      ? 'text-brand-green'
-                      : 'text-slate-200 hover:text-brand-green'
+                      ? 'text-brand-green font-bold'
+                      : 'text-stone-700 hover:text-brand-green'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-brand-lime to-brand-green rounded-full shadow-glow-green" />
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-green rounded-full shadow-sm" />
                   )}
                 </Link>
               );
@@ -126,9 +126,9 @@ export default function Header({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-semibold text-sm shadow-glow-green hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-green hover:bg-[#984C34] text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
-              <MessageCircle className="w-4 h-4 fill-navy-dark text-navy-dark" />
+              <MessageCircle className="w-4 h-4 fill-white text-white" />
               <span>WhatsApp Enquiry</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
@@ -140,15 +140,15 @@ export default function Header({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-full bg-brand-green text-navy-dark shadow-glow-green"
+              className="p-2 sm:p-2.5 rounded-full bg-brand-green text-white shadow-sm"
               aria-label="Enquire on WhatsApp"
             >
-              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-navy-dark text-navy-dark" />
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-white" />
             </a>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 sm:p-2.5 rounded-xl bg-navy-surface border border-navy-border text-slate-200 hover:text-white"
+              className="p-2 sm:p-2.5 rounded-xl bg-white border border-stone-200 text-stone-700 hover:text-stone-900"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -159,9 +159,9 @@ export default function Header({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden bg-navy-dark/98 backdrop-blur-2xl pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-fadeIn">
+        <div className="fixed inset-0 z-40 md:hidden bg-[#FAF8F5]/98 backdrop-blur-2xl pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-fadeIn">
           <div className="space-y-3 pt-4">
-            <div className="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-3 px-1">
+            <div className="text-[11px] uppercase tracking-widest text-stone-500 font-bold mb-3 px-1">
               Menu Navigation
             </div>
             {navLinks.map((link) => {
@@ -173,8 +173,8 @@ export default function Header({
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block py-3 px-4 rounded-xl text-base sm:text-lg font-medium transition-all ${
                     isActive
-                      ? 'bg-navy-surface text-brand-green border-l-4 border-brand-green font-semibold shadow-sm'
-                      : 'text-slate-200 hover:bg-navy-surface/50'
+                      ? 'bg-stone-100 text-brand-green border-l-4 border-brand-green font-semibold shadow-sm'
+                      : 'text-stone-800 hover:bg-stone-100'
                   }`}
                 >
                   {link.label}
@@ -183,18 +183,18 @@ export default function Header({
             })}
           </div>
 
-          <div className="pt-6 mt-6 border-t border-navy-border space-y-3.5">
+          <div className="pt-6 mt-6 border-t border-stone-200 space-y-3.5">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-sm sm:text-base shadow-glow-green active:scale-95 transition-transform"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-brand-green hover:bg-[#984C34] text-white font-bold text-sm sm:text-base shadow-md active:scale-95 transition-transform"
             >
-              <MessageCircle className="w-5 h-5 fill-navy-dark text-navy-dark" />
+              <MessageCircle className="w-5 h-5 fill-white text-white" />
               <span>Enquire on WhatsApp</span>
             </a>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-slate-400 py-1">
+            <div className="flex items-center justify-center gap-2 text-xs text-stone-500 py-1">
               <Phone className="w-3.5 h-3.5 text-brand-green" />
               <span>{phoneNumber}</span>
             </div>

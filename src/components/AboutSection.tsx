@@ -59,14 +59,14 @@ export default function AboutSection({
                   fill
                   className="object-cover object-center hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl glass-panel border border-white/10 flex items-center justify-between">
+                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-stone-200 shadow-md flex items-center justify-between">
                   <div>
-                    <p className="text-xs uppercase tracking-wider text-brand-lime font-bold">
+                    <p className="text-xs uppercase tracking-wider text-brand-green font-bold">
                       Export Ready Infrastructure
                     </p>
-                    <p className="text-sm font-semibold text-white">
+                    <p className="text-sm font-semibold text-stone-900">
                       From Erode Heartland to Global Seaports
                     </p>
                   </div>
@@ -78,15 +78,15 @@ export default function AboutSection({
 
           {/* Text Column (Right) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase shadow-sm">
               About Urban Fresh
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight">
               {title}
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               {description}
             </p>
 
@@ -95,15 +95,15 @@ export default function AboutSection({
               {points.map((point, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-navy-surface/60 border border-white/5 hover:border-brand-green/30 transition-colors"
+                  className="p-4 rounded-xl bg-white border border-stone-200 hover:border-brand-green/40 shadow-sm transition-colors"
                 >
                   <div className="flex items-start gap-3">
                     {point.icon}
                     <div>
-                      <h4 className="text-sm font-bold text-white mb-1">
+                      <h4 className="text-sm font-bold text-stone-900 mb-1">
                         {point.title}
                       </h4>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <p className="text-xs text-stone-500 leading-relaxed">
                         {point.desc}
                       </p>
                     </div>
@@ -116,7 +116,7 @@ export default function AboutSection({
             <div className="pt-4">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-brand-green hover:text-brand-lime font-semibold text-sm group"
+                className="inline-flex items-center gap-2 text-brand-green hover:text-[#984C34] font-semibold text-sm group"
               >
                 <span>Read our complete sourcing philosophy & heritage</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

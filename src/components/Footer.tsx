@@ -47,9 +47,9 @@ export default function Footer({
   const whatsappUrl = generateWhatsAppGeneralEnquiry('Export Enquiry & Pricing', whatsappNumber);
 
   return (
-    <footer className="bg-navy-dark text-slate-300 border-t border-navy-border relative overflow-hidden">
+    <footer className="bg-[#181615] text-stone-300 border-t border-stone-800 relative overflow-hidden">
       {/* Subtle background glow effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-brand-green/5 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-brand-green/10 blur-3xl pointer-events-none" />
 
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
@@ -57,7 +57,7 @@ export default function Footer({
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-brand-green/30 bg-navy-card shadow-glow-green-sm group-hover:border-brand-green transition-all">
+              <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-brand-green/30 bg-stone-900 shadow-sm group-hover:border-brand-green transition-all">
                 <Image
                   src="/images/urban-fresh-logo.jpg"
                   alt="Urban Fresh Logo"
@@ -69,13 +69,13 @@ export default function Footer({
                 <span className="font-extrabold text-2xl tracking-wider text-white flex items-center gap-1.5">
                   URBAN <span className="text-brand-green">FRESH</span>
                 </span>
-                <span className="text-[10px] tracking-widest text-slate-400 uppercase font-medium block">
+                <span className="text-[10px] tracking-widest text-stone-400 uppercase font-medium block">
                   GROWN WITH CARE DELIVERED WORLD WIDE
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
               Connecting pure Indian agricultural heritage with international B2B importers, food
               manufacturers, and cosmetic enterprises worldwide. Clean-label, farm-traceable, and
               prepared for international commerce.
@@ -86,9 +86,9 @@ export default function Footer({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-navy-surface border border-brand-green/40 hover:border-brand-green text-brand-green text-sm font-semibold transition-all hover:shadow-glow-green"
+                className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-brand-green hover:bg-[#984C34] text-white text-sm font-semibold transition-all shadow-md"
               >
-                <MessageCircle className="w-4 h-4 fill-brand-green text-brand-green" />
+                <MessageCircle className="w-4 h-4 fill-white text-white" />
                 <span>Quick WhatsApp Trade Desk</span>
               </a>
             </div>
