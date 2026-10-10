@@ -32,17 +32,17 @@ export default function QualityPage() {
   }, []);
 
   return (
-    <div className="pt-28 pb-20 bg-navy-dark min-h-screen">
+    <div className="pt-28 pb-20 bg-navy-dark min-h-screen text-stone-800">
       {/* Header Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
-          <Award className="w-3.5 h-3.5 text-brand-lime" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <Award className="w-3.5 h-3.5 text-brand-green" />
           International Quality Compliance
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight mb-4">
           {quality.title}
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
           {quality.subtitle}
         </p>
       </div>
@@ -60,18 +60,18 @@ export default function QualityPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Lab Testing */}
-          <div className="p-8 rounded-2xl bg-navy-card border border-white/10 shadow-card-dark flex flex-col justify-between">
+          <div className="p-8 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-navy-surface border border-brand-green/20 flex items-center justify-center text-brand-green mb-6">
-                <FlaskConical className="w-7 h-7 text-brand-lime" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-stone-200 flex items-center justify-center text-brand-green mb-6">
+                <FlaskConical className="w-7 h-7 text-brand-green" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">NABL Laboratory Testing</h3>
-              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+              <h3 className="text-xl font-bold text-stone-900 mb-3">NABL Laboratory Testing</h3>
+              <p className="text-sm text-stone-600 leading-relaxed mb-6 font-normal">
                 {quality.lab_testing_info ||
                   'Batch-wise COA verification covering active curcumin levels, moisture content, peroxide value, and micro-organism thresholds.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-300 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-stone-600 pt-4 border-t border-stone-100">
               <li className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Heavy metal screening (Pb, Cd, As, Hg)
@@ -88,46 +88,46 @@ export default function QualityPage() {
           </div>
 
           {/* Card 2: Packaging Protection */}
-          <div className="p-8 rounded-2xl bg-navy-card border border-white/10 shadow-card-dark flex flex-col justify-between">
+          <div className="p-8 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-navy-surface border border-brand-green/30 flex items-center justify-center text-brand-green mb-6 shadow-glow-green-sm">
-                <Layers className="w-7 h-7 text-brand-lime" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-stone-200 flex items-center justify-center text-brand-green mb-6">
+                <Layers className="w-7 h-7 text-brand-green" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Export-Ready Packaging</h3>
-              <p className="text-sm text-slate-200 leading-relaxed mb-6 font-normal">
+              <h3 className="text-xl font-bold text-stone-900 mb-3">Export-Ready Packaging</h3>
+              <p className="text-sm text-stone-600 leading-relaxed mb-6 font-normal">
                 {quality.packaging_info ||
                   'Moisture-controlled multi-wall paper sacks, bulk drums, IBCs, and private-label packaging options designed to support the storage and transportation requirements of agricultural and food products.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-200 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-stone-600 pt-4 border-t border-stone-100">
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Moisture-barrier multi-wall craft bags
               </li>
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Food-grade HDPE drums & IBC totes
               </li>
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Fumigated heat-treated export pallets
               </li>
             </ul>
           </div>
 
           {/* Card 3: International Certifications */}
-          <div className="p-8 rounded-2xl bg-navy-card border border-white/10 shadow-card-dark flex flex-col justify-between">
+          <div className="p-8 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-navy-surface border border-brand-green/20 flex items-center justify-center text-brand-green mb-6">
-                <FileCheck className="w-7 h-7 text-brand-lime" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-stone-200 flex items-center justify-center text-brand-green mb-6">
+                <FileCheck className="w-7 h-7 text-brand-green" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Export Compliance</h3>
-              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+              <h3 className="text-xl font-bold text-stone-900 mb-3">Export Compliance</h3>
+              <p className="text-sm text-stone-600 leading-relaxed mb-6 font-normal">
                 {quality.certifications_info ||
                   'FSSAI regulatory adherence, Phytosanitary clearance, and transparent Certificate of Origin documentation for every shipment.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-300 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-stone-600 pt-4 border-t border-stone-100">
               <li className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Government Phytosanitary certificate

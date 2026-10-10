@@ -114,15 +114,15 @@ export default function QualityExportTimeline({
 
         {/* Certifications note */}
         {certificationsInfo && (
-          <div className="mt-12 p-6 rounded-2xl bg-navy-surface/80 border border-brand-green/20 max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-            <div className="w-12 h-12 rounded-xl bg-brand-green/20 flex items-center justify-center text-brand-green shrink-0">
+          <div className="mt-12 p-6 rounded-2xl bg-white border border-stone-200 max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">
+              <h4 className="text-sm font-bold text-stone-900">
                 Official Compliance & Documentation
               </h4>
-              <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
+              <p className="text-xs sm:text-sm text-stone-600 mt-0.5">
                 {certificationsInfo}
               </p>
             </div>

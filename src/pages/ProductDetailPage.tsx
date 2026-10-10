@@ -145,10 +145,10 @@ export default function ProductDetailPage() {
             )}
 
             {/* Quick Export Guarantee Callout */}
-            <div className="p-5 rounded-2xl bg-navy-card border border-brand-green/30 shadow-card-dark flex items-center gap-4">
-              <ShieldCheck className="w-8 h-8 text-brand-lime shrink-0" />
-              <div className="text-xs sm:text-sm text-slate-200">
-                <strong className="text-white block font-bold mb-0.5">Standard Export Assurance</strong>
+            <div className="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center gap-4">
+              <ShieldCheck className="w-8 h-8 text-brand-green shrink-0" />
+              <div className="text-xs sm:text-sm text-stone-600">
+                <strong className="text-stone-900 block font-bold mb-0.5">Standard Export Assurance</strong>
                 Certified Phytosanitary Inspection, Certificate of Analysis (COA), and customized
                 maritime container packing available for this commodity.
               </div>
@@ -158,29 +158,29 @@ export default function ProductDetailPage() {
           {/* Details & Specs Column (Right) */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-brand-lime font-bold mb-2">
+              <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-brand-green font-bold mb-2">
                 <Sparkles className="w-3.5 h-3.5" />
                 Verified Commercial Batch
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
                 {currentProduct.title}
               </h1>
 
               {currentProduct.tagline && (
-                <p className="text-base sm:text-lg text-slate-300 font-medium leading-snug">
+                <p className="text-base sm:text-lg text-stone-600 font-medium leading-snug">
                   {currentProduct.tagline}
                 </p>
               )}
             </div>
 
             {/* Commercial Sourcing Inquiry Box (WhatsApp + Email) */}
-            <div className="p-6 rounded-2xl bg-navy-card border border-white/10 shadow-card-dark">
+            <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm">
               <div className="space-y-4">
                 <div>
-                  <span className="text-xs text-brand-lime font-bold block uppercase tracking-wider">
+                  <span className="text-xs text-brand-green font-bold block uppercase tracking-wider">
                     Commercial Sourcing Inquiry
                   </span>
-                  <p className="text-xs text-slate-300 mt-0.5">
+                  <p className="text-xs text-stone-500 mt-0.5">
                     Pre-filled with product title for prompt quote and export specifications
                   </p>
                 </div>
@@ -191,9 +191,9 @@ export default function ProductDetailPage() {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-green hover:bg-[#52ad10] text-[#03111F] font-extrabold text-sm shadow-glow-green hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-sm shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                   >
-                    <MessageCircle className="w-4 h-4 fill-[#03111F] text-[#03111F]" />
+                    <MessageCircle className="w-4 h-4 fill-white text-white" />
                     <span>Enquire on WhatsApp</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
@@ -202,10 +202,10 @@ export default function ProductDetailPage() {
                   {emailEnquiryUrl && (
                     <a
                       href={emailEnquiryUrl}
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-navy-surface hover:bg-navy-surface/80 border border-brand-green/40 hover:border-brand-green text-white font-bold text-sm shadow-sm hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-stone-900 hover:bg-black text-white font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                       title={`Send email enquiry to ${businessEmail}`}
                     >
-                      <Mail className="w-4 h-4 text-brand-lime" />
+                      <Mail className="w-4 h-4 text-white" />
                       <span>Enquire by Email</span>
                     </a>
                   )}
@@ -215,10 +215,10 @@ export default function ProductDetailPage() {
 
             {/* Product Overview Text */}
             <div className="space-y-3">
-              <h3 className="text-sm uppercase tracking-wider font-bold text-white">
+              <h3 className="text-sm uppercase tracking-wider font-bold text-stone-900">
                 Commodity Overview
               </h3>
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed whitespace-pre-line">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed whitespace-pre-line">
                 {currentProduct.description}
               </p>
             </div>
@@ -226,62 +226,62 @@ export default function ProductDetailPage() {
             {/* Core Export Specifications Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
               {currentProduct.grade && (
-                <div className="p-4 rounded-xl bg-navy-card border border-white/10 shadow-sm">
-                  <div className="flex items-center gap-2 text-brand-lime text-xs uppercase font-bold tracking-wider mb-1">
+                <div className="p-4 rounded-xl bg-white border border-stone-200 shadow-sm">
+                  <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
                     <Award className="w-3.5 h-3.5" />
                     Grade / Quality
                   </div>
-                  <p className="text-sm text-white font-semibold">{currentProduct.grade}</p>
+                  <p className="text-sm text-stone-900 font-semibold">{currentProduct.grade}</p>
                 </div>
               )}
 
               {currentProduct.moq && (
-                <div className="p-4 rounded-xl bg-navy-card border border-white/10 shadow-sm">
-                  <div className="flex items-center gap-2 text-brand-lime text-xs uppercase font-bold tracking-wider mb-1">
+                <div className="p-4 rounded-xl bg-white border border-stone-200 shadow-sm">
+                  <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
                     <Package className="w-3.5 h-3.5" />
                     Minimum Order Quantity (MOQ)
                   </div>
-                  <p className="text-sm text-white font-medium">{currentProduct.moq}</p>
+                  <p className="text-sm text-stone-900 font-medium">{currentProduct.moq}</p>
                 </div>
               )}
 
               {currentProduct.packaging && (
-                <div className="p-4 rounded-xl bg-navy-card border border-white/10 sm:col-span-2 shadow-sm">
-                  <div className="flex items-center gap-2 text-brand-lime text-xs uppercase font-bold tracking-wider mb-1">
+                <div className="p-4 rounded-xl bg-white border border-stone-200 sm:col-span-2 shadow-sm">
+                  <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
                     <Layers className="w-3.5 h-3.5" />
                     Packaging Options
                   </div>
-                  <p className="text-sm text-white font-medium">{currentProduct.packaging}</p>
+                  <p className="text-sm text-stone-900 font-medium">{currentProduct.packaging}</p>
                 </div>
               )}
 
               {currentProduct.certifications && (
-                <div className="p-4 rounded-xl bg-navy-card border border-white/10 sm:col-span-2 shadow-sm">
+                <div className="p-4 rounded-xl bg-white border border-stone-200 sm:col-span-2 shadow-sm">
                   <div className="flex items-center gap-2 text-brand-green text-xs uppercase font-bold tracking-wider mb-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-brand-lime" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
                     Certifications & Compliance
                   </div>
-                  <p className="text-sm text-white font-medium">{currentProduct.certifications}</p>
+                  <p className="text-sm text-stone-900 font-medium">{currentProduct.certifications}</p>
                 </div>
               )}
             </div>
 
             {/* Dynamic Export Highlights List */}
             {currentProduct.highlights && currentProduct.highlights.length > 0 && (
-              <div className="pt-4 border-t border-white/10 space-y-3">
-                <h3 className="text-sm uppercase tracking-wider font-bold text-white">
+              <div className="pt-4 border-t border-stone-200 space-y-3">
+                <h3 className="text-sm uppercase tracking-wider font-bold text-stone-900">
                   Export Highlights & Technical Data
                 </h3>
                 <div className="space-y-2">
                   {currentProduct.highlights.map((h, i) => (
                     <div
                       key={i}
-                      className="p-3.5 rounded-xl bg-navy-card border border-white/10 flex items-start gap-3"
+                      className="p-3.5 rounded-xl bg-white border border-stone-200 shadow-sm flex items-start gap-3"
                     >
                       <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
                       <div className="text-xs sm:text-sm">
-                        <strong className="text-brand-lime mr-1.5">{h.label}:</strong>
-                        <span className="text-slate-200">{h.value}</span>
+                        <strong className="text-brand-green mr-1.5">{h.label}:</strong>
+                        <span className="text-stone-700">{h.value}</span>
                       </div>
                     </div>
                   ))}
@@ -293,12 +293,12 @@ export default function ProductDetailPage() {
 
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-white/10">
+          <div className="mt-20 pt-12 border-t border-stone-200">
             <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-white">Other Export Commodities</h3>
+              <h3 className="text-2xl font-bold text-stone-900">Other Export Commodities</h3>
               <Link
                 href="/products"
-                className="text-sm font-semibold text-brand-green hover:text-brand-lime transition-colors"
+                className="text-sm font-semibold text-brand-green hover:underline transition-colors"
               >
                 View all commodities →
               </Link>
@@ -315,7 +315,7 @@ export default function ProductDetailPage() {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to full product catalogue</span>

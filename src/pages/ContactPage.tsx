@@ -21,17 +21,17 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <div className="pt-28 pb-20 bg-navy-dark min-h-screen">
+    <div className="pt-28 pb-20 bg-navy-dark min-h-screen text-stone-800">
       {/* Header Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
-          <Sparkles className="w-3.5 h-3.5 text-brand-lime" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-brand-green" />
           Direct Trade Communication
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight mb-4">
           Contact Our Export Desk
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
           Skip generic email tickets and online checkout forms. Chat directly with our trade directors
           on WhatsApp for fast specification review and competitive container pricing.
         </p>
