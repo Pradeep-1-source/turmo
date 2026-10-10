@@ -72,9 +72,9 @@ export default function Hero({
       {/* Main Content */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-brand-green/30 backdrop-blur-md mb-8 shadow-sm animate-fadeIn">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-brand-green/40 backdrop-blur-md mb-8 shadow-sm animate-fadeIn">
           <Sparkles className="w-4 h-4 text-brand-green" />
-          <span className="text-xs sm:text-sm font-semibold tracking-widest text-stone-700 uppercase">
+          <span className="text-xs sm:text-sm font-bold tracking-widest text-stone-900 uppercase">
             {badge}
           </span>
         </div>
@@ -93,7 +93,7 @@ export default function Hero({
         </h1>
 
         {/* Tagline */}
-        <p className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-stone-600 font-normal leading-relaxed mb-8 sm:mb-10 px-2">
+        <p className="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-stone-800 font-medium leading-relaxed mb-8 sm:mb-10 px-2">
           {tagline}
         </p>
 
@@ -119,7 +119,7 @@ export default function Hero({
         </div>
 
         {/* Trust Badges under CTA */}
-        <div className="mt-12 sm:mt-14 pt-8 border-t border-stone-200 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-xs sm:text-sm text-stone-500">
+        <div className="mt-12 sm:mt-14 pt-8 border-t border-stone-300 flex flex-wrap items-center justify-center gap-4 sm:gap-12 text-xs sm:text-sm text-stone-800 font-bold">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
             <span>Certified NABL Lab COA</span>

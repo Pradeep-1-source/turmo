@@ -19,7 +19,7 @@ export default function NotFoundPage() {
           404
         </h1>
         <h2 className="text-2xl font-bold text-stone-900 mb-4">Export Page Not Found</h2>
-        <p className="text-stone-600 text-sm leading-relaxed mb-8">
+        <p className="text-stone-700 font-medium text-sm leading-relaxed mb-8">
           The agricultural commodity or trade page you are looking for has been moved, renamed, or is currently unavailable.
         </p>
 

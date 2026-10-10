@@ -86,7 +86,7 @@ export default function AboutSection({
               {title}
             </h2>
 
-            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-800 leading-relaxed font-medium">
               {description}
             </p>
 
@@ -103,7 +103,7 @@ export default function AboutSection({
                       <h4 className="text-sm font-bold text-stone-900 mb-1">
                         {point.title}
                       </h4>
-                      <p className="text-xs text-stone-500 leading-relaxed">
+                      <p className="text-xs text-stone-700 leading-relaxed font-medium">
                         {point.desc}
                       </p>
                     </div>

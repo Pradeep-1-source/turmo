@@ -43,7 +43,7 @@ export default function FeaturedProducts({
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
               Export Grade Commodities
             </h2>
-            <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-stone-800 text-sm sm:text-base mt-2 max-w-xl font-medium">
               Authentic Indian harvest processed under strict international standards. Enquire
               directly for custom packaging, container-loads, and laboratory specifications.
             </p>
@@ -64,17 +64,17 @@ export default function FeaturedProducts({
 
         {/* Category Filters */}
         <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-10 no-scrollbar">
-          <div className="flex items-center gap-1.5 text-xs text-stone-500 uppercase font-semibold pr-2">
+          <div className="flex items-center gap-1.5 text-xs text-stone-800 uppercase font-bold pr-2">
             <Filter className="w-3.5 h-3.5 text-brand-green" />
             <span>Filter:</span>
           </div>
 
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
               selectedCategory === 'all'
                 ? 'bg-brand-green text-white shadow-md'
-                : 'bg-white text-stone-700 hover:text-stone-900 border border-stone-200 shadow-sm'
+                : 'bg-white text-stone-900 hover:text-brand-green border border-stone-300 shadow-sm'
             }`}
           >
             All Products ({products.length})
@@ -89,10 +89,10 @@ export default function FeaturedProducts({
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   selectedCategory === cat.id
                     ? 'bg-brand-green text-white shadow-md'
-                    : 'bg-white text-stone-700 hover:text-stone-900 border border-stone-200 shadow-sm'
+                    : 'bg-white text-stone-900 hover:text-brand-green border border-stone-300 shadow-sm'
                 }`}
               >
                 {cat.name} ({count})
@@ -114,10 +114,10 @@ export default function FeaturedProducts({
           </div>
         ) : (
           <div className="text-center py-16 p-8 rounded-2xl bg-white border border-stone-200">
-            <p className="text-stone-700 font-semibold mb-2">
+            <p className="text-stone-900 font-bold mb-2">
               No products found in this category.
             </p>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-stone-700 font-medium">
               Please choose another category or contact us on WhatsApp for custom commodity sourcing.
             </p>
           </div>

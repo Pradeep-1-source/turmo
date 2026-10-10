@@ -67,7 +67,7 @@ export default function QualityExportTimeline({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
             {title}
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-stone-800 font-medium leading-relaxed">
             {description}
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function QualityExportTimeline({
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-stone-700 font-medium leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export default function QualityExportTimeline({
               <h4 className="text-sm font-bold text-stone-900">
                 Official Compliance & Documentation
               </h4>
-              <p className="text-xs sm:text-sm text-stone-600 mt-0.5">
+              <p className="text-xs sm:text-sm text-stone-700 font-medium mt-0.5">
                 {certificationsInfo}
               </p>
             </div>

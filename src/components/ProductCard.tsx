@@ -65,7 +65,7 @@ export default function ProductCard({
           </Link>
 
           {product.tagline && (
-            <p className="text-xs sm:text-sm text-stone-500 line-clamp-2 leading-relaxed mb-4">
+            <p className="text-xs sm:text-sm text-stone-700 font-medium line-clamp-2 leading-relaxed mb-4">
               {product.tagline}
             </p>
           )}
@@ -76,9 +76,9 @@ export default function ProductCard({
               {product.highlights.slice(0, 2).map((h, i) => (
                 <span
                   key={i}
-                  className="text-[10px] px-2 py-0.5 rounded-md bg-stone-100 border border-stone-200 text-stone-600"
+                  className="text-[10px] px-2 py-0.5 rounded-md bg-stone-100 border border-stone-200 text-stone-800 font-medium"
                 >
-                  <strong className="text-brand-green">{h.label}:</strong> {h.value.slice(0, 30)}...
+                  <strong className="text-brand-green font-bold">{h.label}:</strong> {h.value.slice(0, 30)}...
                 </span>
               ))}
             </div>
@@ -89,7 +89,7 @@ export default function ProductCard({
         <div className="pt-4 border-t border-stone-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
           <Link
             href={`/products/${product.slug}`}
-            className="flex-1 py-2.5 px-3 rounded-full bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-700 hover:text-stone-900 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1.5 group/btn text-center"
+            className="flex-1 py-2.5 px-3 rounded-full bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-900 hover:text-black text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 group/btn text-center"
           >
             <span>View Details</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />

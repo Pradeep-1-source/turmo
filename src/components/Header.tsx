@@ -91,7 +91,7 @@ export default function Header({
               <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-stone-900 flex items-center gap-1.5 leading-none">
                 URBAN <span className="text-brand-green">FRESH</span>
               </span>
-              <span className="text-[8px] sm:text-[10px] tracking-widest text-stone-500 uppercase font-medium mt-1">
+              <span className="text-[8px] sm:text-[10px] tracking-widest text-stone-800 uppercase font-bold mt-1">
                 Grown with Care • Delivered Worldwide
               </span>
             </div>
@@ -105,10 +105,10 @@ export default function Header({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm tracking-wide font-medium transition-colors relative py-1 ${
+                  className={`text-sm tracking-wide transition-colors relative py-1 ${
                     isActive
-                      ? 'text-brand-green font-bold'
-                      : 'text-stone-700 hover:text-brand-green'
+                      ? 'text-brand-green font-extrabold'
+                      : 'text-stone-900 font-semibold hover:text-brand-green'
                   }`}
                 >
                   {link.label}
@@ -148,7 +148,7 @@ export default function Header({
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 sm:p-2.5 rounded-xl bg-white border border-stone-200 text-stone-700 hover:text-stone-900"
+              className="p-2 sm:p-2.5 rounded-xl bg-white border border-stone-300 text-stone-900 hover:text-black font-bold"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -161,7 +161,7 @@ export default function Header({
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden bg-[#FAF8F5]/98 backdrop-blur-2xl pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-fadeIn">
           <div className="space-y-3 pt-4">
-            <div className="text-[11px] uppercase tracking-widest text-stone-500 font-bold mb-3 px-1">
+            <div className="text-[11px] uppercase tracking-widest text-stone-800 font-extrabold mb-3 px-1">
               Menu Navigation
             </div>
             {navLinks.map((link) => {
@@ -171,10 +171,10 @@ export default function Header({
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-3 px-4 rounded-xl text-base sm:text-lg font-medium transition-all ${
+                  className={`block py-3 px-4 rounded-xl text-base sm:text-lg font-semibold transition-all ${
                     isActive
-                      ? 'bg-stone-100 text-brand-green border-l-4 border-brand-green font-semibold shadow-sm'
-                      : 'text-stone-800 hover:bg-stone-100'
+                      ? 'bg-stone-200/70 text-brand-green border-l-4 border-brand-green font-bold shadow-sm'
+                      : 'text-stone-900 hover:bg-stone-100 hover:text-brand-green'
                   }`}
                 >
                   {link.label}
@@ -194,7 +194,7 @@ export default function Header({
               <span>Enquire on WhatsApp</span>
             </a>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-stone-500 py-1">
+            <div className="flex items-center justify-center gap-2 text-xs text-stone-800 font-bold py-1">
               <Phone className="w-3.5 h-3.5 text-brand-green" />
               <span>{phoneNumber}</span>
             </div>

@@ -34,7 +34,7 @@ export default function GlobalExportMap({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
             {title}
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-stone-800 font-medium leading-relaxed">
             {description}
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function GlobalExportMap({
                   Active Ocean & Air Corridors
                 </span>
               </div>
-              <div className="flex items-center gap-3 sm:gap-4 text-xs text-stone-500">
+              <div className="flex items-center gap-3 sm:gap-4 text-xs text-stone-800 font-semibold">
                 <span className="flex items-center gap-1.5">
                   <Ship className="w-3.5 h-3.5 text-brand-green" /> FCL & LCL Ocean
                 </span>
@@ -128,7 +128,7 @@ export default function GlobalExportMap({
               <h4 className="text-sm sm:text-base font-extrabold text-stone-900 mt-0.5">
                 Erode, Tamil Nadu ➔ Chennai / Tuticorin Ports
               </h4>
-              <p className="text-[11px] sm:text-xs text-stone-600 mt-1">
+              <p className="text-[11px] sm:text-xs text-stone-800 font-medium mt-1">
                 Phytosanitary inspection, customs clearance, and global bill of lading logistics.
               </p>
             </div>
@@ -141,7 +141,7 @@ export default function GlobalExportMap({
                     <Navigation className="w-3 h-3 text-brand-green shrink-0" />
                     <span>{hub.name}</span>
                   </p>
-                  <p className="text-[11px] text-stone-500 truncate">{hub.coords}</p>
+                  <p className="text-[11px] text-stone-700 font-medium truncate">{hub.coords}</p>
                 </div>
               ))}
             </div>

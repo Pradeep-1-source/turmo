@@ -47,7 +47,7 @@ export default function Footer({
   const whatsappUrl = generateWhatsAppGeneralEnquiry('Export Enquiry & Pricing', whatsappNumber);
 
   return (
-    <footer className="bg-[#181615] text-stone-300 border-t border-stone-800 relative overflow-hidden">
+    <footer className="bg-[#141211] text-stone-100 border-t border-stone-800 relative overflow-hidden pb-24 sm:pb-14">
       {/* Subtle background glow effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-brand-green/10 blur-3xl pointer-events-none" />
 
@@ -69,13 +69,13 @@ export default function Footer({
                 <span className="font-extrabold text-2xl tracking-wider text-white flex items-center gap-1.5">
                   URBAN <span className="text-brand-green">FRESH</span>
                 </span>
-                <span className="text-[10px] tracking-widest text-stone-400 uppercase font-medium block">
+                <span className="text-[10px] tracking-widest text-stone-200 uppercase font-bold block">
                   GROWN WITH CARE DELIVERED WORLD WIDE
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-stone-200 leading-relaxed max-w-sm font-normal">
               Connecting pure Indian agricultural heritage with international B2B importers, food
               manufacturers, and cosmetic enterprises worldwide. Clean-label, farm-traceable, and
               prepared for international commerce.
@@ -96,39 +96,45 @@ export default function Footer({
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm tracking-wider uppercase flex items-center gap-2">
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase flex items-center gap-2">
               <Globe2 className="w-4 h-4 text-brand-green" />
               Company
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
+                <Link href="/" className="text-stone-200 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <ArrowRight className="w-3 h-3 text-brand-green" />
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
+                <Link href="/about" className="text-stone-200 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <ArrowRight className="w-3 h-3 text-brand-green" />
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
+                <Link href="/products" className="text-stone-200 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <ArrowRight className="w-3 h-3 text-brand-green" />
                   Export Catalogue
                 </Link>
               </li>
               <li>
-                <Link href="/quality" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
+                <Link href="/quality" className="text-stone-200 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <ArrowRight className="w-3 h-3 text-brand-green" />
                   Quality & Standards
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
+                <Link href="/contact" className="text-stone-200 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <ArrowRight className="w-3 h-3 text-brand-green" />
                   Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin/login" className="text-stone-300 hover:text-white transition-colors flex items-center gap-1.5 font-medium">
+                  <Lock className="w-3 h-3 text-brand-lime" />
+                  Admin Login
                 </Link>
               </li>
             </ul>
@@ -136,7 +142,7 @@ export default function Footer({
 
           {/* Featured Commodities */}
           <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm tracking-wider uppercase flex items-center gap-2">
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-brand-green" />
               Key Exports
             </h4>
@@ -144,7 +150,7 @@ export default function Footer({
               <li>
                 <Link
                   href="/products/premium-indian-turmeric-powder-fingers"
-                  className="hover:text-brand-green transition-colors"
+                  className="text-stone-200 hover:text-white transition-colors font-medium block"
                 >
                   High Curcumin Turmeric
                 </Link>
@@ -152,7 +158,7 @@ export default function Footer({
               <li>
                 <Link
                   href="/products/premium-cold-pressed-coconut-oil"
-                  className="hover:text-brand-green transition-colors"
+                  className="text-stone-200 hover:text-white transition-colors font-medium block"
                 >
                   Cold-Pressed Virgin Coconut Oil
                 </Link>
@@ -160,13 +166,13 @@ export default function Footer({
               <li>
                 <Link
                   href="/products/premium-cold-pressed-groundnut-oil"
-                  className="hover:text-brand-green transition-colors"
+                  className="text-stone-200 hover:text-white transition-colors font-medium block"
                 >
                   Pure Cold-Pressed Groundnut Oil
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-brand-green transition-colors text-brand-green">
+                <Link href="/products" className="text-brand-lime hover:text-white font-semibold transition-colors block">
                   View Full Catalogue →
                 </Link>
               </li>
@@ -175,10 +181,10 @@ export default function Footer({
 
           {/* Contact Details */}
           <div className="space-y-4">
-            <h4 className="text-white font-semibold text-sm tracking-wider uppercase">
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase">
               Registered Office
             </h4>
-            <ul className="space-y-3 text-sm text-slate-300">
+            <ul className="space-y-3 text-sm text-stone-100">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
@@ -187,13 +193,13 @@ export default function Footer({
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-brand-green shrink-0" />
-                <a href={`tel:${phoneNumber.replace(/\s+/g, '')}`} className="hover:text-white">
+                <a href={`tel:${phoneNumber.replace(/\s+/g, '')}`} className="hover:text-white text-stone-100 font-medium">
                   {phoneNumber}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-brand-green shrink-0" />
-                <a href={`mailto:${email}`} className="hover:text-white">
+                <a href={`mailto:${email}`} className="hover:text-white text-stone-100 font-medium">
                   {email}
                 </a>
               </li>
@@ -202,26 +208,27 @@ export default function Footer({
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 text-center sm:text-left">
-          <div>
-            © {new Date().getFullYear()} <strong className="text-slate-200">Urban Fresh</strong>. All
-            rights reserved. B2B Agricultural Exports.
-          </div>
-
-          <div className="flex items-center gap-5 sm:gap-6 text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
-              <span>FSSAI & APEDA Export Compliant</span>
+        <div className="mt-12 pt-8 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-300 text-center md:text-left pr-0 md:pr-48">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
+            <span>
+              © {new Date().getFullYear()} <strong className="text-white font-bold">Urban Fresh</strong>. All rights reserved. B2B Agricultural Exports.
             </span>
-
+            <span className="hidden sm:inline text-stone-400">•</span>
             <Link
               href="/admin/login"
-              className="flex items-center gap-1.5 text-slate-400 hover:text-brand-green transition-colors font-medium px-2.5 py-1 rounded-lg hover:bg-navy-surface border border-transparent hover:border-white/10"
+              className="inline-flex items-center gap-1.5 text-white hover:text-brand-lime transition-all font-semibold px-2.5 py-1 rounded-md bg-stone-800/90 hover:bg-stone-700 border border-stone-700 hover:border-brand-green/60 shadow-sm"
               title="Secure Administrator Access"
             >
               <Lock className="w-3.5 h-3.5 text-brand-lime" />
               <span>Admin Access</span>
             </Link>
+          </div>
+
+          <div className="flex items-center gap-5 text-stone-200 font-medium">
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-brand-green" />
+              <span>FSSAI & APEDA Export Compliant</span>
+            </span>
           </div>
         </div>
       </div>

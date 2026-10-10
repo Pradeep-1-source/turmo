@@ -34,7 +34,7 @@ export default function ProductsPage() {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight mb-4">
           Export Product Catalogue
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-800 font-medium leading-relaxed">
           Pure Indian agricultural commodities, precision-tested for international food,
           nutraceutical, and cosmetic formulation. Connect on WhatsApp for FOB/CIF quotes and container quantities.
         </p>

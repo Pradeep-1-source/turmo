@@ -49,7 +49,7 @@ export default function WhyUrbanFresh({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
             Why International Buyers Choose Us
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-stone-800 font-medium leading-relaxed">
             Delivering consistency, authentic Indian farm heritage, and rigorous export compliance
             for global distributors, manufacturers, and importers.
           </p>
@@ -68,7 +68,7 @@ export default function WhyUrbanFresh({
                 <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-brand-green transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">
+                <p className="text-sm text-stone-700 leading-relaxed font-normal">
                   {item.description}
                 </p>
               </div>

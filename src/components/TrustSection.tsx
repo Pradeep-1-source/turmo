@@ -37,10 +37,10 @@ export default function TrustSection({
               <div className="w-14 h-14 rounded-2xl bg-[#FAF8F5] flex items-center justify-center mb-3 border border-brand-green/20 group-hover:border-brand-green group-hover:shadow-sm transition-all duration-300">
                 {icons[index % icons.length]}
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-stone-900 tracking-wide group-hover:text-brand-green transition-colors">
+              <h3 className="text-lg sm:text-xl font-extrabold text-stone-900 tracking-wide group-hover:text-brand-green transition-colors">
                 {item.label}
               </h3>
-              <p className="text-xs sm:text-sm text-stone-500 mt-1 max-w-[180px]">
+              <p className="text-xs sm:text-sm text-stone-700 font-semibold mt-1 max-w-[180px]">
                 {item.sub}
               </p>
             </div>

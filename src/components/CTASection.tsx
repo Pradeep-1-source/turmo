@@ -34,7 +34,7 @@ export default function CTASection({
             Looking for reliable Indian agricultural products for your business?
           </h2>
 
-          <p className="text-base sm:text-xl text-stone-600 font-medium mb-10 max-w-xl mx-auto">
+          <p className="text-base sm:text-xl text-stone-800 font-semibold mb-10 max-w-xl mx-auto">
             Let&apos;s discuss your requirement. Connect directly with our export desk for specifications,
             batch COA certificates, and competitive CIF/FOB pricing.
           </p>
@@ -61,7 +61,7 @@ export default function CTASection({
           </div>
 
           {/* Quick SLA / Info points */}
-          <div className="mt-10 pt-6 border-t border-stone-200 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-stone-500">
+          <div className="mt-10 pt-6 border-t border-stone-200 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-stone-800 font-bold">
             <div className="flex items-center gap-1.5">
               <Clock className="w-4 h-4 text-brand-green" />
               <span>Typical Response Time: &lt; 2 Hours</span>

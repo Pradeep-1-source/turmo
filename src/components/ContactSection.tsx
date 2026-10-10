@@ -46,7 +46,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
             Direct Trade & Export Enquiries
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-stone-800 font-medium leading-relaxed">
             Connect directly with our international trade desk via WhatsApp or phone. No tedious forms
             or waiting queues—we discuss your exact cargo specifications instantly.
           </p>
@@ -68,12 +68,12 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 </div>
               </div>
 
-              <div className="space-y-5 text-sm text-stone-600">
+              <div className="space-y-5 text-sm text-stone-800">
                 <div className="flex items-start gap-3.5">
                   <MapPin className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-stone-900 block font-medium">Headquarters & Processing Hub:</strong>
-                    <p className="leading-relaxed mt-0.5">
+                    <strong className="text-stone-900 block font-semibold">Headquarters & Processing Hub:</strong>
+                    <p className="leading-relaxed mt-0.5 font-normal">
                       {addressLine1},<br />
                       {addressLine2},<br />
                       {city}, {state} - {postalCode}, {country}
@@ -84,8 +84,8 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 <div className="flex items-center gap-3.5">
                   <Phone className="w-5 h-5 text-brand-green shrink-0" />
                   <div>
-                    <strong className="text-stone-900 block font-medium">Direct Telephone:</strong>
-                    <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-brand-green transition-colors font-medium text-stone-800">
+                    <strong className="text-stone-900 block font-semibold">Direct Telephone:</strong>
+                    <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-brand-green transition-colors font-medium text-stone-900">
                       {phone}
                     </a>
                   </div>
@@ -94,8 +94,8 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 <div className="flex items-center gap-3.5">
                   <MessageCircle className="w-5 h-5 text-brand-green shrink-0" />
                   <div>
-                    <strong className="text-stone-900 block font-medium">WhatsApp Trade Desk:</strong>
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-brand-green transition-colors font-medium text-stone-800">
+                    <strong className="text-stone-900 block font-semibold">WhatsApp Trade Desk:</strong>
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-brand-green transition-colors font-medium text-stone-900">
                       {whatsapp}
                     </a>
                   </div>
@@ -104,8 +104,8 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 <div className="flex items-center gap-3.5">
                   <Mail className="w-5 h-5 text-brand-green shrink-0" />
                   <div>
-                    <strong className="text-stone-900 block font-medium">Export Email:</strong>
-                    <a href={`mailto:${email}`} className="hover:text-brand-green transition-colors font-medium text-stone-800">
+                    <strong className="text-stone-900 block font-semibold">Export Email:</strong>
+                    <a href={`mailto:${email}`} className="hover:text-brand-green transition-colors font-medium text-stone-900">
                       {email}
                     </a>
                   </div>
@@ -114,8 +114,8 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 <div className="flex items-center gap-3.5">
                   <Clock className="w-5 h-5 text-brand-green shrink-0" />
                   <div>
-                    <strong className="text-stone-900 block font-medium">Operating Hours:</strong>
-                    <span>{businessHours}</span>
+                    <strong className="text-stone-900 block font-semibold">Operating Hours:</strong>
+                    <span className="font-medium text-stone-900">{businessHours}</span>
                   </div>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
             {/* Quick Assurance */}
             <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-stone-200 flex items-center gap-4">
               <ShieldCheck className="w-8 h-8 text-brand-green shrink-0" />
-              <div className="text-xs sm:text-sm text-stone-600">
+              <div className="text-xs sm:text-sm text-stone-800 font-medium">
                 <strong className="text-stone-900 block font-bold">Fast Documentation Verification</strong>
                 Phytosanitary certificates, Certificates of Analysis (COA), and packaging samples dispatched promptly for verified B2B importers.
               </div>
@@ -142,29 +142,29 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 Looking for reliable Indian agricultural products for your business?
               </h3>
 
-              <p className="text-base text-stone-600 leading-relaxed mb-6">
+              <p className="text-base text-stone-800 font-medium leading-relaxed mb-6">
                 Let&apos;s discuss your requirement. Skip lengthy forms and get real-time answers directly from our trade directors on WhatsApp.
               </p>
 
               <div className="space-y-3.5 mb-8">
                 <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0" />
-                  <p className="text-xs sm:text-sm text-stone-700">
-                    <strong>Container Loads & MOQ:</strong> Share your destination port (CIF / FOB terms).
+                  <p className="text-xs sm:text-sm text-stone-800 font-medium">
+                    <strong className="text-stone-900">Container Loads & MOQ:</strong> Share your destination port (CIF / FOB terms).
                   </p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0" />
-                  <p className="text-xs sm:text-sm text-stone-700">
-                    <strong>Custom Packaging:</strong> Private labeling, multi-ply bags, IBCs or bulk drums.
+                  <p className="text-xs sm:text-sm text-stone-800 font-medium">
+                    <strong className="text-stone-900">Custom Packaging:</strong> Private labeling, multi-ply bags, IBCs or bulk drums.
                   </p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200 flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0" />
-                  <p className="text-xs sm:text-sm text-stone-700">
-                    <strong>Pre-Shipment Samples:</strong> Courier dispatch of verified harvest samples.
+                  <p className="text-xs sm:text-sm text-stone-800 font-medium">
+                    <strong className="text-stone-900">Pre-Shipment Samples:</strong> Courier dispatch of verified harvest samples.
                   </p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 <ExternalLink className="w-4 h-4" />
               </a>
 
-              <p className="text-center text-xs text-stone-500">
+              <p className="text-center text-xs text-stone-700 font-semibold">
                 Direct WhatsApp channel: <strong>+91 9884449843</strong>
               </p>
             </div>

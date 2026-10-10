@@ -147,7 +147,7 @@ export default function ProductDetailPage() {
             {/* Quick Export Guarantee Callout */}
             <div className="p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex items-center gap-4">
               <ShieldCheck className="w-8 h-8 text-brand-green shrink-0" />
-              <div className="text-xs sm:text-sm text-stone-600">
+              <div className="text-xs sm:text-sm text-stone-700 font-medium">
                 <strong className="text-stone-900 block font-bold mb-0.5">Standard Export Assurance</strong>
                 Certified Phytosanitary Inspection, Certificate of Analysis (COA), and customized
                 maritime container packing available for this commodity.
@@ -167,7 +167,7 @@ export default function ProductDetailPage() {
               </h1>
 
               {currentProduct.tagline && (
-                <p className="text-base sm:text-lg text-stone-600 font-medium leading-snug">
+                <p className="text-base sm:text-lg text-stone-800 font-semibold leading-snug">
                   {currentProduct.tagline}
                 </p>
               )}
@@ -180,7 +180,7 @@ export default function ProductDetailPage() {
                   <span className="text-xs text-brand-green font-bold block uppercase tracking-wider">
                     Commercial Sourcing Inquiry
                   </span>
-                  <p className="text-xs text-stone-500 mt-0.5">
+                  <p className="text-xs text-stone-700 font-medium mt-0.5">
                     Pre-filled with product title for prompt quote and export specifications
                   </p>
                 </div>
@@ -218,7 +218,7 @@ export default function ProductDetailPage() {
               <h3 className="text-sm uppercase tracking-wider font-bold text-stone-900">
                 Commodity Overview
               </h3>
-              <p className="text-sm sm:text-base text-stone-600 leading-relaxed whitespace-pre-line">
+              <p className="text-sm sm:text-base text-stone-800 leading-relaxed whitespace-pre-line font-medium">
                 {currentProduct.description}
               </p>
             </div>
@@ -281,7 +281,7 @@ export default function ProductDetailPage() {
                       <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
                       <div className="text-xs sm:text-sm">
                         <strong className="text-brand-green mr-1.5">{h.label}:</strong>
-                        <span className="text-stone-700">{h.value}</span>
+                        <span className="text-stone-800 font-medium">{h.value}</span>
                       </div>
                     </div>
                   ))}
@@ -315,7 +315,7 @@ export default function ProductDetailPage() {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-stone-800 hover:text-black font-semibold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to full product catalogue</span>

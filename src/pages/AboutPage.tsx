@@ -95,7 +95,7 @@ export default function AboutPage() {
                 <MapPin className="w-5 h-5 text-brand-green" />
               </div>
               <div>
-                <p className="text-xs text-stone-500 font-medium">Exporter Location</p>
+                <p className="text-xs text-stone-800 font-bold">Exporter Location</p>
                 <p className="text-sm font-bold text-stone-900">Erode, Tamil Nadu, India</p>
               </div>
             </div>
@@ -109,12 +109,12 @@ export default function AboutPage() {
             </div>
 
             <div className="prose prose-stone max-w-none space-y-4">
-              <p className="text-stone-700 text-base sm:text-lg leading-relaxed font-normal">
+              <p className="text-stone-800 text-base sm:text-lg leading-relaxed font-normal">
                 At Urban Fresh, we bring the richness of agriculture closer to the world. Driven by
                 quality, trust, and a passion for agricultural products, we aim to connect India’s
                 agricultural potential with opportunities across domestic and international markets.
               </p>
-              <p className="text-stone-700 text-base sm:text-lg leading-relaxed font-normal">
+              <p className="text-stone-800 text-base sm:text-lg leading-relaxed font-normal">
                 We specialize in sourcing and supplying quality agro-based and food products, with a
                 commitment to reliable service, careful handling, and customer satisfaction. From
                 selecting the right products to coordinating dependable deliveries, we strive to
@@ -137,7 +137,7 @@ export default function AboutPage() {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-4">
                 Our Commitment
               </h2>
-              <p className="text-stone-600 text-base leading-relaxed">
+              <p className="text-stone-800 text-base leading-relaxed font-medium">
                 {commitmentText}
               </p>
             </div>
@@ -156,7 +156,7 @@ export default function AboutPage() {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-4">
                 Our Vision
               </h2>
-              <p className="text-stone-600 text-base leading-relaxed">
+              <p className="text-stone-800 text-base leading-relaxed font-medium">
                 {visionText}
               </p>
             </div>
