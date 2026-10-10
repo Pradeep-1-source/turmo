@@ -21,6 +21,8 @@ import {
   MapPin,
   Target,
   Compass,
+  UserCheck,
+  Quote,
 } from 'lucide-react';
 
 export default function AboutPage() {
@@ -33,32 +35,47 @@ export default function AboutPage() {
       fetchAboutContent(),
       fetchSiteSettings(),
       fetchHomepageContent(),
-    ]).then(([a, s, h]) => {
-      setAbout(a);
-      setSite(s);
-      setHomepage(h);
-    }).catch(err => console.warn(err));
+    ])
+      .then(([a, s, h]) => {
+        setAbout(a);
+        setSite(s);
+        setHomepage(h);
+      })
+      .catch((err) => console.warn('Using default content for about page:', err));
   }, []);
 
+  const pageTitle = about.title || 'About Urban Fresh';
+  const mainHeading = about.subtitle || 'From Nature’s Richness to the World’s Markets';
+  const commitmentText =
+    about.commitment ||
+    about.mission ||
+    'Quality is at the heart of everything we do. We believe in transparent business practices, responsible sourcing, consistent product standards, and building lasting partnerships with farmers, suppliers, distributors, and buyers worldwide.';
+  const visionText =
+    about.vision ||
+    'To establish Urban Fresh as a trusted global name in the agricultural and food products industry by delivering quality, creating value, and connecting India’s agricultural resources with markets around the world.';
+  const closingStatement =
+    about.closing_statement || 'Growing Together. Delivering Quality. Building Trust.';
+  const managingDirector = about.managing_director || 'Jayasuriya R';
+  const designation = about.designation || 'Managing Director | Urban Fresh';
+
   return (
-    <div className="pt-28 pb-20 bg-navy-dark min-h-screen">
+    <div className="pt-28 pb-20 bg-navy-dark min-h-screen text-slate-100">
       {/* Hero Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/40 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
           <Sparkles className="w-3.5 h-3.5 text-brand-lime" />
-          Agricultural Heritage & Export Quality
+          <span>{pageTitle}</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 max-w-4xl mx-auto">
-          {about.title}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+          {mainHeading}
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
-          {about.subtitle}
-        </p>
+        <div className="w-20 h-1 bg-gradient-to-r from-brand-green to-brand-lime mx-auto rounded-full mb-6" />
       </div>
 
-      {/* Main Narrative with Image */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Main Narrative with Facility Image */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Visual Column */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-card-dark aspect-[4/3] bg-navy-card">
               <Image
@@ -67,88 +84,119 @@ export default function AboutPage() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-transparent opacity-70" />
             </div>
 
-            {/* Floating Origin Badge */}
-            <div className="absolute -bottom-6 -right-4 sm:right-6 bg-navy-card/95 border border-brand-green/30 rounded-2xl p-4 shadow-card-hover backdrop-blur-md flex items-center gap-3">
+            {/* Origin Badge */}
+            <div className="absolute -bottom-6 -right-2 sm:right-6 bg-navy-card border border-brand-green/40 rounded-2xl p-4 shadow-card-hover backdrop-blur-md flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center text-brand-green">
                 <MapPin className="w-5 h-5 text-brand-lime" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 font-medium">Exporter Location</p>
+                <p className="text-xs text-slate-300 font-medium">Exporter Location</p>
                 <p className="text-sm font-bold text-white">Erode, Tamil Nadu, India</p>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-6 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 text-brand-green text-sm font-semibold mb-3">
+          {/* Narrative Text */}
+          <div className="lg:col-span-6 flex flex-col justify-center space-y-6">
+            <div className="inline-flex items-center gap-2 text-brand-green text-sm font-semibold">
               <ShieldCheck className="w-4 h-4 text-brand-lime" />
-              Responsible Indian Exporter
+              <span>Dedicated Agricultural Sourcing & Export</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 leading-snug">
-              Bridging Traditional Indian Farming with Global Regulatory Rigor
-            </h2>
-            <p className="text-slate-300 text-base leading-relaxed mb-6 font-normal whitespace-pre-line">
-              {about.description}
-            </p>
 
-            {/* Mission & Vision Mini Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-              <div className="p-5 rounded-2xl bg-navy-surface border border-white/10 shadow-sm">
-                <div className="flex items-center gap-2 mb-2 text-brand-green font-bold text-sm">
-                  <Target className="w-4 h-4 text-brand-lime" />
-                  Our Mission
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {about.mission}
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-navy-surface border border-white/10 shadow-sm">
-                <div className="flex items-center gap-2 mb-2 text-brand-green font-bold text-sm">
-                  <Compass className="w-4 h-4 text-brand-lime" />
-                  Our Vision
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {about.vision}
-                </p>
-              </div>
+            <div className="prose prose-invert max-w-none space-y-4">
+              <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-normal">
+                At Urban Fresh, we bring the richness of agriculture closer to the world. Driven by
+                quality, trust, and a passion for agricultural products, we aim to connect India’s
+                agricultural potential with opportunities across domestic and international markets.
+              </p>
+              <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-normal">
+                We specialize in sourcing and supplying quality agro-based and food products, with a
+                commitment to reliable service, careful handling, and customer satisfaction. From
+                selecting the right products to coordinating dependable deliveries, we strive to
+                make every business relationship meaningful and every transaction trustworthy.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Highlights / Operational Pillars */}
-      {about.highlights && about.highlights.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-              Our Core Operational Competencies
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Engineered to meet the exact procurement benchmarks of commercial international importers.
-            </p>
+      {/* Commitment & Vision Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Our Commitment Card */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-navy-card border border-white/10 hover:border-brand-green/40 transition-colors shadow-card-dark flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-navy-surface border border-brand-green/30 flex items-center justify-center text-brand-green mb-6 shadow-glow-green-sm">
+                <Target className="w-6 h-6 text-brand-lime" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+                Our Commitment
+              </h2>
+              <p className="text-slate-200 text-base leading-relaxed">
+                {commitmentText}
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-semibold text-brand-lime">
+              <CheckCircle2 className="w-4 h-4 text-brand-green" />
+              <span>Transparent Sourcing & Consistent Product Standards</span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {about.highlights.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-navy-card border border-white/10 hover:border-brand-green/30 transition-colors shadow-card-dark"
-              >
-                <div className="w-10 h-10 rounded-xl bg-navy-surface border border-brand-green/20 flex items-center justify-center text-brand-green mb-4">
-                  <CheckCircle2 className="w-5 h-5 text-brand-lime" />
-                </div>
-                <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+          {/* Our Vision Card */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-navy-card border border-white/10 hover:border-brand-green/40 transition-colors shadow-card-dark flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-navy-surface border border-brand-lime/30 flex items-center justify-center text-brand-lime mb-6 shadow-glow-green-sm">
+                <Compass className="w-6 h-6 text-brand-green" />
               </div>
-            ))}
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+                Our Vision
+              </h2>
+              <p className="text-slate-200 text-base leading-relaxed">
+                {visionText}
+              </p>
+            </div>
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-semibold text-brand-green">
+              <CheckCircle2 className="w-4 h-4 text-brand-lime" />
+              <span>Trusted Global Presence in Agricultural & Food Products</span>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Closing Statement & Managing Director Signature Section */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-navy-card via-navy-surface to-navy-card border border-brand-green/30 shadow-card-dark text-center relative overflow-hidden">
+          <div className="absolute top-0 right-1/4 w-72 h-72 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none" />
+
+          {/* Quote Icon */}
+          <div className="w-12 h-12 rounded-full bg-brand-green/20 border border-brand-green/40 mx-auto flex items-center justify-center text-brand-lime mb-4">
+            <Quote className="w-5 h-5 text-brand-lime" />
+          </div>
+
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-8">
+            &ldquo;{closingStatement}&rdquo;
+          </h3>
+
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 border-t border-white/10">
+            <div className="w-14 h-14 rounded-2xl bg-navy-dark border border-brand-green/40 flex items-center justify-center shadow-sm">
+              <UserCheck className="w-7 h-7 text-brand-green" />
+            </div>
+            <div className="text-center sm:text-left">
+              <p className="text-lg font-extrabold text-white tracking-wide">
+                {managingDirector}
+              </p>
+              <p className="text-xs sm:text-sm font-semibold text-brand-lime uppercase tracking-wider mt-0.5">
+                {designation}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Why Choose Urban Fresh */}
       <WhyUrbanFresh items={homepage.why_us_items} />

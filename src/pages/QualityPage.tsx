@@ -90,27 +90,27 @@ export default function QualityPage() {
           {/* Card 2: Packaging Protection */}
           <div className="p-8 rounded-2xl bg-navy-card border border-white/10 shadow-card-dark flex flex-col justify-between">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-navy-surface border border-brand-green/20 flex items-center justify-center text-brand-green mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-navy-surface border border-brand-green/30 flex items-center justify-center text-brand-green mb-6 shadow-glow-green-sm">
                 <Layers className="w-7 h-7 text-brand-lime" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Maritime Packaging</h3>
-              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+              <h3 className="text-xl font-bold text-white mb-3">Export-Ready Packaging</h3>
+              <p className="text-sm text-slate-200 leading-relaxed mb-6 font-normal">
                 {quality.packaging_info ||
-                  'Export packaging engineered for humidity control, extended sea transit, and palletized container shipping.'}
+                  'Moisture-controlled multi-wall paper sacks, bulk drums, IBCs, and private-label packaging options designed to support the storage and transportation requirements of agricultural and food products.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-300 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-slate-200 pt-4 border-t border-white/10">
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
                 Moisture-barrier multi-wall craft bags
               </li>
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
                 Food-grade HDPE drums & IBC totes
               </li>
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
-                Fumigated heat-treated wooden pallets
+                <ShieldCheck className="w-4 h-4 text-brand-lime shrink-0" />
+                Fumigated heat-treated export pallets
               </li>
             </ul>
           </div>

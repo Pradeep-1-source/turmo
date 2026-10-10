@@ -84,7 +84,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
   // If authenticated, render full responsive dashboard layout
   return (
     <AdminProvider>
-      <div className="min-h-screen bg-navy-dark text-slate-100 flex flex-col md:flex-row w-full overflow-x-hidden">
+      <div className="admin-panel min-h-screen bg-navy-dark text-slate-100 flex flex-col md:flex-row w-full overflow-x-hidden">
         <AdminSidebar onLogout={handleLogout} />
         <div className="flex-1 flex flex-col min-w-0 min-h-screen bg-navy-deep overflow-y-auto">
           {children || <Outlet />}

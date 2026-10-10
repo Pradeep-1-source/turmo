@@ -23,7 +23,7 @@ export default function WhyUrbanFresh({
     {
       title: 'Export-Ready Packaging',
       description:
-        'Multi-layer moisture barrier packaging, bulk HDPE drums, or custom private labeling for sea transit.',
+        'Moisture-controlled multi-wall paper sacks, bulk drums, IBCs, and private-label packaging options designed to support the storage and transportation requirements of agricultural and food products.',
     },
     {
       title: 'B2B Global Supply',
@@ -40,16 +40,16 @@ export default function WhyUrbanFresh({
   ];
 
   return (
-    <section className="py-24 bg-navy-dark relative overflow-hidden border-t border-navy-border/60">
+    <section className="py-24 bg-navy-dark relative overflow-hidden border-t border-navy-border/60 text-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/40 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
             The Urban Fresh Advantage
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
             Why International Buyers Choose Us
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed">
             Delivering consistency, authentic Indian farm heritage, and rigorous export compliance
             for global distributors, manufacturers, and importers.
           </p>
@@ -59,22 +59,22 @@ export default function WhyUrbanFresh({
           {items.map((item, index) => (
             <div
               key={index}
-              className="group p-8 rounded-2xl bg-white border border-stone-200 hover:border-brand-green/50 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg flex flex-col justify-between"
+              className="group p-8 rounded-2xl bg-navy-card border border-white/10 hover:border-brand-green/50 shadow-card-dark transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover flex flex-col justify-between"
             >
               <div>
-                <div className="w-16 h-16 rounded-2xl bg-[#FAF8F5] border border-stone-200 group-hover:border-brand-green flex items-center justify-center mb-6 transition-all duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-navy-surface border border-brand-green/30 group-hover:border-brand-green group-hover:shadow-glow-green-sm flex items-center justify-center mb-6 transition-all duration-300">
                   {cardIcons[index % cardIcons.length]}
                 </div>
-                <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-brand-green transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-lime transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">
+                <p className="text-sm text-slate-200 leading-relaxed font-normal">
                   {item.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-stone-100 flex items-center gap-2 text-xs text-brand-green font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-green" />
+              <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-brand-lime font-semibold">
+                <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
                 <span>Export Standard Verified</span>
               </div>
             </div>

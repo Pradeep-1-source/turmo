@@ -3,32 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --color-navy-dark: #FAF8F5;
-  --color-navy-deep: #F5F0E8;
-  --color-navy-card: #FFFFFF;
-  --color-green-fresh: #B05D41;
-  --color-green-lime: #C86E53;
-  --color-light-gray: #231F1D;
+  --color-navy-dark: #03111F;
+  --color-navy-deep: #061A2B;
+  --color-navy-surface: #0A243D;
+  --color-navy-card: #081D33;
+  --color-green-fresh: #62C914;
+  --color-green-lime: #A8E600;
+  --color-light-gray: #E2E8F0;
 }
 
 /* Base styling */
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
-  background-color: #FAF8F5;
-  color: #231F1D;
+  background-color: #03111F;
+  color: #FFFFFF;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
-  selection-background-color: #B05D41;
-  selection-color: #FFFFFF;
+  selection-background-color: #62C914;
+  selection-color: #03111F;
 }
 
 ::selection {
-  background: #B05D41;
-  color: #FFFFFF;
+  background: #62C914;
+  color: #03111F;
 }
 
 /* Custom scrollbar */
@@ -36,70 +37,111 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF8F5;
+  background: #03111F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8D1C7;
+  background: #1E3A5F;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B05D41;
+  background: #62C914;
 }
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(8, 29, 51, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #E8E1D7;
-  box-shadow: 0 10px 30px -10px rgba(40, 30, 20, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 .glass-header {
-  background: rgba(250, 248, 245, 0.94);
+  background: rgba(3, 17, 31, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(176, 93, 65, 0.15);
-  box-shadow: 0 4px 20px -2px rgba(40, 30, 20, 0.05);
+  border-bottom: 1px solid rgba(98, 201, 20, 0.2);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
 .glow-green {
-  box-shadow: 0 8px 25px -4px rgba(176, 93, 65, 0.35);
+  box-shadow: 0 0 25px -5px rgba(98, 201, 20, 0.4);
 }
 
 .glow-green-text {
-  text-shadow: 0 0 20px rgba(176, 93, 65, 0.3);
+  text-shadow: 0 0 20px rgba(98, 201, 20, 0.4);
 }
 
 /* Gradient text */
 .text-gradient-green {
-  background: linear-gradient(135deg, #B05D41 0%, #C86E53 100%);
+  background: linear-gradient(135deg, #A8E600 0%, #62C914 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-silver {
-  background: linear-gradient(180deg, #231F1D 0%, #57524E 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* High contrast typography rules for warm light theme */
-.bg-navy-dark, .bg-navy-deep {
-  color: #231F1D;
+/* ========================================================
+   ADMIN & FORM INPUT ACCESSIBILITY RULES
+   Ensures typed text is always dark #17212B on clean white #FFFFFF,
+   with #64748B placeholder and #62C914 focus ring.
+   ======================================================== */
+.admin-panel input:not([type="checkbox"]):not([type="radio"]),
+.admin-panel textarea,
+.admin-panel select,
+.admin-input,
+input.admin-field,
+textarea.admin-field,
+select.admin-field {
+  background-color: #FFFFFF !important;
+  color: #17212B !important;
+  border: 1px solid #CBD5E1 !important;
 }
 
-/* Headings on light background */
-.bg-navy-dark h1:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-dark h2:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-dark h3:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-deep h1:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-deep h2:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-deep h3:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-card h1:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-card h2:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-card h3:not([class*="bg-"]):not([class*="text-gradient"]) {
-  color: #231F1D;
+.admin-panel input::placeholder,
+.admin-panel textarea::placeholder,
+.admin-input::placeholder,
+input.admin-field::placeholder,
+textarea.admin-field::placeholder {
+  color: #64748B !important;
+  opacity: 1 !important;
+}
+
+.admin-panel input:focus,
+.admin-panel textarea:focus,
+.admin-panel select:focus,
+.admin-input:focus,
+input.admin-field:focus,
+textarea.admin-field:focus,
+select.admin-field:focus {
+  border-color: #62C914 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(98, 201, 20, 0.25) !important;
+}
+
+.admin-panel select option,
+select.admin-field option {
+  background-color: #FFFFFF !important;
+  color: #17212B !important;
+}
+
+/* Browser autofill handling to prevent white-on-white text */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #17212B !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Floating leaf animation */

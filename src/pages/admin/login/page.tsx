@@ -73,7 +73,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-navy-dark flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="admin-panel min-h-screen bg-navy-dark flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] bg-brand-green/10 rounded-full blur-[140px] pointer-events-none" />
 
@@ -92,14 +92,14 @@ export default function AdminLoginPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Urban Fresh Admin Portal
           </h1>
-          <p className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold flex items-center justify-center gap-1.5">
+          <p className="text-[11px] sm:text-xs text-slate-300 mt-1 uppercase tracking-widest font-semibold flex items-center justify-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-brand-lime" />
             <span>Secure Content Management System</span>
           </p>
         </div>
 
         {/* Login Form Box */}
-        <div className="rounded-2xl sm:rounded-3xl bg-navy-card/90 border border-white/10 p-6 sm:p-8 shadow-card-dark backdrop-blur-xl">
+        <div className="rounded-2xl sm:rounded-3xl bg-navy-card border border-white/10 p-6 sm:p-8 shadow-card-dark backdrop-blur-xl">
           {error && (
             <div className="mb-6 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-red-300 text-xs">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
@@ -109,11 +109,11 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-4 sm:space-y-5">
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-2">
                 Administrator Email
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2 z-10" />
                 <input
                   type="email"
                   required
@@ -121,17 +121,17 @@ export default function AdminLoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter administrator email"
                   autoComplete="username"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green transition-colors"
+                  className="admin-field w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2 z-10" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
@@ -139,12 +139,12 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter administrator password"
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green transition-colors"
+                  className="admin-field w-full pl-10 pr-11 py-3 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#17212B] transition-colors"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? (
@@ -159,7 +159,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-sm shadow-glow-green hover:shadow-xl hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-50 mt-2"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-[#03111F] font-extrabold text-sm shadow-glow-green hover:shadow-xl hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-50 mt-2"
             >
               <span>{loading ? 'Authenticating...' : 'Sign In to Dashboard'}</span>
               <ArrowRight className="w-4 h-4" />

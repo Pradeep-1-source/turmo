@@ -87,6 +87,10 @@ export interface AboutContent {
   description: string;
   mission: string;
   vision: string;
+  commitment?: string;
+  closing_statement?: string;
+  managing_director?: string;
+  designation?: string;
   highlights: AboutHighlight[];
   image_url: string;
   updated_at?: string;

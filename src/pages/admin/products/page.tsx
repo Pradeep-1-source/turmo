@@ -209,7 +209,7 @@ export default function AdminProductsPage() {
                   setIsEditing(false);
                 }
               }}
-              className="py-2.5 px-3.5 rounded-xl bg-navy-card border border-white/10 text-white text-xs font-semibold focus:outline-none focus:border-brand-green w-full sm:w-auto"
+              className="admin-field py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] text-xs font-semibold focus:outline-none focus:border-brand-green w-full sm:w-auto"
             >
               {products.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -273,7 +273,7 @@ export default function AdminProductsPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Title */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Product Title
                     </label>
                     <input
@@ -283,13 +283,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, title: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
 
                   {/* Slug */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Slug (URL)
                     </label>
                     <input
@@ -299,13 +299,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, slug: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green font-mono text-xs"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 font-mono text-xs"
                     />
                   </div>
 
                   {/* Category */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Category
                     </label>
                     <select
@@ -313,7 +313,7 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, category_id: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     >
                       {categories.map((c) => (
                         <option key={c.id} value={c.id}>
@@ -325,7 +325,7 @@ export default function AdminProductsPage() {
 
                   {/* Tagline */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Tagline / Subheading
                     </label>
                     <input
@@ -334,7 +334,7 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, tagline: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
 
@@ -469,7 +469,7 @@ export default function AdminProductsPage() {
 
                   {/* Description */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Full Product Description
                     </label>
                     <textarea
@@ -479,13 +479,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, description: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green leading-relaxed"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 leading-relaxed"
                     />
                   </div>
 
                   {/* Grade */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Grade / Quality
                     </label>
                     <input
@@ -494,13 +494,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, grade: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
 
                   {/* MOQ */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Minimum Order Quantity (MOQ)
                     </label>
                     <input
@@ -509,13 +509,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, moq: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
 
                   {/* Packaging */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Packaging Formats
                     </label>
                     <input
@@ -524,13 +524,13 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, packaging: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
 
                   {/* Certifications */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                       Certifications & Compliance
                     </label>
                     <input
@@ -539,7 +539,7 @@ export default function AdminProductsPage() {
                       onChange={(e) =>
                         setSelectedProduct({ ...selectedProduct, certifications: e.target.value })
                       }
-                      className="w-full py-2.5 px-3.5 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
                 </div>
@@ -547,7 +547,7 @@ export default function AdminProductsPage() {
                 {/* Structured Highlights Repeatable Fields */}
                 <div className="pt-4 border-t border-white/10 space-y-3">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                    <label className="text-xs font-bold text-slate-200 uppercase tracking-wider">
                       Technical Highlights & Specifications
                     </label>
                     <button
@@ -568,14 +568,14 @@ export default function AdminProductsPage() {
                           value={h.label}
                           onChange={(e) => updateHighlight(idx, 'label', e.target.value)}
                           placeholder="Label (e.g. Curcumin)"
-                          className="w-1/3 py-2 px-3 rounded-lg bg-navy-surface border border-white/10 text-xs text-brand-lime font-semibold"
+                          className="admin-field w-1/3 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B] font-semibold"
                         />
                         <input
                           type="text"
                           value={h.value}
                           onChange={(e) => updateHighlight(idx, 'value', e.target.value)}
                           placeholder="Value (e.g. 5.5% High Curcumin)"
-                          className="flex-1 py-2 px-3 rounded-lg bg-navy-surface border border-white/10 text-xs text-white"
+                          className="admin-field flex-1 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B]"
                         />
                         <button
                           type="button"

@@ -152,7 +152,7 @@ export default function AdminCategoriesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                     Category Name
                   </label>
                   <input
@@ -162,12 +162,12 @@ export default function AdminCategoriesPage() {
                     onChange={(e) =>
                       setSelectedCategory({ ...selectedCategory, name: e.target.value })
                     }
-                    className="w-full py-2 px-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                    className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                     Slug
                   </label>
                   <input
@@ -177,12 +177,12 @@ export default function AdminCategoriesPage() {
                     onChange={(e) =>
                       setSelectedCategory({ ...selectedCategory, slug: e.target.value })
                     }
-                    className="w-full py-2 px-3 rounded-xl bg-navy-surface border border-white/10 text-white text-xs font-mono focus:outline-none focus:border-brand-green"
+                    className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] text-xs font-mono focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
                     Description
                   </label>
                   <textarea
@@ -191,7 +191,7 @@ export default function AdminCategoriesPage() {
                     onChange={(e) =>
                       setSelectedCategory({ ...selectedCategory, description: e.target.value })
                     }
-                    className="w-full py-2 px-3 rounded-xl bg-navy-surface border border-white/10 text-white text-sm focus:outline-none focus:border-brand-green"
+                    className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                   />
                 </div>
 

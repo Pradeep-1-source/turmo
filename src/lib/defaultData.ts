@@ -230,7 +230,7 @@ export const defaultHomepageContent: HomepageContent = {
     },
     {
       title: 'Export-Ready Packaging',
-      description: 'Moisture-controlled multi-wall paper sacks, bulk drums, IBCs, and private labeling engineered for extended ocean transit.',
+      description: 'Moisture-controlled multi-wall paper sacks, bulk drums, IBCs, and private-label packaging options designed to support the storage and transportation requirements of agricultural and food products.',
     },
     {
       title: 'B2B Global Supply',
@@ -250,30 +250,35 @@ export const defaultHomepageContent: HomepageContent = {
 
 export const defaultAboutContent: AboutContent = {
   id: 'default',
-  title: 'Rooted in India. Prepared for the World.',
-  subtitle: 'Premier Agricultural Commodities & Food Export Partner',
+  title: 'About Urban Fresh',
+  subtitle: 'From Nature’s Richness to the World’s Markets',
   description:
-    'Urban Fresh is headquartered in the fertile agricultural belt of Erode, Tamil Nadu, India. Renowned globally as the yellow city of turmeric and prime hub for coconuts and oilseeds, our geographical advantage allows us to source farm-fresh raw commodities directly at harvest.\n\nWe bridge local Indian agricultural heritage with modern international quality standards. Every batch undergo meticulous cleaning, processing under sterile and temperature-controlled environments, and multi-tier lab analysis to ensure our global B2B clients receive consistent, pristine quality.',
+    'At Urban Fresh, we bring the richness of agriculture closer to the world. Driven by quality, trust, and a passion for agricultural products, we aim to connect India’s agricultural potential with opportunities across domestic and international markets.\n\nWe specialize in sourcing and supplying quality agro-based and food products, with a commitment to reliable service, careful handling, and customer satisfaction. From selecting the right products to coordinating dependable deliveries, we strive to make every business relationship meaningful and every transaction trustworthy.',
+  commitment:
+    'Quality is at the heart of everything we do. We believe in transparent business practices, responsible sourcing, consistent product standards, and building lasting partnerships with farmers, suppliers, distributors, and buyers worldwide.',
   mission:
-    'To supply pure, unadulterated, and sustainably sourced Indian agricultural commodities to international enterprises with total transparency and export reliability.',
+    'Quality is at the heart of everything we do. We believe in transparent business practices, responsible sourcing, consistent product standards, and building lasting partnerships with farmers, suppliers, distributors, and buyers worldwide.',
   vision:
-    'To be recognized worldwide as India’s benchmark partner for clean-label, premium-grade agricultural exports.',
+    'To establish Urban Fresh as a trusted global name in the agricultural and food products industry by delivering quality, creating value, and connecting India’s agricultural resources with markets around the world.',
+  closing_statement: 'Growing Together. Delivering Quality. Building Trust.',
+  managing_director: 'Jayasuriya R',
+  designation: 'Managing Director | Urban Fresh',
   highlights: [
     {
-      title: 'Direct Grower Partnerships',
-      desc: 'Transparent collaboration with agricultural producers in Tamil Nadu for sustainable harvests.',
+      title: 'Our Commitment',
+      desc: 'Quality is at the heart of everything we do. We believe in transparent business practices, responsible sourcing, consistent product standards, and building lasting partnerships with farmers, suppliers, distributors, and buyers worldwide.',
     },
     {
-      title: 'Hygienic Modern Processing',
-      desc: 'Gentle temperature-monitored extraction and pulverization ensuring natural phytochemical retention.',
+      title: 'Our Vision',
+      desc: 'To establish Urban Fresh as a trusted global name in the agricultural and food products industry by delivering quality, creating value, and connecting India’s agricultural resources with markets around the world.',
     },
     {
-      title: 'Strict Quality Documentation',
-      desc: 'Comprehensive certificates of analysis (COA), Phytosanitary, and batch traceability.',
+      title: 'Transparent Sourcing',
+      desc: 'Direct grower partnerships and dependable delivery schedules ensuring complete harvest traceability and customer satisfaction.',
     },
     {
-      title: 'Sea-Worthy Export Logistics',
-      desc: 'Engineered moisture barrier packaging and prompt handling to major international shipping routes.',
+      title: 'Global Delivery Standards',
+      desc: 'Careful handling, moisture-controlled transit packaging, and prompt coordination connecting India’s richness to world markets.',
     },
   ],
   image_url: '/images/hero-bg.jpg',
