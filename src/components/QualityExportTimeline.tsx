@@ -61,13 +61,13 @@ export default function QualityExportTimeline({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-glow-green-sm">
             Certified Export Supply Chain
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
             {title}
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed">
             {description}
           </p>
         </div>
@@ -75,35 +75,35 @@ export default function QualityExportTimeline({
         {/* Desktop Horizontal Timeline / Mobile Vertical */}
         <div className="relative">
           {/* Timeline Connecting Line on Desktop */}
-          <div className="hidden lg:block absolute top-[45px] left-12 right-12 h-0.5 bg-gradient-to-r from-brand-lime via-brand-green to-stone-400 opacity-40 z-0" />
+          <div className="hidden lg:block absolute top-[45px] left-12 right-12 h-0.5 bg-gradient-to-r from-brand-lime via-brand-green to-navy-border opacity-60 z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
             {steps.map((item, index) => (
               <div
                 key={index}
-                className="group relative rounded-2xl bg-white border border-stone-200 hover:border-brand-green/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
+                className="group relative rounded-2xl bg-navy-card border border-navy-border hover:border-brand-green/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
               >
                 <div>
                   {/* Step Badge / Icon */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#FAF8F5] border border-stone-200 flex items-center justify-center group-hover:border-brand-green transition-all">
+                    <div className="w-12 h-12 rounded-xl bg-navy-surface border border-brand-green/20 flex items-center justify-center group-hover:border-brand-green transition-all">
                       {stepIcons[index % stepIcons.length]}
                     </div>
-                    <span className="text-xs font-extrabold tracking-wider px-2.5 py-1 rounded-lg bg-[#FAF8F5] text-brand-green border border-brand-green/20">
+                    <span className="text-xs font-extrabold tracking-wider px-2.5 py-1 rounded-lg bg-navy-surface text-brand-lime border border-brand-green/30">
                       STEP {item.step}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-stone-900 mb-2 group-hover:text-brand-green transition-colors">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-brand-lime transition-colors">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-stone-100 flex items-center gap-1 text-[11px] text-brand-green font-medium">
+                <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-1 text-[11px] text-brand-lime font-medium">
                   <span>Verified Benchmark</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -122,7 +122,7 @@ export default function QualityExportTimeline({
               <h4 className="text-sm font-bold text-white">
                 Official Compliance & Documentation
               </h4>
-              <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-100 mt-0.5">
                 {certificationsInfo}
               </p>
             </div>

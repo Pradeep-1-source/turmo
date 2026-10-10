@@ -73,7 +73,7 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
       <div className="min-h-screen bg-navy-dark flex items-center justify-center p-4">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+          <p className="text-xs text-slate-200 font-semibold tracking-wider uppercase">
             Verifying Admin Session...
           </p>
         </div>

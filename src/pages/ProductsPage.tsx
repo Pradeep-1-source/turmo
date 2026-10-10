@@ -27,14 +27,14 @@ export default function ProductsPage() {
     <div className="pt-28 pb-16 bg-navy-dark min-h-screen">
       {/* Page Header Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-brand-green" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-brand-lime" />
           Direct Exporter Portfolio
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight mb-4">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
           Export Product Catalogue
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 font-normal leading-relaxed">
           Pure Indian agricultural commodities, precision-tested for international food,
           nutraceutical, and cosmetic formulation. Connect on WhatsApp for FOB/CIF quotes and container quantities.
         </p>

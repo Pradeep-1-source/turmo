@@ -40,7 +40,7 @@ export default function TrustSection({
               <h3 className="text-lg sm:text-xl font-bold text-stone-900 tracking-wide group-hover:text-brand-green transition-colors">
                 {item.label}
               </h3>
-              <p className="text-xs sm:text-sm text-stone-500 mt-1 max-w-[180px]">
+              <p className="text-xs sm:text-sm text-stone-600 font-medium mt-1 max-w-[180px]">
                 {item.sub}
               </p>
             </div>

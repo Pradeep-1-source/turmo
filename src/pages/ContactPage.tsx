@@ -31,7 +31,7 @@ export default function ContactPage() {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
           Contact Our Export Desk
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-100 font-normal leading-relaxed">
           Skip generic email tickets and online checkout forms. Chat directly with our trade directors
           on WhatsApp for fast specification review and competitive container pricing.
         </p>

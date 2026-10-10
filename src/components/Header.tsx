@@ -88,10 +88,10 @@ export default function Header({
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-stone-900 flex items-center gap-1.5 leading-none">
-                URBAN <span className="text-brand-green">FRESH</span>
+              <span className="font-extrabold text-lg sm:text-2xl tracking-wider text-white flex items-center gap-1.5 leading-none">
+                URBAN <span className="text-brand-lime">FRESH</span>
               </span>
-              <span className="text-[8px] sm:text-[10px] tracking-widest text-stone-500 uppercase font-medium mt-1">
+              <span className="text-[8px] sm:text-[10px] tracking-widest text-slate-300 uppercase font-semibold mt-1">
                 Grown with Care • Delivered Worldwide
               </span>
             </div>
@@ -105,15 +105,15 @@ export default function Header({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm tracking-wide font-medium transition-colors relative py-1 ${
+                  className={`text-sm tracking-wide transition-colors relative py-1 ${
                     isActive
-                      ? 'text-brand-green font-bold'
-                      : 'text-stone-700 hover:text-brand-green'
+                      ? 'text-brand-lime font-bold'
+                      : 'text-slate-200 hover:text-white font-medium'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-green rounded-full shadow-sm" />
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-lime rounded-full shadow-glow-green-sm" />
                   )}
                 </Link>
               );
@@ -148,7 +148,7 @@ export default function Header({
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 sm:p-2.5 rounded-xl bg-white border border-stone-200 text-stone-700 hover:text-stone-900"
+              className="p-2 sm:p-2.5 rounded-xl bg-navy-surface border border-white/10 text-slate-200 hover:text-white"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}

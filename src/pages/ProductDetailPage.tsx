@@ -54,7 +54,7 @@ export default function ProductDetailPage() {
     return (
       <div className="pt-32 pb-20 bg-navy-dark min-h-screen text-center">
         <h1 className="text-3xl font-bold text-white mb-4">Product Not Found</h1>
-        <p className="text-slate-300 mb-8">The requested export product could not be found.</p>
+        <p className="text-slate-100 mb-8">The requested export product could not be found.</p>
         <Link
           href="/products"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-green text-navy-dark font-bold hover:bg-brand-lime transition-colors"
@@ -88,7 +88,7 @@ export default function ProductDetailPage() {
     <div className="pt-28 pb-20 bg-navy-dark min-h-screen text-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 mb-8">
+        <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-200 mb-8">
           <Link href="/" className="hover:text-brand-lime transition-colors">
             Home
           </Link>
@@ -167,7 +167,7 @@ export default function ProductDetailPage() {
               </h1>
 
               {currentProduct.tagline && (
-                <p className="text-base sm:text-lg text-slate-300 font-medium leading-snug">
+                <p className="text-base sm:text-lg text-slate-100 font-medium leading-snug">
                   {currentProduct.tagline}
                 </p>
               )}
@@ -180,7 +180,7 @@ export default function ProductDetailPage() {
                   <span className="text-xs text-brand-lime font-bold block uppercase tracking-wider">
                     Commercial Sourcing Inquiry
                   </span>
-                  <p className="text-xs text-slate-300 mt-0.5">
+                  <p className="text-xs text-slate-200 mt-0.5">
                     Pre-filled with product title for prompt quote and export specifications
                   </p>
                 </div>
@@ -218,7 +218,7 @@ export default function ProductDetailPage() {
               <h3 className="text-sm uppercase tracking-wider font-bold text-white">
                 Commodity Overview
               </h3>
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed whitespace-pre-line">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed whitespace-pre-line">
                 {currentProduct.description}
               </p>
             </div>
@@ -315,7 +315,7 @@ export default function ProductDetailPage() {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to full product catalogue</span>

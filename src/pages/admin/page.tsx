@@ -67,7 +67,7 @@ export default function AdminDashboardPage() {
           {/* Card 1: Total Products */}
           <div className="p-6 rounded-2xl bg-navy-card border border-white/5 shadow-card-dark flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase font-bold text-slate-400 tracking-wider">
+              <p className="text-xs uppercase font-bold text-slate-200 tracking-wider">
                 Total Products
               </p>
               <h3 className="text-3xl font-extrabold text-white mt-1">
@@ -85,13 +85,13 @@ export default function AdminDashboardPage() {
           {/* Card 2: Active Products */}
           <div className="p-6 rounded-2xl bg-navy-card border border-white/5 shadow-card-dark flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase font-bold text-slate-400 tracking-wider">
+              <p className="text-xs uppercase font-bold text-slate-200 tracking-wider">
                 Published & Active
               </p>
               <h3 className="text-3xl font-extrabold text-brand-green mt-1">
                 {activeProductsCount}
               </h3>
-              <p className="text-[11px] text-slate-400 mt-1 font-medium">
+              <p className="text-[11px] text-slate-200 mt-1 font-medium">
                 Visible to global buyers
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function AdminDashboardPage() {
           {/* Card 3: Categories */}
           <div className="p-6 rounded-2xl bg-navy-card border border-white/5 shadow-card-dark flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase font-bold text-slate-400 tracking-wider">
+              <p className="text-xs uppercase font-bold text-slate-200 tracking-wider">
                 Categories
               </p>
               <h3 className="text-3xl font-extrabold text-white mt-1">
@@ -121,7 +121,7 @@ export default function AdminDashboardPage() {
           {/* Card 4: WhatsApp Desk Status */}
           <div className="p-6 rounded-2xl bg-navy-card border border-white/5 shadow-card-dark flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase font-bold text-slate-400 tracking-wider">
+              <p className="text-xs uppercase font-bold text-slate-200 tracking-wider">
                 WhatsApp Desk
               </p>
               <h3 className="text-xl font-extrabold text-white mt-1">+91 9884449843</h3>
@@ -144,7 +144,7 @@ export default function AdminDashboardPage() {
             <h3 className="text-xl font-bold text-white">
               Manage your export catalogue & website content
             </h3>
-            <p className="text-xs text-slate-400 max-w-xl">
+            <p className="text-xs text-slate-200 max-w-xl">
               Any changes made in this admin panel immediately update the live public website and Supabase database.
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function AdminDashboardPage() {
           <div className="p-6 border-b border-white/5 flex items-center justify-between">
             <div>
               <h3 className="text-lg font-bold text-white">Export Commodities</h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-200 mt-0.5">
                 Overview of all products registered in the export portfolio
               </p>
             </div>
@@ -196,11 +196,11 @@ export default function AdminDashboardPage() {
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-xs text-slate-400">Loading products...</div>
+            <div className="p-12 text-center text-xs text-slate-200">Loading products...</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-navy-surface/80 uppercase tracking-wider text-[10px] text-slate-400 border-b border-white/5">
+              <table className="w-full text-left text-xs text-slate-100">
+                <thead className="bg-navy-surface/80 uppercase tracking-wider text-[10px] text-slate-200 border-b border-white/5">
                   <tr>
                     <th className="py-3 px-6">Product</th>
                     <th className="py-3 px-4">Category</th>
@@ -226,7 +226,7 @@ export default function AdminDashboardPage() {
                               <strong className="text-white block font-semibold text-sm max-w-xs truncate">
                                 {p.title}
                               </strong>
-                              <span className="text-[11px] text-slate-400 block truncate max-w-xs">
+                              <span className="text-[11px] text-slate-200 block truncate max-w-xs">
                                 {p.tagline || p.slug}
                               </span>
                             </div>
@@ -237,7 +237,7 @@ export default function AdminDashboardPage() {
                           {p.category?.name || 'General'}
                         </td>
 
-                        <td className="py-4 px-4 text-slate-300">
+                        <td className="py-4 px-4 text-slate-100">
                           {p.moq || 'Contact Trade Desk'}
                         </td>
 
@@ -247,7 +247,7 @@ export default function AdminDashboardPage() {
                             className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase transition-all ${
                               p.published
                                 ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/30'
-                                : 'bg-slate-800 text-slate-400 border border-slate-700'
+                                : 'bg-slate-800 text-slate-200 border border-slate-700'
                             }`}
                           >
                             {p.published ? (

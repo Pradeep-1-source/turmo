@@ -40,13 +40,13 @@ export default function ContactSection({ contact }: ContactSectionProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             Connect With Export Team
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
             Direct Trade & Export Enquiries
           </h2>
-          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed">
             Connect directly with our international trade desk via WhatsApp or phone. No tedious forms
             or waiting queues—we discuss your exact cargo specifications instantly.
           </p>
