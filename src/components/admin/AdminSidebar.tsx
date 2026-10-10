@@ -53,10 +53,10 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
               />
             </div>
             <div>
-              <span className="font-extrabold text-sm tracking-wider text-white block">
+              <span className="font-extrabold text-sm tracking-wider text-stone-900 block">
                 URBAN <span className="text-brand-green">FRESH</span>
               </span>
-              <span className="text-[10px] text-brand-lime font-semibold uppercase tracking-widest block">
+              <span className="text-[10px] text-brand-green font-bold uppercase tracking-widest block">
                 Export CMS Portal
               </span>
             </div>
@@ -66,7 +66,7 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
           <button
             type="button"
             onClick={() => setSidebarOpen(false)}
-            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-navy-surface transition-colors"
+            className="md:hidden p-2 rounded-xl text-stone-600 hover:text-black hover:bg-stone-200/60 transition-colors"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -75,7 +75,7 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
 
         {/* Navigation list */}
         <nav className="p-4 space-y-1.5">
-          <div className="px-3 py-2 text-[10px] uppercase font-bold tracking-widest text-slate-400">
+          <div className="px-3 py-2 text-[10px] uppercase font-extrabold tracking-widest text-stone-700">
             Catalog & CMS
           </div>
           {links.map((link) => {
@@ -88,13 +88,13 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
                 key={link.href}
                 href={link.href}
                 onClick={handleNavClick}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                   isActive
-                    ? 'bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark shadow-glow-green-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-navy-surface'
+                    ? 'bg-brand-green text-white shadow-md'
+                    : 'text-stone-700 hover:text-stone-900 hover:bg-stone-200/50'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-navy-dark' : 'text-brand-green'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-brand-green'}`} />
                 <span>{link.label}</span>
               </Link>
             );
@@ -108,13 +108,13 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
           href="/"
           target="_blank"
           onClick={handleNavClick}
-          className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-navy-surface transition-all"
+          className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 transition-all"
         >
           <span className="flex items-center gap-2">
             <Home className="w-4 h-4 text-brand-green" />
             View Live Website
           </span>
-          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+          <ExternalLink className="w-3.5 h-3.5 text-stone-600" />
         </Link>
 
         <button
@@ -122,7 +122,7 @@ export default function AdminSidebar({ onLogout }: AdminSidebarProps) {
             handleNavClick();
             onLogout();
           }}
-          className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all text-left"
+          className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold text-red-600 hover:text-red-800 hover:bg-red-500/10 transition-all text-left"
         >
           <LogOut className="w-4 h-4" />
           <span>Sign Out</span>

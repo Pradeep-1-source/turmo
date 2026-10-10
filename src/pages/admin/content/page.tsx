@@ -112,8 +112,8 @@ export default function AdminContentPage() {
   };
 
   const inputClass =
-    'admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 transition-all';
-  const labelClass = 'block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1';
+    'admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 transition-all font-medium';
+  const labelClass = 'block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1';
 
   return (
     <>
@@ -130,13 +130,13 @@ export default function AdminContentPage() {
 
       <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-white/10 no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-stone-200 no-scrollbar">
           <button
             onClick={() => setActiveTab('home')}
-            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap shadow-sm ${
               activeTab === 'home'
-                ? 'bg-brand-green text-navy-dark shadow-glow-green-sm'
-                : 'text-slate-300 hover:bg-navy-surface hover:text-white'
+                ? 'bg-brand-green text-white'
+                : 'text-stone-700 bg-white border border-stone-200 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
             <Home className="w-4 h-4" />
@@ -145,10 +145,10 @@ export default function AdminContentPage() {
 
           <button
             onClick={() => setActiveTab('about')}
-            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap shadow-sm ${
               activeTab === 'about'
-                ? 'bg-brand-green text-navy-dark shadow-glow-green-sm'
-                : 'text-slate-300 hover:bg-navy-surface hover:text-white'
+                ? 'bg-brand-green text-white'
+                : 'text-stone-700 bg-white border border-stone-200 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
             <FileText className="w-4 h-4" />
@@ -157,10 +157,10 @@ export default function AdminContentPage() {
 
           <button
             onClick={() => setActiveTab('quality')}
-            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap shadow-sm ${
               activeTab === 'quality'
-                ? 'bg-brand-green text-navy-dark shadow-glow-green-sm'
-                : 'text-slate-300 hover:bg-navy-surface hover:text-white'
+                ? 'bg-brand-green text-white'
+                : 'text-stone-700 bg-white border border-stone-200 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
             <Award className="w-4 h-4" />
@@ -169,10 +169,10 @@ export default function AdminContentPage() {
 
           <button
             onClick={() => setActiveTab('contact')}
-            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap shadow-sm ${
               activeTab === 'contact'
-                ? 'bg-brand-green text-navy-dark shadow-glow-green-sm'
-                : 'text-slate-300 hover:bg-navy-surface hover:text-white'
+                ? 'bg-brand-green text-white'
+                : 'text-stone-700 bg-white border border-stone-200 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
             <Phone className="w-4 h-4" />
@@ -181,10 +181,10 @@ export default function AdminContentPage() {
 
           <button
             onClick={() => setActiveTab('settings')}
-            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+            className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap shadow-sm ${
               activeTab === 'settings'
-                ? 'bg-brand-green text-navy-dark shadow-glow-green-sm'
-                : 'text-slate-300 hover:bg-navy-surface hover:text-white'
+                ? 'bg-brand-green text-white'
+                : 'text-stone-700 bg-white border border-stone-200 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
             <Settings className="w-4 h-4" />

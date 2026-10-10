@@ -197,7 +197,7 @@ export default function AdminProductsPage() {
         {/* Top Control Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-            <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
+            <span className="text-xs uppercase font-extrabold text-stone-800 tracking-wider">
               Select Product:
             </span>
             <select
@@ -222,7 +222,7 @@ export default function AdminProductsPage() {
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               onClick={handleAddNew}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-xs shadow-glow-green hover:scale-105 active:scale-95 transition-all"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-brand-green text-white font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Add New</span>
@@ -231,7 +231,7 @@ export default function AdminProductsPage() {
             {selectedProduct && (
               <button
                 onClick={() => setIsEditing(!isEditing)}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-navy-surface border border-white/10 hover:border-brand-green text-white font-semibold text-xs transition-all active:scale-95"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-white border border-stone-300 hover:border-brand-green text-stone-900 font-bold text-xs transition-all active:scale-95 shadow-sm"
               >
                 <Edit className="w-4 h-4 text-brand-green" />
                 <span>{isEditing ? 'Cancel Edit' : 'Edit'}</span>
@@ -241,7 +241,7 @@ export default function AdminProductsPage() {
             {selectedProduct && (
               <button
                 onClick={() => handleDelete(selectedProduct.id)}
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-300 font-semibold text-xs transition-all active:scale-95"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-700 font-bold text-xs transition-all active:scale-95"
               >
                 <Trash2 className="w-4 h-4" />
                 <span className="hidden xs:inline">Delete</span>
@@ -254,16 +254,16 @@ export default function AdminProductsPage() {
         {selectedProduct ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             {/* LEFT: Product Form / Editor */}
-            <div className="lg:col-span-7 bg-navy-card rounded-2xl border border-white/10 p-5 sm:p-8 shadow-card-dark">
+            <div className="lg:col-span-7 bg-white rounded-2xl border border-stone-200 p-5 sm:p-8 shadow-sm">
               <form onSubmit={handleSave} className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                  <h3 className="text-base font-bold text-white flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-brand-lime" />
+                <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+                  <h3 className="text-base font-extrabold text-stone-900 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-brand-green" />
                     Product Specifications Editor
                   </h3>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-xs shadow-glow-green hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
                   >
                     <Save className="w-4 h-4" />
                     <span>Save to Live Website</span>
@@ -273,7 +273,7 @@ export default function AdminProductsPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Title */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Product Title
                     </label>
                     <input
@@ -289,7 +289,7 @@ export default function AdminProductsPage() {
 
                   {/* Slug */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Slug (URL)
                     </label>
                     <input
@@ -305,7 +305,7 @@ export default function AdminProductsPage() {
 
                   {/* Category */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Category
                     </label>
                     <select
@@ -325,7 +325,7 @@ export default function AdminProductsPage() {
 
                   {/* Tagline */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Tagline / Subheading
                     </label>
                     <input
@@ -339,19 +339,19 @@ export default function AdminProductsPage() {
                   </div>
 
                   {/* Product Image Upload & Settings */}
-                  <div className="sm:col-span-2 space-y-3 p-4 rounded-2xl bg-navy-surface/60 border border-white/5">
+                  <div className="sm:col-span-2 space-y-3 p-4 rounded-2xl bg-stone-50 border border-stone-200">
                     <div className="flex items-center justify-between">
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                      <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider">
                         Product Visual & Image Upload
                       </label>
-                      <span className="text-[10px] text-brand-lime font-semibold uppercase tracking-wider">
+                      <span className="text-[10px] text-brand-green font-bold uppercase tracking-wider">
                         Live Preview Enabled
                       </span>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       {/* Image Preview Thumbnail */}
-                      <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-navy-surface border-2 border-brand-green/30 shrink-0 shadow-md group">
+                      <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-white border-2 border-brand-green/30 shrink-0 shadow-sm group">
                         <Image
                           src={primaryImage}
                           alt={selectedProduct.title || 'Product'}
@@ -369,18 +369,18 @@ export default function AdminProductsPage() {
                           className={`w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl border-2 border-dashed ${
                             isUploadingImage
                               ? 'border-brand-green bg-brand-green/10'
-                              : 'border-brand-green/40 hover:border-brand-green bg-navy-surface hover:bg-navy-surface/80'
-                          } cursor-pointer transition-all text-xs font-semibold text-slate-200 group active:scale-[0.99]`}
+                              : 'border-brand-green/40 hover:border-brand-green bg-white hover:bg-stone-50'
+                          } cursor-pointer transition-all text-xs font-bold text-stone-900 group active:scale-[0.99] shadow-sm`}
                         >
                           {isUploadingImage ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin text-brand-green" />
-                              <span className="text-brand-lime">Uploading and processing image...</span>
+                              <span className="text-brand-green">Uploading and processing image...</span>
                             </>
                           ) : (
                             <>
                               <Upload className="w-4 h-4 text-brand-green group-hover:scale-110 transition-transform" />
-                              <span className="text-white group-hover:text-brand-lime transition-colors">
+                              <span className="text-stone-900 group-hover:text-brand-green transition-colors font-bold">
                                 Upload Product Image from Device
                               </span>
                             </>
@@ -393,16 +393,16 @@ export default function AdminProductsPage() {
                             className="hidden"
                           />
                         </label>
-                        <p className="text-[11px] text-slate-400">
+                        <p className="text-[11px] text-stone-700 font-medium">
                           Supports JPG, PNG, WEBP, AVIF. Selected file instantly uploads & updates catalogue.
                         </p>
                       </div>
                     </div>
 
                     {/* Presets or Direct Path */}
-                    <div className="pt-2 border-t border-white/5 space-y-2">
+                    <div className="pt-2 border-t border-stone-200 space-y-2">
                       <div className="flex items-center justify-between text-[11px]">
-                        <span className="text-slate-400 font-medium">Or choose high-res commodity preset:</span>
+                        <span className="text-stone-800 font-bold">Or choose high-res commodity preset:</span>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {[
@@ -428,10 +428,10 @@ export default function AdminProductsPage() {
                               setSelectedProduct({ ...selectedProduct, images: newImages });
                               showToast(`Applied preset: ${preset.label}`);
                             }}
-                            className={`px-2.5 py-1 rounded-lg text-[10px] font-semibold border transition-all ${
+                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all ${
                               primaryImage === preset.url
-                                ? 'bg-brand-green text-navy-dark border-brand-green'
-                                : 'bg-navy-surface border-white/10 text-slate-300 hover:text-white hover:border-brand-green/40'
+                                ? 'bg-brand-green text-white border-brand-green shadow-sm'
+                                : 'bg-white border-stone-300 text-stone-800 hover:text-black hover:border-brand-green/60 shadow-sm'
                             }`}
                           >
                             {preset.label}
@@ -441,7 +441,7 @@ export default function AdminProductsPage() {
 
                       {/* Manual Image Path Input */}
                       <div className="pt-1">
-                        <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
+                        <label className="block text-[10px] uppercase font-bold text-stone-800 tracking-wider mb-1">
                           Direct Image URL / Path (Optional)
                         </label>
                         <input
@@ -461,7 +461,7 @@ export default function AdminProductsPage() {
                             setSelectedProduct({ ...selectedProduct, images: newImages });
                           }}
                           placeholder="/images/your-image.jpg or https://..."
-                          className="w-full py-2 px-3 rounded-xl bg-navy-surface border border-white/10 text-white text-xs focus:outline-none focus:border-brand-green font-mono"
+                          className="w-full py-2 px-3 rounded-xl bg-white border border-stone-300 text-stone-900 text-xs focus:outline-none focus:border-brand-green font-mono"
                         />
                       </div>
                     </div>
@@ -469,7 +469,7 @@ export default function AdminProductsPage() {
 
                   {/* Description */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Full Product Description
                     </label>
                     <textarea
@@ -485,7 +485,7 @@ export default function AdminProductsPage() {
 
                   {/* Grade */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Grade / Quality
                     </label>
                     <input
@@ -500,7 +500,7 @@ export default function AdminProductsPage() {
 
                   {/* MOQ */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Minimum Order Quantity (MOQ)
                     </label>
                     <input
@@ -515,7 +515,7 @@ export default function AdminProductsPage() {
 
                   {/* Packaging */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Packaging Formats
                     </label>
                     <input
@@ -530,7 +530,7 @@ export default function AdminProductsPage() {
 
                   {/* Certifications */}
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                       Certifications & Compliance
                     </label>
                     <input
@@ -545,15 +545,15 @@ export default function AdminProductsPage() {
                 </div>
 
                 {/* Structured Highlights Repeatable Fields */}
-                <div className="pt-4 border-t border-white/10 space-y-3">
+                <div className="pt-4 border-t border-stone-200 space-y-3">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                    <label className="text-xs font-extrabold text-stone-900 uppercase tracking-wider">
                       Technical Highlights & Specifications
                     </label>
                     <button
                       type="button"
                       onClick={addHighlight}
-                      className="text-xs text-brand-green hover:text-brand-lime font-bold flex items-center gap-1"
+                      className="text-xs text-brand-green hover:text-[#984C34] font-bold flex items-center gap-1"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       Add Highlight Field
@@ -568,19 +568,20 @@ export default function AdminProductsPage() {
                           value={h.label}
                           onChange={(e) => updateHighlight(idx, 'label', e.target.value)}
                           placeholder="Label (e.g. Curcumin)"
-                          className="admin-field w-1/3 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B] font-semibold"
+                          className="admin-field w-1/3 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B] font-bold"
                         />
                         <input
                           type="text"
                           value={h.value}
                           onChange={(e) => updateHighlight(idx, 'value', e.target.value)}
                           placeholder="Value (e.g. 5.5% High Curcumin)"
-                          className="admin-field flex-1 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B]"
+                          className="admin-field flex-1 py-2 px-3 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#17212B] font-medium"
                         />
                         <button
                           type="button"
                           onClick={() => removeHighlight(idx)}
-                          className="p-2 text-slate-500 hover:text-red-400"
+                          className="p-2 text-stone-400 hover:text-red-600 transition-colors"
+                          title="Remove Highlight"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -590,7 +591,7 @@ export default function AdminProductsPage() {
                 </div>
 
                 {/* Publish Toggle */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-4 border-t border-stone-200 flex items-center justify-between">
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="checkbox"
@@ -600,14 +601,14 @@ export default function AdminProductsPage() {
                       }
                       className="w-4 h-4 rounded text-brand-green focus:ring-brand-green"
                     />
-                    <span className="text-sm font-semibold text-white">
+                    <span className="text-sm font-bold text-stone-900">
                       Publish to public export catalogue
                     </span>
                   </label>
 
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-xs shadow-glow-green hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
                   >
                     <Save className="w-4 h-4" />
                     <span>Save Changes</span>
@@ -619,13 +620,13 @@ export default function AdminProductsPage() {
             {/* RIGHT: Live Preview Card */}
             <div className="lg:col-span-5 sticky top-28 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase font-bold text-brand-lime tracking-widest flex items-center gap-1.5">
+                <span className="text-xs uppercase font-extrabold text-brand-green tracking-widest flex items-center gap-1.5">
                   <Eye className="w-3.5 h-3.5" /> Live Card Preview
                 </span>
                 <a
                   href={`/products/${selectedProduct.slug}`}
                   target="_blank"
-                  className="text-xs text-brand-green hover:underline flex items-center gap-1"
+                  className="text-xs font-bold text-brand-green hover:underline flex items-center gap-1"
                 >
                   <span>Open Full Detail Page</span>
                   <ExternalLink className="w-3 h-3" />
@@ -633,8 +634,8 @@ export default function AdminProductsPage() {
               </div>
 
               {/* Preview Container */}
-              <div className="rounded-2xl bg-navy-card border border-brand-green/40 shadow-card-hover overflow-hidden">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-navy-surface">
+              <div className="rounded-2xl bg-white border border-stone-200 shadow-md overflow-hidden">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-100">
                   <Image
                     src={primaryImage}
                     alt={selectedProduct.title}
@@ -642,18 +643,18 @@ export default function AdminProductsPage() {
                     className="object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-navy-dark/90 border border-brand-green/30 text-[11px] font-semibold text-brand-lime uppercase">
+                    <span className="inline-block px-3 py-1 rounded-full bg-stone-900/90 text-[11px] font-bold text-white uppercase shadow-sm">
                       {categories.find((c) => c.id === selectedProduct.category_id)?.name || 'Spices'}
                     </span>
                   </div>
                 </div>
 
                 <div className="p-6 space-y-3">
-                  <h4 className="text-lg font-bold text-white leading-snug">
+                  <h4 className="text-lg font-extrabold text-stone-900 leading-snug">
                     {selectedProduct.title}
                   </h4>
                   {selectedProduct.tagline && (
-                    <p className="text-xs text-slate-400 line-clamp-2">
+                    <p className="text-xs text-stone-700 font-medium line-clamp-2">
                       {selectedProduct.tagline}
                     </p>
                   )}
@@ -662,21 +663,21 @@ export default function AdminProductsPage() {
                     {selectedProduct.highlights?.map((h, i) => (
                       <span
                         key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-md bg-navy-surface border border-white/5 text-slate-300"
+                        className="text-[11px] px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200 text-stone-900 font-medium shadow-sm"
                       >
-                        <strong className="text-brand-lime">{h.label}:</strong> {h.value}
+                        <strong className="text-brand-green font-bold mr-1">{h.label}:</strong> {h.value}
                       </span>
                     ))}
                   </div>
 
-                  <div className="pt-4 border-t border-white/10 flex items-center gap-3">
+                  <div className="pt-4 border-t border-stone-200 flex items-center gap-3">
                     <a
                       href={waPreviewUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-xs shadow-glow-green flex items-center justify-center gap-1.5"
+                      className="w-full py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 transition-all"
                     >
-                      <MessageCircle className="w-4 h-4 fill-navy-dark text-navy-dark" />
+                      <MessageCircle className="w-4 h-4 fill-white text-white" />
                       <span>Test WhatsApp Enquiry Link</span>
                     </a>
                   </div>

@@ -99,8 +99,9 @@ body {
 .bg-navy-deep h3:not([class*="bg-"]):not([class*="text-gradient"]),
 .bg-navy-card h1:not([class*="bg-"]):not([class*="text-gradient"]),
 .bg-navy-card h2:not([class*="bg-"]):not([class*="text-gradient"]),
-.bg-navy-card h3:not([class*="bg-"]):not([class*="text-gradient"]) {
-  color: #231F1D;
+.bg-navy-card h3:not([class*="bg-"]):not([class*="text-gradient"]),
+.bg-navy-card h4:not([class*="bg-"]):not([class*="text-gradient"]) {
+  color: #17212B !important;
 }
 
 /* Paragraph and text rules for warm light theme */
@@ -116,7 +117,23 @@ body {
 .bg-navy-card p.text-slate-200,
 .bg-navy-card p.text-slate-300,
 .bg-navy-card p.text-slate-400 {
-  color: #57524E;
+  color: #334155 !important;
+}
+
+/* Admin labels and text accessibility */
+.admin-panel label,
+label.admin-label {
+  color: #17212B !important;
+  font-weight: 700 !important;
+}
+
+.admin-panel .text-slate-200,
+.admin-panel .text-slate-300 {
+  color: #334155 !important;
+}
+
+.admin-panel .text-slate-400 {
+  color: #475569 !important;
 }
 
 /* ========================================================

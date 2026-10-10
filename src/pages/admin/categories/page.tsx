@@ -79,13 +79,13 @@ export default function AdminCategoriesPage() {
 
       <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Layers className="w-5 h-5 text-brand-lime" />
+          <h2 className="text-lg font-extrabold text-stone-900 flex items-center gap-2">
+            <Layers className="w-5 h-5 text-brand-green" />
             Categories Portfolio ({categories.length})
           </h2>
           <button
             onClick={handleAddNew}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-bold text-xs shadow-glow-green hover:scale-105 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
           >
             <Plus className="w-4 h-4" />
             <span>Add Category</span>
@@ -94,9 +94,9 @@ export default function AdminCategoriesPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Categories List */}
-          <div className="lg:col-span-6 rounded-2xl bg-navy-card border border-white/10 p-6 shadow-card-dark divide-y divide-white/5">
+          <div className="lg:col-span-6 rounded-2xl bg-white border border-stone-200 p-6 shadow-sm divide-y divide-stone-200">
             {loading ? (
-              <p className="text-xs text-slate-400">Loading categories...</p>
+              <p className="text-xs text-stone-700 font-medium">Loading categories...</p>
             ) : (
               categories.map((c) => (
                 <div
@@ -104,19 +104,19 @@ export default function AdminCategoriesPage() {
                   onClick={() => setSelectedCategory(c)}
                   className={`py-4 px-3 rounded-xl cursor-pointer flex items-center justify-between transition-colors ${
                     selectedCategory?.id === c.id
-                      ? 'bg-navy-surface border border-brand-green/30'
-                      : 'hover:bg-navy-surface/40'
+                      ? 'bg-stone-50 border border-brand-green/40 shadow-sm'
+                      : 'hover:bg-stone-50/60'
                   }`}
                 >
                   <div>
-                    <h4 className="text-sm font-bold text-white">{c.name}</h4>
-                    <p className="text-xs text-slate-400 mt-0.5">{c.description || c.slug}</p>
+                    <h4 className="text-sm font-bold text-stone-900">{c.name}</h4>
+                    <p className="text-xs text-stone-700 font-medium mt-0.5">{c.description || c.slug}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                        c.published ? 'bg-emerald-950 text-emerald-400' : 'bg-slate-800 text-slate-400'
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase shadow-sm ${
+                        c.published ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' : 'bg-stone-100 text-stone-700 border border-stone-300'
                       }`}
                     >
                       {c.published ? 'Active' : 'Draft'}
@@ -126,7 +126,7 @@ export default function AdminCategoriesPage() {
                         e.stopPropagation();
                         handleDelete(c.id);
                       }}
-                      className="p-1.5 text-slate-500 hover:text-red-400"
+                      className="p-1.5 text-stone-400 hover:text-red-600 transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -138,13 +138,13 @@ export default function AdminCategoriesPage() {
 
           {/* Category Edit Form */}
           {selectedCategory && (
-            <div className="lg:col-span-6 rounded-2xl bg-navy-card border border-brand-green/30 p-6 shadow-card-dark">
+            <div className="lg:col-span-6 rounded-2xl bg-white border border-stone-200 p-6 shadow-sm">
               <form onSubmit={handleSave} className="space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <h3 className="text-sm font-bold text-white">Edit Category</h3>
+                <div className="flex items-center justify-between pb-3 border-b border-stone-200">
+                  <h3 className="text-sm font-extrabold text-stone-900">Edit Category</h3>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-xs shadow-glow-green hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
                   >
                     <Save className="w-3.5 h-3.5" />
                     <span>Save Category</span>
@@ -152,7 +152,7 @@ export default function AdminCategoriesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                     Category Name
                   </label>
                   <input
@@ -167,7 +167,7 @@ export default function AdminCategoriesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                     Slug
                   </label>
                   <input
@@ -182,7 +182,7 @@ export default function AdminCategoriesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
                     Description
                   </label>
                   <textarea
@@ -205,10 +205,10 @@ export default function AdminCategoriesPage() {
                       }
                       className="w-4 h-4 rounded text-brand-green"
                     />
-                    <span className="text-xs font-semibold text-white">Active in Catalogue</span>
+                    <span className="text-xs font-bold text-stone-900">Active in Catalogue</span>
                   </label>
 
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-stone-700 font-medium">
                     Sort Order: {selectedCategory.sort_order}
                   </span>
                 </div>
