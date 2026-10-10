@@ -27,14 +27,14 @@ export default function GlobalExportMap({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
             <Globe2 className="w-3.5 h-3.5 text-brand-green" />
             Global Trade Corridors
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
             {title}
           </h2>
-          <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-stone-600 font-normal leading-relaxed">
             {description}
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function GlobalExportMap({
                   Active Ocean & Air Corridors
                 </span>
               </div>
-              <div className="flex items-center gap-3 sm:gap-4 text-xs text-stone-700 font-medium">
+              <div className="flex items-center gap-3 sm:gap-4 text-xs text-stone-500">
                 <span className="flex items-center gap-1.5">
                   <Ship className="w-3.5 h-3.5 text-brand-green" /> FCL & LCL Ocean
                 </span>
@@ -123,7 +123,7 @@ export default function GlobalExportMap({
             {/* Origin Callout */}
             <div className="relative z-10 self-center my-4 sm:my-auto p-4 rounded-2xl bg-white/95 border border-stone-200 shadow-md max-w-sm text-center">
               <span className="text-[10px] uppercase font-bold tracking-widest text-brand-green block">
-                 Primary Origin & Port Dispatch
+                Primary Origin & Port Dispatch
               </span>
               <h4 className="text-sm sm:text-base font-extrabold text-stone-900 mt-0.5">
                 Erode, Tamil Nadu ➔ Chennai / Tuticorin Ports
@@ -141,7 +141,7 @@ export default function GlobalExportMap({
                     <Navigation className="w-3 h-3 text-brand-green shrink-0" />
                     <span>{hub.name}</span>
                   </p>
-                  <p className="text-[11px] text-stone-600 font-medium truncate">{hub.coords}</p>
+                  <p className="text-[11px] text-stone-500 truncate">{hub.coords}</p>
                 </div>
               ))}
             </div>

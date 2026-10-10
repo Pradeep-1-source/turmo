@@ -24,7 +24,7 @@ export default function AdminHeader({
         <button
           type="button"
           onClick={toggleSidebar}
-          className="md:hidden p-2 rounded-xl bg-navy-surface border border-white/10 text-slate-200 hover:text-white hover:border-brand-green/40 transition-colors shrink-0"
+          className="md:hidden p-2 rounded-xl bg-navy-surface border border-white/10 text-slate-300 hover:text-white hover:border-brand-green/40 transition-colors shrink-0"
           aria-label="Open navigation menu"
         >
           <Menu className="w-5 h-5 text-brand-green" />
@@ -35,7 +35,7 @@ export default function AdminHeader({
             {title}
           </h1>
           {subtitle && (
-            <p className="text-xs text-slate-200 mt-0.5 truncate hidden sm:block">
+            <p className="text-xs text-slate-400 mt-0.5 truncate hidden sm:block">
               {subtitle}
             </p>
           )}

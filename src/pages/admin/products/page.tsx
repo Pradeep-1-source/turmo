@@ -197,7 +197,7 @@ export default function AdminProductsPage() {
         {/* Top Control Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-            <span className="text-xs uppercase font-bold text-slate-200 tracking-wider">
+            <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
               Select Product:
             </span>
             <select
@@ -393,7 +393,7 @@ export default function AdminProductsPage() {
                             className="hidden"
                           />
                         </label>
-                        <p className="text-[11px] text-slate-200">
+                        <p className="text-[11px] text-slate-400">
                           Supports JPG, PNG, WEBP, AVIF. Selected file instantly uploads & updates catalogue.
                         </p>
                       </div>
@@ -402,7 +402,7 @@ export default function AdminProductsPage() {
                     {/* Presets or Direct Path */}
                     <div className="pt-2 border-t border-white/5 space-y-2">
                       <div className="flex items-center justify-between text-[11px]">
-                        <span className="text-slate-200 font-medium">Or choose high-res commodity preset:</span>
+                        <span className="text-slate-400 font-medium">Or choose high-res commodity preset:</span>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {[
@@ -431,7 +431,7 @@ export default function AdminProductsPage() {
                             className={`px-2.5 py-1 rounded-lg text-[10px] font-semibold border transition-all ${
                               primaryImage === preset.url
                                 ? 'bg-brand-green text-navy-dark border-brand-green'
-                                : 'bg-navy-surface border-white/10 text-slate-200 hover:text-white hover:border-brand-green/40'
+                                : 'bg-navy-surface border-white/10 text-slate-300 hover:text-white hover:border-brand-green/40'
                             }`}
                           >
                             {preset.label}
@@ -441,7 +441,7 @@ export default function AdminProductsPage() {
 
                       {/* Manual Image Path Input */}
                       <div className="pt-1">
-                        <label className="block text-[10px] uppercase font-bold text-slate-200 tracking-wider mb-1">
+                        <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">
                           Direct Image URL / Path (Optional)
                         </label>
                         <input
@@ -653,7 +653,7 @@ export default function AdminProductsPage() {
                     {selectedProduct.title}
                   </h4>
                   {selectedProduct.tagline && (
-                    <p className="text-xs text-slate-200 line-clamp-2">
+                    <p className="text-xs text-slate-400 line-clamp-2">
                       {selectedProduct.tagline}
                     </p>
                   )}
@@ -662,7 +662,7 @@ export default function AdminProductsPage() {
                     {selectedProduct.highlights?.map((h, i) => (
                       <span
                         key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-md bg-navy-surface border border-white/5 text-slate-100"
+                        className="text-[10px] px-2 py-0.5 rounded-md bg-navy-surface border border-white/5 text-slate-300"
                       >
                         <strong className="text-brand-lime">{h.label}:</strong> {h.value}
                       </span>
@@ -685,7 +685,7 @@ export default function AdminProductsPage() {
             </div>
           </div>
         ) : (
-          <div className="p-12 text-center text-slate-200 bg-navy-card rounded-2xl border border-white/5">
+          <div className="p-12 text-center text-slate-400 bg-navy-card rounded-2xl border border-white/5">
             Select a product to edit or click &quot;Add New Product&quot;.
           </div>
         )}

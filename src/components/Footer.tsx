@@ -69,13 +69,13 @@ export default function Footer({
                 <span className="font-extrabold text-2xl tracking-wider text-white flex items-center gap-1.5">
                   URBAN <span className="text-brand-green">FRESH</span>
                 </span>
-                <span className="text-[10px] tracking-widest text-stone-200 uppercase font-medium block">
+                <span className="text-[10px] tracking-widest text-stone-400 uppercase font-medium block">
                   GROWN WITH CARE DELIVERED WORLD WIDE
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-stone-200 leading-relaxed max-w-sm">
+            <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
               Connecting pure Indian agricultural heritage with international B2B importers, food
               manufacturers, and cosmetic enterprises worldwide. Clean-label, farm-traceable, and
               prepared for international commerce.
@@ -100,34 +100,34 @@ export default function Footer({
               <Globe2 className="w-4 h-4 text-brand-green" />
               Company
             </h4>
-            <ul className="space-y-2.5 text-sm text-stone-200">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-brand-lime/80" />
+                  <ArrowRight className="w-3 h-3 text-slate-500" />
                   Home
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-brand-lime/80" />
+                  <ArrowRight className="w-3 h-3 text-slate-500" />
                   About Us
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-brand-lime/80" />
+                  <ArrowRight className="w-3 h-3 text-slate-500" />
                   Export Catalogue
                 </Link>
               </li>
               <li>
                 <Link href="/quality" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-brand-lime/80" />
+                  <ArrowRight className="w-3 h-3 text-slate-500" />
                   Quality & Standards
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
-                  <ArrowRight className="w-3 h-3 text-brand-lime/80" />
+                  <ArrowRight className="w-3 h-3 text-slate-500" />
                   Contact Us
                 </Link>
               </li>
@@ -178,7 +178,7 @@ export default function Footer({
             <h4 className="text-white font-semibold text-sm tracking-wider uppercase">
               Registered Office
             </h4>
-            <ul className="space-y-3 text-sm text-slate-100">
+            <ul className="space-y-3 text-sm text-slate-300">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-brand-green shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
@@ -202,13 +202,13 @@ export default function Footer({
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-200 text-center sm:text-left">
+        <div className="mt-12 pt-8 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 text-center sm:text-left">
           <div>
-            © {new Date().getFullYear()} <strong className="text-white">Urban Fresh</strong>. All
+            © {new Date().getFullYear()} <strong className="text-slate-200">Urban Fresh</strong>. All
             rights reserved. B2B Agricultural Exports.
           </div>
 
-          <div className="flex items-center gap-5 sm:gap-6 text-slate-200">
+          <div className="flex items-center gap-5 sm:gap-6 text-slate-400">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
               <span>FSSAI & APEDA Export Compliant</span>
@@ -216,7 +216,7 @@ export default function Footer({
 
             <Link
               href="/admin/login"
-              className="flex items-center gap-1.5 text-slate-200 hover:text-brand-green transition-colors font-medium px-2.5 py-1 rounded-lg hover:bg-navy-surface border border-transparent hover:border-white/10"
+              className="flex items-center gap-1.5 text-slate-400 hover:text-brand-green transition-colors font-medium px-2.5 py-1 rounded-lg hover:bg-navy-surface border border-transparent hover:border-white/10"
               title="Secure Administrator Access"
             >
               <Lock className="w-3.5 h-3.5 text-brand-lime" />

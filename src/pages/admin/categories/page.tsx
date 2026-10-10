@@ -96,7 +96,7 @@ export default function AdminCategoriesPage() {
           {/* Categories List */}
           <div className="lg:col-span-6 rounded-2xl bg-navy-card border border-white/10 p-6 shadow-card-dark divide-y divide-white/5">
             {loading ? (
-              <p className="text-xs text-slate-200">Loading categories...</p>
+              <p className="text-xs text-slate-400">Loading categories...</p>
             ) : (
               categories.map((c) => (
                 <div
@@ -110,13 +110,13 @@ export default function AdminCategoriesPage() {
                 >
                   <div>
                     <h4 className="text-sm font-bold text-white">{c.name}</h4>
-                    <p className="text-xs text-slate-200 mt-0.5">{c.description || c.slug}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">{c.description || c.slug}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <span
                       className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                        c.published ? 'bg-emerald-950 text-emerald-400' : 'bg-slate-800 text-slate-200'
+                        c.published ? 'bg-emerald-950 text-emerald-400' : 'bg-slate-800 text-slate-400'
                       }`}
                     >
                       {c.published ? 'Active' : 'Draft'}
@@ -208,7 +208,7 @@ export default function AdminCategoriesPage() {
                     <span className="text-xs font-semibold text-white">Active in Catalogue</span>
                   </label>
 
-                  <span className="text-xs text-slate-200">
+                  <span className="text-xs text-slate-400">
                     Sort Order: {selectedCategory.sort_order}
                   </span>
                 </div>

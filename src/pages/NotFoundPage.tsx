@@ -15,11 +15,11 @@ export default function NotFoundPage() {
         </div>
 
         {/* 404 Header */}
-        <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-200 mb-2">
+        <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-2">
           404
         </h1>
         <h2 className="text-2xl font-bold text-white mb-4">Export Page Not Found</h2>
-        <p className="text-slate-200 text-sm leading-relaxed mb-8">
+        <p className="text-slate-400 text-sm leading-relaxed mb-8">
           The agricultural commodity or trade page you are looking for has been moved, renamed, or is currently unavailable.
         </p>
 

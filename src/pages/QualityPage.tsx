@@ -42,7 +42,7 @@ export default function QualityPage() {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
           {quality.title}
         </h1>
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-100 font-normal leading-relaxed">
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
           {quality.subtitle}
         </p>
       </div>
@@ -66,12 +66,12 @@ export default function QualityPage() {
                 <FlaskConical className="w-7 h-7 text-brand-lime" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">NABL Laboratory Testing</h3>
-              <p className="text-sm text-slate-100 leading-relaxed mb-6 font-normal">
+              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
                 {quality.lab_testing_info ||
                   'Batch-wise COA verification covering active curcumin levels, moisture content, peroxide value, and micro-organism thresholds.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-100 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-slate-300 pt-4 border-t border-white/10">
               <li className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Heavy metal screening (Pb, Cd, As, Hg)
@@ -122,12 +122,12 @@ export default function QualityPage() {
                 <FileCheck className="w-7 h-7 text-brand-lime" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Export Compliance</h3>
-              <p className="text-sm text-slate-100 leading-relaxed mb-6 font-normal">
+              <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
                 {quality.certifications_info ||
                   'FSSAI regulatory adherence, Phytosanitary clearance, and transparent Certificate of Origin documentation for every shipment.'}
               </p>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-100 pt-4 border-t border-white/10">
+            <ul className="space-y-2.5 text-xs text-slate-300 pt-4 border-t border-white/10">
               <li className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-brand-green shrink-0" />
                 Government Phytosanitary certificate

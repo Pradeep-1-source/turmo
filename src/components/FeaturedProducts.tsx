@@ -36,14 +36,14 @@ export default function FeaturedProducts({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase mb-3 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-brand-lime" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase mb-3 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-brand-green" />
               Direct From Source
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
               Export Grade Commodities
             </h2>
-            <p className="text-slate-200 text-sm sm:text-base mt-2 max-w-xl">
+            <p className="text-stone-600 text-sm sm:text-base mt-2 max-w-xl">
               Authentic Indian harvest processed under strict international standards. Enquire
               directly for custom packaging, container-loads, and laboratory specifications.
             </p>
@@ -53,7 +53,7 @@ export default function FeaturedProducts({
             <div className="mt-6 md:mt-0">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-navy-surface hover:bg-navy-card text-white border border-white/15 text-xs sm:text-sm font-semibold tracking-wide uppercase transition-all shadow-sm group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 hover:bg-black text-white text-xs sm:text-sm font-semibold tracking-wide uppercase transition-all shadow-sm group"
               >
                 <span>View All Products</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -64,8 +64,8 @@ export default function FeaturedProducts({
 
         {/* Category Filters */}
         <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-10 no-scrollbar">
-          <div className="flex items-center gap-1.5 text-xs text-slate-200 uppercase font-semibold pr-2">
-            <Filter className="w-3.5 h-3.5 text-brand-lime" />
+          <div className="flex items-center gap-1.5 text-xs text-stone-500 uppercase font-semibold pr-2">
+            <Filter className="w-3.5 h-3.5 text-brand-green" />
             <span>Filter:</span>
           </div>
 
@@ -73,8 +73,8 @@ export default function FeaturedProducts({
             onClick={() => setSelectedCategory('all')}
             className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
               selectedCategory === 'all'
-                ? 'bg-brand-green text-navy-dark font-bold shadow-md'
-                : 'bg-navy-surface text-slate-200 hover:text-white border border-white/10 shadow-sm'
+                ? 'bg-brand-green text-white shadow-md'
+                : 'bg-white text-stone-700 hover:text-stone-900 border border-stone-200 shadow-sm'
             }`}
           >
             All Products ({products.length})
@@ -91,8 +91,8 @@ export default function FeaturedProducts({
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                   selectedCategory === cat.id
-                    ? 'bg-brand-green text-navy-dark font-bold shadow-md'
-                    : 'bg-navy-surface text-slate-200 hover:text-white border border-white/10 shadow-sm'
+                    ? 'bg-brand-green text-white shadow-md'
+                    : 'bg-white text-stone-700 hover:text-stone-900 border border-stone-200 shadow-sm'
                 }`}
               >
                 {cat.name} ({count})
@@ -128,7 +128,7 @@ export default function FeaturedProducts({
           <div className="mt-14 text-center">
             <Link
               href="/products"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-brand-green to-brand-lime text-navy-dark font-extrabold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-glow-green-sm hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-black hover:bg-stone-800 text-white font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-md hover:scale-105 active:scale-95"
             >
               VIEW ALL PRODUCTS
             </Link>

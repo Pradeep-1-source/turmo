@@ -78,15 +78,15 @@ export default function AboutSection({
 
           {/* Text Column (Right) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-surface border border-brand-green/30 text-brand-lime text-xs font-bold tracking-widest uppercase shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-brand-green/30 text-brand-green text-xs font-bold tracking-widest uppercase shadow-sm">
               About Urban Fresh
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight">
               {title}
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-stone-600 leading-relaxed font-normal">
               {description}
             </p>
 

@@ -168,7 +168,7 @@ export default function AdminLoginPage() {
 
           {/* Security Notice */}
           <div className="mt-6 pt-5 border-t border-white/10 text-center">
-            <p className="text-[11px] text-slate-200 flex items-center justify-center gap-1.5">
+            <p className="text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-brand-green" />
               <span>Restricted administrative portal. Authorized access only.</span>
             </p>
@@ -178,7 +178,7 @@ export default function AdminLoginPage() {
         <div className="text-center mt-6">
           <Link
             href="/"
-            className="text-xs text-slate-200 hover:text-white transition-colors"
+            className="text-xs text-slate-400 hover:text-white transition-colors"
           >
             ← Return to public website
           </Link>
