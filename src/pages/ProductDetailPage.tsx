@@ -77,7 +77,7 @@ export default function ProductDetailPage() {
     site.whatsapp_number
   );
 
-  const businessEmail = site.email || 'export@urbanfresh.in';
+  const businessEmail = site.email || 'urbanfreshf2w@gmail.com';
   const emailEnquiryUrl = generateEmailProductEnquiry(currentProduct.title, businessEmail);
 
   const relatedProducts = allProducts

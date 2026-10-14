@@ -565,7 +565,7 @@ export default function AdminContentPage() {
                     value={contact.email}
                     onChange={(e) => setContact({ ...contact, email: e.target.value })}
                     className={inputClass}
-                    placeholder="export@urbanfresh.in"
+                    placeholder="urbanfreshf2w@gmail.com"
                   />
                 </div>
 
@@ -651,7 +651,7 @@ export default function AdminContentPage() {
                       value={site.email}
                       onChange={(e) => setSite({ ...site, email: e.target.value })}
                       className={inputClass}
-                      placeholder="export@urbanfresh.in"
+                      placeholder="urbanfreshf2w@gmail.com"
                     />
                   </div>
                 </div>

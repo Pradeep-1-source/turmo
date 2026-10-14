@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
 
         if (signInError) {
           // If user does not exist in Supabase auth yet, allow local fallback with configured admin creds
-          if (cleanEmail.toLowerCase() === 'admin@urbanfresh.in' && cleanPassword === 'Urban112') {
+          if ((cleanEmail.toLowerCase() === 'admin@urbanfresh.in' || cleanEmail.toLowerCase() === 'urbanfreshf2w@gmail.com') && cleanPassword === 'Urban112') {
             localStorage.setItem('uf_admin_auth', 'true');
             router.push('/admin');
             return;
@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
         }
       } else {
         // Secure CMS Mode Authentication
-        if (cleanEmail.toLowerCase() === 'admin@urbanfresh.in' && cleanPassword === 'Urban112') {
+        if ((cleanEmail.toLowerCase() === 'admin@urbanfresh.in' || cleanEmail.toLowerCase() === 'urbanfreshf2w@gmail.com') && cleanPassword === 'Urban112') {
           localStorage.setItem('uf_admin_auth', 'true');
           router.push('/admin');
           return;

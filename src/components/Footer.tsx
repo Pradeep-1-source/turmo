@@ -31,7 +31,7 @@ interface FooterProps {
 export default function Footer({
   whatsappNumber = '919884449843',
   phoneNumber = '+91 9884449843',
-  email = 'export@urbanfresh.in',
+  email = 'urbanfreshf2w@gmail.com',
   addressLine1 = 'D.No-48, VELLI VALASU, Attavanai Anumanpalli',
   addressLine2 = 'PO: Arachalur, DIST: Erode',
   city = 'Erode',

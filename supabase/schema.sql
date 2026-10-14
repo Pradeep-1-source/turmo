@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS public.contact_settings (
     country TEXT NOT NULL DEFAULT 'India',
     phone TEXT NOT NULL DEFAULT '+91 9884449843',
     whatsapp TEXT NOT NULL DEFAULT '+91 9884449843',
-    email TEXT NOT NULL DEFAULT 'export@urbanfresh.in',
+    email TEXT NOT NULL DEFAULT 'urbanfreshf2w@gmail.com',
     maps_embed_url TEXT DEFAULT '',
     business_hours TEXT DEFAULT 'Mon - Sat: 9:00 AM - 6:30 PM IST',
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
     logo_url TEXT DEFAULT '/images/urban-fresh-logo.jpg',
     whatsapp_number TEXT NOT NULL DEFAULT '919884449843',
     phone_number TEXT NOT NULL DEFAULT '+91 9884449843',
-    email TEXT NOT NULL DEFAULT 'export@urbanfresh.in',
+    email TEXT NOT NULL DEFAULT 'urbanfreshf2w@gmail.com',
     footer_text TEXT NOT NULL DEFAULT 'Urban Fresh connects quality Indian agricultural products with global buyers. Dedicated to international quality, clean labeling, and seamless B2B worldwide trade.',
     default_seo_title TEXT NOT NULL DEFAULT 'Urban Fresh | Premium Indian Agricultural Products & Global Export',
     default_seo_description TEXT NOT NULL DEFAULT 'Urban Fresh supplies premium Indian agricultural and food products for global B2B buyers, with a focus on quality, responsible sourcing and export-ready supply.',

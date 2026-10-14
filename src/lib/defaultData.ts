@@ -336,7 +336,7 @@ export const defaultContactSettings: ContactSettings = {
   country: 'India',
   phone: '+91 9884449843',
   whatsapp: '+91 9884449843',
-  email: 'export@urbanfresh.in',
+  email: 'urbanfreshf2w@gmail.com',
   maps_embed_url: 'https://maps.google.com/maps?q=Arachalur,+Erode,+Tamil+Nadu&t=&z=13&ie=UTF8&iwloc=&output=embed',
   business_hours: 'Monday - Saturday: 9:00 AM - 6:30 PM IST',
 };
@@ -348,7 +348,7 @@ export const defaultSiteSettings: SiteSettings = {
   logo_url: '/images/urban-fresh-logo.jpg',
   whatsapp_number: '919884449843',
   phone_number: '+91 9884449843',
-  email: 'export@urbanfresh.in',
+  email: 'urbanfreshf2w@gmail.com',
   footer_text:
     'Urban Fresh is a premier Indian agricultural products and food export enterprise. We bridge authentic Indian farming excellence with international B2B importers, food processors, and cosmetic formulators across the globe.',
   default_seo_title: 'Urban Fresh | Premium Indian Agricultural Products & Global Export',

@@ -28,7 +28,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
   const country = contact?.country || 'India';
   const phone = contact?.phone || '+91 9884449843';
   const whatsapp = contact?.whatsapp || '+91 9884449843';
-  const email = contact?.email || 'export@urbanfresh.in';
+  const email = contact?.email || 'urbanfreshf2w@gmail.com';
   const businessHours = contact?.business_hours || 'Mon - Sat: 9:00 AM - 6:30 PM IST';
 
   const whatsappUrl = generateWhatsAppGeneralEnquiry('Export Partnership Discussion', whatsapp);
