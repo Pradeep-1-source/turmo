@@ -168,6 +168,37 @@ ALTER TABLE public.quality_content ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.contact_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 
+-- Clean up any existing policies
+DROP POLICY IF EXISTS "Allow public read published categories" ON public.categories;
+DROP POLICY IF EXISTS "Allow public read published products" ON public.products;
+DROP POLICY IF EXISTS "Allow public read product images" ON public.product_images;
+DROP POLICY IF EXISTS "Allow public read product highlights" ON public.product_highlights;
+DROP POLICY IF EXISTS "Allow public read homepage content" ON public.homepage_content;
+DROP POLICY IF EXISTS "Allow public read about content" ON public.about_content;
+DROP POLICY IF EXISTS "Allow public read quality content" ON public.quality_content;
+DROP POLICY IF EXISTS "Allow public read contact settings" ON public.contact_settings;
+DROP POLICY IF EXISTS "Allow public read site settings" ON public.site_settings;
+
+DROP POLICY IF EXISTS "Allow authenticated full access categories" ON public.categories;
+DROP POLICY IF EXISTS "Allow authenticated full access products" ON public.products;
+DROP POLICY IF EXISTS "Allow authenticated full access product_images" ON public.product_images;
+DROP POLICY IF EXISTS "Allow authenticated full access product_highlights" ON public.product_highlights;
+DROP POLICY IF EXISTS "Allow authenticated full access homepage" ON public.homepage_content;
+DROP POLICY IF EXISTS "Allow authenticated full access about" ON public.about_content;
+DROP POLICY IF EXISTS "Allow authenticated full access quality" ON public.quality_content;
+DROP POLICY IF EXISTS "Allow authenticated full access contact" ON public.contact_settings;
+DROP POLICY IF EXISTS "Allow authenticated full access settings" ON public.site_settings;
+
+DROP POLICY IF EXISTS "Allow full access categories" ON public.categories;
+DROP POLICY IF EXISTS "Allow full access products" ON public.products;
+DROP POLICY IF EXISTS "Allow full access product_images" ON public.product_images;
+DROP POLICY IF EXISTS "Allow full access product_highlights" ON public.product_highlights;
+DROP POLICY IF EXISTS "Allow full access homepage" ON public.homepage_content;
+DROP POLICY IF EXISTS "Allow full access about" ON public.about_content;
+DROP POLICY IF EXISTS "Allow full access quality" ON public.quality_content;
+DROP POLICY IF EXISTS "Allow full access contact" ON public.contact_settings;
+DROP POLICY IF EXISTS "Allow full access settings" ON public.site_settings;
+
 -- Public READ Policies
 CREATE POLICY "Allow public read published categories" ON public.categories FOR SELECT USING (published = true);
 CREATE POLICY "Allow public read published products" ON public.products FOR SELECT USING (published = true);
@@ -179,36 +210,52 @@ CREATE POLICY "Allow public read quality content" ON public.quality_content FOR 
 CREATE POLICY "Allow public read contact settings" ON public.contact_settings FOR SELECT USING (true);
 CREATE POLICY "Allow public read site settings" ON public.site_settings FOR SELECT USING (true);
 
--- Authenticated Admin Policies (Full Access)
-CREATE POLICY "Allow authenticated full access categories" ON public.categories FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access products" ON public.products FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access product_images" ON public.product_images FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access product_highlights" ON public.product_highlights FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access homepage" ON public.homepage_content FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access about" ON public.about_content FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access quality" ON public.quality_content FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access contact" ON public.contact_settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access settings" ON public.site_settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
+-- Admin Management Policies (Allow full access for authenticated users & anon admin client)
+CREATE POLICY "Allow full access categories" ON public.categories FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access products" ON public.products FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access product_images" ON public.product_images FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access product_highlights" ON public.product_highlights FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access homepage" ON public.homepage_content FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access about" ON public.about_content FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access quality" ON public.quality_content FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access contact" ON public.contact_settings FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow full access settings" ON public.site_settings FOR ALL USING (true) WITH CHECK (true);
 
 -- 12. Storage Buckets (Execute in Supabase Storage or Dashboard)
 INSERT INTO storage.buckets (id, name, public) 
 VALUES ('product-images', 'product-images', true)
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET public = true;
 
 INSERT INTO storage.buckets (id, name, public) 
 VALUES ('site-assets', 'site-assets', true)
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET public = true;
 
--- Storage RLS
+-- Storage RLS Policies
+DROP POLICY IF EXISTS "Allow public read product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated upload product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated update product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated delete product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow upload product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow update product-images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow delete product-images" ON storage.objects;
+
 CREATE POLICY "Allow public read product-images" ON storage.objects FOR SELECT USING (bucket_id = 'product-images');
-CREATE POLICY "Allow authenticated upload product-images" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'product-images');
-CREATE POLICY "Allow authenticated update product-images" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'product-images');
-CREATE POLICY "Allow authenticated delete product-images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'product-images');
+CREATE POLICY "Allow upload product-images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'product-images');
+CREATE POLICY "Allow update product-images" ON storage.objects FOR UPDATE USING (bucket_id = 'product-images');
+CREATE POLICY "Allow delete product-images" ON storage.objects FOR DELETE USING (bucket_id = 'product-images');
+
+DROP POLICY IF EXISTS "Allow public read site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated upload site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated update site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated delete site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow upload site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow update site-assets" ON storage.objects;
+DROP POLICY IF EXISTS "Allow delete site-assets" ON storage.objects;
 
 CREATE POLICY "Allow public read site-assets" ON storage.objects FOR SELECT USING (bucket_id = 'site-assets');
-CREATE POLICY "Allow authenticated upload site-assets" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'site-assets');
-CREATE POLICY "Allow authenticated update site-assets" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'site-assets');
-CREATE POLICY "Allow authenticated delete site-assets" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'site-assets');
+CREATE POLICY "Allow upload site-assets" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'site-assets');
+CREATE POLICY "Allow update site-assets" ON storage.objects FOR UPDATE USING (bucket_id = 'site-assets');
+CREATE POLICY "Allow delete site-assets" ON storage.objects FOR DELETE USING (bucket_id = 'site-assets');
 
 -- 13. Seed Initial Singleton Content
 INSERT INTO public.homepage_content (id) VALUES ('default') ON CONFLICT (id) DO NOTHING;

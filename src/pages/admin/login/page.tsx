@@ -37,8 +37,23 @@ export default function AdminLoginPage() {
         });
 
         if (signInError) {
-          // If user does not exist in Supabase auth yet, allow local fallback with configured admin creds
+          // If user does not exist in Supabase auth yet, attempt auto signup for the master admin
           if ((cleanEmail.toLowerCase() === 'admin@urbanfresh.in' || cleanEmail.toLowerCase() === 'urbanfreshf2w@gmail.com') && cleanPassword === 'Urban112') {
+            try {
+              const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+                email: cleanEmail,
+                password: cleanPassword,
+              });
+              if (!signUpError && signUpData?.session) {
+                localStorage.setItem('uf_admin_auth', 'true');
+                router.push('/admin');
+                return;
+              }
+            } catch (signupErr) {
+              console.warn('Auto signup check notice:', signupErr);
+            }
+
+            // Allow fallback login session
             localStorage.setItem('uf_admin_auth', 'true');
             router.push('/admin');
             return;
