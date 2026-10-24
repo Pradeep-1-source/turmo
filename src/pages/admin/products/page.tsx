@@ -9,6 +9,8 @@ import {
   saveProduct,
   deleteProduct,
   uploadProductImage,
+  generateUUID,
+  isValidUUID,
 } from '@/lib/supabase';
 import { Product, Category, ProductHighlight } from '@/types/database';
 import {
@@ -37,6 +39,7 @@ export default function AdminProductsPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -62,13 +65,14 @@ export default function AdminProductsPage() {
   };
 
   const handleAddNew = () => {
+    const newId = generateUUID();
     const newProduct: Product = {
-      id: `prod-${Date.now()}`,
+      id: newId,
       title: 'New Export Commodity',
       slug: `new-commodity-${Date.now().toString().slice(-4)}`,
       tagline: 'High quality Indian agricultural produce for international B2B export.',
       description: 'Carefully harvested and processed under sterile standards for global export.',
-      category_id: categories[0]?.id || '',
+      category_id: categories[0]?.id || undefined,
       grade: 'Export Grade 1',
       moq: '500 KG / 1 MT',
       packaging: 'Multi-layer Kraft paper sacks or food-grade bulk drums',
@@ -81,15 +85,15 @@ export default function AdminProductsPage() {
       seo_description: 'Export grade Indian commodity ready for international B2B buyers.',
       images: [
         {
-          id: `img-${Date.now()}`,
+          id: generateUUID(),
           image_url: '/images/turmeric.jpg',
           alt_text: 'Export Commodity',
           sort_order: 1,
         },
       ],
       highlights: [
-        { label: 'Available Forms', value: 'Whole and fine powder' },
-        { label: 'Quality Threshold', value: '100% pure and lab verified' },
+        { id: generateUUID(), label: 'Available Forms', value: 'Whole and fine powder', sort_order: 1 },
+        { id: generateUUID(), label: 'Quality Threshold', value: '100% pure and lab verified', sort_order: 2 },
       ],
     };
 
@@ -99,22 +103,78 @@ export default function AdminProductsPage() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedProduct) return;
+    if (!selectedProduct || isSaving) return;
 
-    await saveProduct(selectedProduct);
-    await loadData();
-    setIsEditing(false);
-    showToast('Product saved successfully to Supabase / Live CMS!');
+    if (!selectedProduct.title?.trim()) {
+      showToast('Unable to save product. Title is required.');
+      return;
+    }
+    if (!selectedProduct.slug?.trim()) {
+      showToast('Unable to save product. Slug is required.');
+      return;
+    }
+    if (!selectedProduct.description?.trim()) {
+      showToast('Unable to save product. Description is required.');
+      return;
+    }
+
+    try {
+      setIsSaving(true);
+
+      const sanitizedSlug = selectedProduct.slug
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9-_]/g, '-');
+
+      const validId = isValidUUID(selectedProduct.id) ? selectedProduct.id : generateUUID();
+
+      const productToSave: Product = {
+        ...selectedProduct,
+        id: validId,
+        slug: sanitizedSlug,
+        title: selectedProduct.title.trim(),
+        description: selectedProduct.description.trim(),
+      };
+
+      const result = await saveProduct(productToSave);
+
+      if (!result.success) {
+        console.error('Save product failed:', result.error);
+        showToast(result.error || 'Unable to save product. Please check the required fields and try again.');
+        return;
+      }
+
+      await loadData();
+      setSelectedProduct(productToSave);
+      setIsEditing(false);
+      showToast('Product saved successfully.');
+    } catch (err: any) {
+      console.error('Unexpected save error:', err);
+      showToast('Unable to save product. Please check the required fields and try again.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDelete = async (id: string) => {
+    if (isSaving) return;
     if (confirm('Are you sure you want to delete this product?')) {
-      await deleteProduct(id);
-      await loadData();
-      if (selectedProduct?.id === id) {
-        setSelectedProduct(products.find((p) => p.id !== id) || null);
+      try {
+        setIsSaving(true);
+        const result = await deleteProduct(id);
+        if (!result.success) {
+          showToast(result.error || 'Unable to delete product.');
+          return;
+        }
+        await loadData();
+        setSelectedProduct((prev) => (prev?.id === id ? null : prev));
+        showToast('Product deleted successfully.');
+      } catch (err: any) {
+        console.error('Delete product error:', err);
+        showToast('Unable to delete product.');
+      } finally {
+        setIsSaving(false);
       }
-      showToast('Product deleted successfully.');
     }
   };
 
@@ -123,7 +183,15 @@ export default function AdminProductsPage() {
     const currentHighlights = selectedProduct.highlights || [];
     setSelectedProduct({
       ...selectedProduct,
-      highlights: [...currentHighlights, { label: 'New Highlight', value: 'Specification detail' }],
+      highlights: [
+        ...currentHighlights,
+        {
+          id: generateUUID(),
+          label: 'New Highlight',
+          value: 'Specification detail',
+          sort_order: currentHighlights.length + 1,
+        },
+      ],
     });
   };
 
@@ -136,7 +204,9 @@ export default function AdminProductsPage() {
 
   const removeHighlight = (index: number) => {
     if (!selectedProduct || !selectedProduct.highlights) return;
-    const updated = selectedProduct.highlights.filter((_, i) => i !== index);
+    const updated = selectedProduct.highlights
+      .filter((_, i) => i !== index)
+      .map((h, i) => ({ ...h, sort_order: i + 1 }));
     setSelectedProduct({ ...selectedProduct, highlights: updated });
   };
 
@@ -157,16 +227,16 @@ export default function AdminProductsPage() {
         newImages[0] = { ...newImages[0], image_url: uploadedUrl };
       } else {
         newImages.push({
-          id: `img-${Date.now()}`,
+          id: generateUUID(),
           image_url: uploadedUrl,
           sort_order: 1,
         });
       }
       setSelectedProduct({ ...selectedProduct, images: newImages });
       showToast('Product image uploaded successfully!');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Image upload failed', err);
-      alert('Failed to upload image. Please try another file or enter an image URL.');
+      alert(err?.message || 'Failed to upload image. Please try another file or enter an image URL.');
     } finally {
       setIsUploadingImage(false);
       e.target.value = '';
@@ -263,10 +333,20 @@ export default function AdminProductsPage() {
                   </h3>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
+                    disabled={isSaving}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all disabled:opacity-50"
                   >
-                    <Save className="w-4 h-4" />
-                    <span>Save to Live Website</span>
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4" />
+                        <span>Save to Live Website</span>
+                      </>
+                    )}
                   </button>
                 </div>
 
@@ -542,6 +622,22 @@ export default function AdminProductsPage() {
                       className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
                     />
                   </div>
+
+                  {/* Applications */}
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-extrabold text-stone-900 uppercase tracking-wider mb-1">
+                      Commercial Applications & Uses
+                    </label>
+                    <input
+                      type="text"
+                      value={selectedProduct.applications || ''}
+                      onChange={(e) =>
+                        setSelectedProduct({ ...selectedProduct, applications: e.target.value })
+                      }
+                      placeholder="e.g. Food processing, culinary formulations, cosmetics"
+                      className="admin-field w-full py-2.5 px-3.5 rounded-xl bg-white border border-[#CBD5E1] text-[#17212B] placeholder:text-[#64748B] text-sm focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20"
+                    />
+                  </div>
                 </div>
 
                 {/* Structured Highlights Repeatable Fields */}
@@ -608,10 +704,20 @@ export default function AdminProductsPage() {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all"
+                    disabled={isSaving}
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-green hover:bg-[#984C34] text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all disabled:opacity-50"
                   >
-                    <Save className="w-4 h-4" />
-                    <span>Save Changes</span>
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4" />
+                        <span>Save Changes</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

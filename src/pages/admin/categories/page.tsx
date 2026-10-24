@@ -6,6 +6,8 @@ import {
   fetchAllCategoriesAdmin,
   saveCategory,
   deleteCategory,
+  generateUUID,
+  isValidUUID,
 } from '@/lib/supabase';
 import { Category } from '@/types/database';
 import { Plus, Trash2, Edit, Save, Layers, CheckCircle2, XCircle } from 'lucide-react';
@@ -15,6 +17,7 @@ export default function AdminCategoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     loadCategories();
@@ -37,7 +40,7 @@ export default function AdminCategoriesPage() {
 
   const handleAddNew = () => {
     const newCat: Category = {
-      id: `cat-${Date.now()}`,
+      id: generateUUID(),
       name: 'New Commodity Sector',
       slug: `sector-${Date.now().toString().slice(-4)}`,
       description: 'Export agricultural commodity sector',
@@ -49,18 +52,48 @@ export default function AdminCategoriesPage() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedCategory) return;
-    await saveCategory(selectedCategory);
-    await loadCategories();
-    showToast('Category updated successfully!');
+    if (!selectedCategory || isSaving) return;
+
+    try {
+      setIsSaving(true);
+      const catToSave: Category = {
+        ...selectedCategory,
+        id: isValidUUID(selectedCategory.id) ? selectedCategory.id : generateUUID(),
+        slug: selectedCategory.slug.toLowerCase().trim().replace(/[^a-z0-9-_]/g, '-'),
+      };
+      const result = await saveCategory(catToSave);
+      if (!result.success) {
+        showToast(result.error || 'Unable to save category.');
+        return;
+      }
+      await loadCategories();
+      setSelectedCategory(catToSave);
+      showToast('Category updated successfully!');
+    } catch (err: any) {
+      showToast('Unable to save category.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDelete = async (id: string) => {
+    if (isSaving) return;
     if (confirm('Are you sure you want to delete this category?')) {
-      await deleteCategory(id);
-      await loadCategories();
-      setSelectedCategory(null);
-      showToast('Category removed.');
+      try {
+        setIsSaving(true);
+        const result = await deleteCategory(id);
+        if (!result.success) {
+          showToast(result.error || 'Unable to delete category.');
+          return;
+        }
+        await loadCategories();
+        setSelectedCategory(null);
+        showToast('Category removed.');
+      } catch (err: any) {
+        showToast('Unable to delete category.');
+      } finally {
+        setIsSaving(false);
+      }
     }
   };
 

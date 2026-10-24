@@ -24,9 +24,9 @@ import { Product, SiteSettings } from '@/types/database';
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
 
-  // Find initial fallback product matching slug if available
-  const initialProduct = defaultProducts.find((p) => p.slug === slug) || defaultProducts[0];
-  const [product, setProduct] = useState<Product | null>(initialProduct);
+  const [product, setProduct] = useState<Product | null>(
+    () => defaultProducts.find((p) => p.slug === slug) || null
+  );
   const [allProducts, setAllProducts] = useState<Product[]>(defaultProducts);
   const [site, setSite] = useState<SiteSettings>(defaultSiteSettings);
   const [loading, setLoading] = useState(true);
@@ -40,9 +40,7 @@ export default function ProductDetailPage() {
       fetchSiteSettings(),
     ])
       .then(([prod, prods, s]) => {
-        if (prod) {
-          setProduct(prod);
-        }
+        setProduct(prod);
         setAllProducts(prods);
         setSite(s);
       })
@@ -50,11 +48,24 @@ export default function ProductDetailPage() {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  if (loading && !product) {
+    return (
+      <div className="pt-32 pb-20 bg-navy-dark min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            Loading Product Details...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (!product && !loading) {
     return (
       <div className="pt-32 pb-20 bg-navy-dark min-h-screen text-center">
         <h1 className="text-3xl font-bold text-white mb-4">Product Not Found</h1>
-        <p className="text-slate-300 mb-8">The requested export product could not be found.</p>
+        <p className="text-slate-300 mb-8">The requested export product could not be found or is not published.</p>
         <Link
           href="/products"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-green text-navy-dark font-bold hover:bg-brand-lime transition-colors"
@@ -65,7 +76,7 @@ export default function ProductDetailPage() {
     );
   }
 
-  const currentProduct = product || initialProduct;
+  const currentProduct = product;
 
   const primaryImage =
     currentProduct.images && currentProduct.images.length > 0

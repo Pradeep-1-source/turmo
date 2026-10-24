@@ -43,6 +43,27 @@ export const supabase: SupabaseClient | null = isSupabaseConfigured()
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
+export interface SaveResult {
+  success: boolean;
+  error?: string;
+}
+
+export function isValidUUID(uuid?: string | null): boolean {
+  if (!uuid) return false;
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid);
+}
+
+export function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 // Helper to check for client-side local overrides (from Admin in demo mode)
 const getLocalOverride = <T>(key: string, fallback: T): T => {
   if (typeof window === 'undefined') return fallback;
@@ -118,8 +139,19 @@ export async function fetchProducts(): Promise<Product[]> {
         .eq('published', true)
         .order('sort_order', { ascending: true });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
+        data.forEach((p: any) => {
+          if (Array.isArray(p.images)) {
+            p.images.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+          }
+          if (Array.isArray(p.highlights)) {
+            p.highlights.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+          }
+        });
         return data as Product[];
+      }
+      if (error) {
+        console.error('fetchProducts Supabase error:', error);
       }
     } catch (e) {
       console.warn('Falling back to default products', e);
@@ -142,7 +174,18 @@ export async function fetchAllProductsAdmin(): Promise<Product[]> {
         .order('sort_order', { ascending: true });
 
       if (!error && data) {
+        data.forEach((p: any) => {
+          if (Array.isArray(p.images)) {
+            p.images.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+          }
+          if (Array.isArray(p.highlights)) {
+            p.highlights.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+          }
+        });
         return data as Product[];
+      }
+      if (error) {
+        console.error('fetchAllProductsAdmin Supabase error:', error);
       }
     } catch (e) {
       console.warn('Falling back to local products for admin', e);
@@ -152,6 +195,39 @@ export async function fetchAllProductsAdmin(): Promise<Product[]> {
 }
 
 export async function fetchProductBySlug(slug: string): Promise<Product | null> {
+  if (!slug) return null;
+
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select(`
+          *,
+          category:categories(*),
+          images:product_images(*),
+          highlights:product_highlights(*)
+        `)
+        .eq('slug', slug)
+        .eq('published', true)
+        .maybeSingle();
+
+      if (!error && data) {
+        if (Array.isArray(data.images)) {
+          data.images.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+        }
+        if (Array.isArray(data.highlights)) {
+          data.highlights.sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
+        }
+        return data as Product;
+      }
+      if (error) {
+        console.error('fetchProductBySlug Supabase error:', error);
+      }
+    } catch (e) {
+      console.warn('Falling back for fetchProductBySlug', e);
+    }
+  }
+
   const products = await fetchProducts();
   const product = products.find((p) => p.slug === slug);
   return product || null;
@@ -336,135 +412,280 @@ export async function saveSiteSettings(settings: SiteSettings): Promise<boolean>
   return true;
 }
 
-export async function saveProduct(product: Product): Promise<boolean> {
-  const currentProducts = await fetchAllProductsAdmin();
-  const existingIdx = currentProducts.findIndex((p) => p.id === product.id);
-  let updatedProducts: Product[];
-  if (existingIdx >= 0) {
-    updatedProducts = [...currentProducts];
-    updatedProducts[existingIdx] = product;
-  } else {
-    updatedProducts = [product, ...currentProducts];
+export async function saveProduct(product: Product): Promise<SaveResult> {
+  if (!product) {
+    return { success: false, error: 'No product data provided.' };
   }
-  setLocalOverride('products', updatedProducts);
+
+  const title = product.title?.trim();
+  if (!title) {
+    return { success: false, error: 'Product title is required.' };
+  }
+
+  const slug = product.slug?.trim();
+  if (!slug) {
+    return { success: false, error: 'Product slug is required.' };
+  }
+
+  const description = product.description?.trim();
+  if (!description) {
+    return { success: false, error: 'Product description is required.' };
+  }
+
+  const productId = isValidUUID(product.id) ? product.id : generateUUID();
+  const validCategoryId = isValidUUID(product.category_id) ? product.category_id : null;
 
   if (isSupabaseConfigured() && supabase) {
     try {
-      const { data, error } = await supabase.from('products').upsert({
-        id: product.id,
-        category_id: product.category_id,
-        title: product.title,
-        slug: product.slug,
-        tagline: product.tagline,
-        description: product.description,
-        applications: product.applications,
-        grade: product.grade,
-        moq: product.moq,
-        certifications: product.certifications,
-        packaging: product.packaging,
-        featured: product.featured,
-        published: product.published,
-        sort_order: product.sort_order,
-        seo_title: product.seo_title,
-        seo_description: product.seo_description,
+      // 1. Upsert product record
+      const productRow = {
+        id: productId,
+        category_id: validCategoryId,
+        title,
+        slug,
+        tagline: product.tagline?.trim() || null,
+        description,
+        applications: product.applications?.trim() || null,
+        grade: product.grade?.trim() || null,
+        moq: product.moq?.trim() || null,
+        certifications: product.certifications?.trim() || null,
+        packaging: product.packaging?.trim() || null,
+        featured: Boolean(product.featured),
+        published: Boolean(product.published),
+        sort_order: typeof product.sort_order === 'number' ? product.sort_order : 0,
+        seo_title: product.seo_title?.trim() || null,
+        seo_description: product.seo_description?.trim() || null,
         updated_at: new Date().toISOString(),
-      });
-      if (error) throw error;
-    } catch (e) {
-      console.error('Supabase saveProduct failed', e);
-      return false;
+      };
+
+      const { error: prodError } = await supabase
+        .from('products')
+        .upsert(productRow, { onConflict: 'id' });
+
+      if (prodError) {
+        console.error('Supabase save product error:', prodError);
+        if (prodError.message?.includes('duplicate key') || prodError.message?.includes('unique constraint')) {
+          return { success: false, error: 'A product with this URL slug already exists. Please choose a unique slug.' };
+        }
+        return { success: false, error: `Database error: ${prodError.message}` };
+      }
+
+      // 2. Synchronize product images in public.product_images
+      const { error: delImgErr } = await supabase
+        .from('product_images')
+        .delete()
+        .eq('product_id', productId);
+
+      if (delImgErr) {
+        console.error('Supabase delete old product_images error:', delImgErr);
+        return { success: false, error: `Failed to update product images: ${delImgErr.message}` };
+      }
+
+      const rawImages = product.images || [];
+      const imagesToInsert = rawImages
+        .filter((img) => img.image_url && img.image_url.trim() !== '')
+        .map((img, idx) => ({
+          product_id: productId,
+          image_url: img.image_url.trim(),
+          alt_text: img.alt_text?.trim() || title,
+          sort_order: typeof img.sort_order === 'number' ? img.sort_order : idx + 1,
+        }));
+
+      if (imagesToInsert.length > 0) {
+        const { error: insImgErr } = await supabase
+          .from('product_images')
+          .insert(imagesToInsert);
+
+        if (insImgErr) {
+          console.error('Supabase insert product_images error:', insImgErr);
+          return { success: false, error: `Failed to save product images: ${insImgErr.message}` };
+        }
+      }
+
+      // 3. Synchronize product highlights in public.product_highlights
+      const { error: delHighErr } = await supabase
+        .from('product_highlights')
+        .delete()
+        .eq('product_id', productId);
+
+      if (delHighErr) {
+        console.error('Supabase delete old product_highlights error:', delHighErr);
+        return { success: false, error: `Failed to update product highlights: ${delHighErr.message}` };
+      }
+
+      const rawHighlights = product.highlights || [];
+      const highlightsToInsert = rawHighlights
+        .filter((h) => h.label && h.label.trim() !== '' && h.value && h.value.trim() !== '')
+        .map((h, idx) => ({
+          product_id: productId,
+          label: h.label.trim(),
+          value: h.value.trim(),
+          sort_order: typeof h.sort_order === 'number' ? h.sort_order : idx + 1,
+        }));
+
+      if (highlightsToInsert.length > 0) {
+        const { error: insHighErr } = await supabase
+          .from('product_highlights')
+          .insert(highlightsToInsert);
+
+        if (insHighErr) {
+          console.error('Supabase insert product_highlights error:', insHighErr);
+          return { success: false, error: `Failed to save product highlights: ${insHighErr.message}` };
+        }
+      }
+    } catch (e: any) {
+      console.error('Supabase saveProduct failed with exception:', e);
+      return { success: false, error: e?.message || 'Unexpected database error while saving product.' };
     }
   }
-  return true;
+
+  // Update local override cache only after database operations succeed
+  const normalizedProduct: Product = {
+    ...product,
+    id: productId,
+    category_id: validCategoryId || undefined,
+    title,
+    slug,
+    description,
+  };
+
+  const currentProducts = await fetchAllProductsAdmin();
+  const existingIdx = currentProducts.findIndex((p) => p.id === productId);
+  let updatedProducts: Product[];
+  if (existingIdx >= 0) {
+    updatedProducts = [...currentProducts];
+    updatedProducts[existingIdx] = normalizedProduct;
+  } else {
+    updatedProducts = [normalizedProduct, ...currentProducts];
+  }
+  setLocalOverride('products', updatedProducts);
+
+  return { success: true };
 }
 
-export async function deleteProduct(productId: string): Promise<boolean> {
-  const currentProducts = await fetchAllProductsAdmin();
-  const updatedProducts = currentProducts.filter((p) => p.id !== productId);
-  setLocalOverride('products', updatedProducts);
+export async function deleteProduct(productId: string): Promise<SaveResult> {
+  if (!productId) {
+    return { success: false, error: 'Product ID is required for deletion.' };
+  }
 
   if (isSupabaseConfigured() && supabase) {
     try {
       const { error } = await supabase.from('products').delete().eq('id', productId);
-      if (error) throw error;
-    } catch (e) {
-      console.error('Supabase deleteProduct failed', e);
-      return false;
+      if (error) {
+        console.error('Supabase deleteProduct error:', error);
+        return { success: false, error: `Failed to delete product: ${error.message}` };
+      }
+    } catch (e: any) {
+      console.error('Supabase deleteProduct failed with exception:', e);
+      return { success: false, error: e?.message || 'Unexpected database error while deleting product.' };
     }
   }
-  return true;
+
+  const currentProducts = await fetchAllProductsAdmin();
+  const updatedProducts = currentProducts.filter((p) => p.id !== productId);
+  setLocalOverride('products', updatedProducts);
+  return { success: true };
 }
 
-export async function saveCategory(category: Category): Promise<boolean> {
-  const currentCategories = await fetchAllCategoriesAdmin();
-  const existingIdx = currentCategories.findIndex((c) => c.id === category.id);
-  let updatedCategories: Category[];
-  if (existingIdx >= 0) {
-    updatedCategories = [...currentCategories];
-    updatedCategories[existingIdx] = category;
-  } else {
-    updatedCategories = [...currentCategories, category];
+export async function saveCategory(category: Category): Promise<SaveResult> {
+  if (!category || !category.name?.trim()) {
+    return { success: false, error: 'Category name is required.' };
   }
-  setLocalOverride('categories', updatedCategories);
+
+  const catId = isValidUUID(category.id) ? category.id : generateUUID();
+  const normalizedCategory: Category = {
+    ...category,
+    id: catId,
+    name: category.name.trim(),
+    slug: category.slug.trim(),
+  };
 
   if (isSupabaseConfigured() && supabase) {
     try {
-      const { error } = await supabase.from('categories').upsert(category);
-      if (error) throw error;
-    } catch (e) {
-      console.error('Supabase saveCategory failed', e);
-      return false;
+      const { error } = await supabase.from('categories').upsert(normalizedCategory, { onConflict: 'id' });
+      if (error) {
+        console.error('Supabase saveCategory failed:', error);
+        return { success: false, error: error.message };
+      }
+    } catch (e: any) {
+      console.error('Supabase saveCategory failed with exception:', e);
+      return { success: false, error: e?.message || 'Unexpected error while saving category.' };
     }
   }
-  return true;
+
+  const currentCategories = await fetchAllCategoriesAdmin();
+  const existingIdx = currentCategories.findIndex((c) => c.id === catId);
+  let updatedCategories: Category[];
+  if (existingIdx >= 0) {
+    updatedCategories = [...currentCategories];
+    updatedCategories[existingIdx] = normalizedCategory;
+  } else {
+    updatedCategories = [...currentCategories, normalizedCategory];
+  }
+  setLocalOverride('categories', updatedCategories);
+  return { success: true };
 }
 
-export async function deleteCategory(categoryId: string): Promise<boolean> {
-  const currentCategories = await fetchAllCategoriesAdmin();
-  const updated = currentCategories.filter((c) => c.id !== categoryId);
-  setLocalOverride('categories', updated);
+export async function deleteCategory(categoryId: string): Promise<SaveResult> {
+  if (!categoryId) {
+    return { success: false, error: 'Category ID is required.' };
+  }
 
   if (isSupabaseConfigured() && supabase) {
     try {
       const { error } = await supabase.from('categories').delete().eq('id', categoryId);
-      if (error) throw error;
-    } catch (e) {
-      console.error('Supabase deleteCategory failed', e);
-      return false;
+      if (error) {
+        console.error('Supabase deleteCategory failed:', error);
+        return { success: false, error: error.message };
+      }
+    } catch (e: any) {
+      console.error('Supabase deleteCategory failed with exception:', e);
+      return { success: false, error: e?.message || 'Unexpected error while deleting category.' };
     }
   }
-  return true;
+
+  const currentCategories = await fetchAllCategoriesAdmin();
+  const updated = currentCategories.filter((c) => c.id !== categoryId);
+  setLocalOverride('categories', updated);
+  return { success: true };
 }
 
 export async function uploadProductImage(file: File): Promise<string> {
-  // 1. Try Supabase Storage if configured
-  if (isSupabaseConfigured() && supabase) {
-    try {
-      const fileExt = file.name.split('.').pop() || 'jpg';
-      const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-      const filePath = `products/${cleanFileName}`;
-
-      const { data, error } = await supabase.storage
-        .from('product-images')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: true,
-        });
-
-      if (!error && data) {
-        const { data: publicData } = supabase.storage
-          .from('product-images')
-          .getPublicUrl(filePath);
-        if (publicData?.publicUrl) {
-          return publicData.publicUrl;
-        }
-      }
-    } catch (e) {
-      console.warn('Supabase storage upload failed, converting to local data URI', e);
-    }
+  if (!file) {
+    throw new Error('No file provided for upload.');
   }
 
-  // 2. Client-side local image reader (returns base64 data URI for instant preview & persistence)
+  // 1. Try Supabase Storage if configured
+  if (isSupabaseConfigured() && supabase) {
+    const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+    const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+    const filePath = `products/${cleanFileName}`;
+
+    const { data, error } = await supabase.storage
+      .from('product-images')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: true,
+      });
+
+    if (error) {
+      console.error('Supabase storage upload error:', error);
+      throw new Error(`Storage upload failed: ${error.message}`);
+    }
+
+    if (data) {
+      const { data: publicData } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+
+      if (publicData?.publicUrl) {
+        return publicData.publicUrl;
+      }
+    }
+    throw new Error('Storage upload succeeded but could not generate public URL.');
+  }
+
+  // 2. Only if Supabase is explicitly NOT configured (local development / offline demo fallback)
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {

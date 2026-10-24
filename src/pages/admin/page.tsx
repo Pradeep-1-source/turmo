@@ -46,10 +46,12 @@ export default function AdminDashboardPage() {
 
   const handleTogglePublish = async (product: Product) => {
     const updated = { ...product, published: !product.published };
-    await saveProduct(updated);
-    setProducts((prev) =>
-      prev.map((item) => (item.id === product.id ? updated : item))
-    );
+    const res = await saveProduct(updated);
+    if (res.success) {
+      setProducts((prev) =>
+        prev.map((item) => (item.id === product.id ? updated : item))
+      );
+    }
   };
 
   const activeProductsCount = products.filter((p) => p.published).length;
