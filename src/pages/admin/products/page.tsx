@@ -11,6 +11,7 @@ import {
   uploadProductImage,
   generateUUID,
   isValidUUID,
+  isSupabaseConfigured,
 } from '@/lib/supabase';
 import { Product, Category, ProductHighlight } from '@/types/database';
 import {
@@ -264,6 +265,20 @@ export default function AdminProductsPage() {
       )}
 
       <main className="p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1 min-w-0">
+        {!isSupabaseConfigured() && (
+          <div className="p-4 rounded-2xl bg-amber-500/10 border-2 border-amber-500/30 text-amber-900 text-xs sm:text-sm font-semibold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+            <div className="flex items-start gap-2.5">
+              <span className="text-base shrink-0">⚠️</span>
+              <div>
+                <strong className="block text-amber-950 font-bold">Cloud Database Not Connected (Changes Will NOT Appear on Mobile)</strong>
+                <p className="text-amber-800 text-xs mt-0.5 leading-relaxed">
+                  Supabase credentials are not detected. To make new product images and edits visible to live mobile visitors, click the <strong>&quot;⚠️ Connect Database&quot;</strong> button in the top header to enter your credentials, or add <code className="bg-amber-100 px-1 py-0.5 rounded font-mono text-[11px]">VITE_SUPABASE_URL</code> and <code className="bg-amber-100 px-1 py-0.5 rounded font-mono text-[11px]">VITE_SUPABASE_ANON_KEY</code> in your Vercel Project Settings.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Top Control Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">

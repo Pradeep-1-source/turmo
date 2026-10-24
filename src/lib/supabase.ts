@@ -18,29 +18,44 @@ import {
   defaultSiteSettings,
 } from './defaultData';
 
-const supabaseUrl =
-  (typeof import.meta !== 'undefined' && import.meta.env?.NEXT_PUBLIC_SUPABASE_URL) ||
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) ||
-  (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SUPABASE_URL) ||
-  '';
+const getEnvOrLocal = (envKey: string, localKey: string) => {
+  let val = '';
+  if (typeof import.meta !== 'undefined' && import.meta.env) {
+    val = (import.meta.env[`NEXT_PUBLIC_${envKey}`] || import.meta.env[`VITE_${envKey}`] || '') as string;
+  }
+  if (!val && typeof window !== 'undefined') {
+    val = localStorage.getItem(localKey) || '';
+  }
+  return (val || '').trim();
+};
 
-const supabaseAnonKey =
-  (typeof import.meta !== 'undefined' && import.meta.env?.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_ANON_KEY) ||
-  (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
-  '';
+export const getSupabaseCredentials = () => {
+  const url = getEnvOrLocal('SUPABASE_URL', 'uf_supabase_url');
+  const key = getEnvOrLocal('SUPABASE_ANON_KEY', 'uf_supabase_anon_key');
+  const isConfigured =
+    Boolean(url) &&
+    Boolean(key) &&
+    !url.includes('your-project-id') &&
+    !key.includes('your-anon-key');
+  return { url, key, isConfigured };
+};
 
 export const isSupabaseConfigured = (): boolean => {
-  return (
-    Boolean(supabaseUrl) &&
-    Boolean(supabaseAnonKey) &&
-    !supabaseUrl.includes('your-project-id') &&
-    !supabaseAnonKey.includes('your-anon-key')
-  );
+  return getSupabaseCredentials().isConfigured;
+};
+
+let _supabaseInstance: SupabaseClient | null = null;
+export const getSupabase = (): SupabaseClient | null => {
+  const { url, key, isConfigured } = getSupabaseCredentials();
+  if (!isConfigured) return null;
+  if (!_supabaseInstance) {
+    _supabaseInstance = createClient(url, key);
+  }
+  return _supabaseInstance;
 };
 
 export const supabase: SupabaseClient | null = isSupabaseConfigured()
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? getSupabase()
   : null;
 
 export interface SaveResult {
@@ -435,32 +450,39 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
   const productId = isValidUUID(product.id) ? product.id : generateUUID();
   const validCategoryId = isValidUUID(product.category_id) ? product.category_id : null;
 
-  if (isSupabaseConfigured() && supabase) {
-    try {
-      // 1. Upsert product record
-      const productRow = {
-        id: productId,
-        category_id: validCategoryId,
-        title,
-        slug,
-        tagline: product.tagline?.trim() || null,
-        description,
-        applications: product.applications?.trim() || null,
-        grade: product.grade?.trim() || null,
-        moq: product.moq?.trim() || null,
-        certifications: product.certifications?.trim() || null,
-        packaging: product.packaging?.trim() || null,
-        featured: Boolean(product.featured),
-        published: Boolean(product.published),
-        sort_order: typeof product.sort_order === 'number' ? product.sort_order : 0,
-        seo_title: product.seo_title?.trim() || null,
-        seo_description: product.seo_description?.trim() || null,
-        updated_at: new Date().toISOString(),
-      };
+  const client = getSupabase() || supabase;
+  if (!isSupabaseConfigured() || !client) {
+    return {
+      success: false,
+      error: 'Supabase database is NOT connected! Changes cannot sync to mobile devices or other visitors. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel settings.',
+    };
+  }
 
-      const { error: prodError } = await supabase
-        .from('products')
-        .upsert(productRow, { onConflict: 'id' });
+  try {
+    // 1. Upsert product record
+    const productRow = {
+      id: productId,
+      category_id: validCategoryId,
+      title,
+      slug,
+      tagline: product.tagline?.trim() || null,
+      description,
+      applications: product.applications?.trim() || null,
+      grade: product.grade?.trim() || null,
+      moq: product.moq?.trim() || null,
+      certifications: product.certifications?.trim() || null,
+      packaging: product.packaging?.trim() || null,
+      featured: Boolean(product.featured),
+      published: Boolean(product.published),
+      sort_order: typeof product.sort_order === 'number' ? product.sort_order : 0,
+      seo_title: product.seo_title?.trim() || null,
+      seo_description: product.seo_description?.trim() || null,
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error: prodError } = await client
+      .from('products')
+      .upsert(productRow, { onConflict: 'id' });
 
       if (prodError) {
         console.error('Supabase save product error:', prodError);
@@ -471,7 +493,7 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
       }
 
       // 2. Synchronize product images in public.product_images
-      const { error: delImgErr } = await supabase
+      const { error: delImgErr } = await client
         .from('product_images')
         .delete()
         .eq('product_id', productId);
@@ -492,7 +514,7 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
         }));
 
       if (imagesToInsert.length > 0) {
-        const { error: insImgErr } = await supabase
+        const { error: insImgErr } = await client
           .from('product_images')
           .insert(imagesToInsert);
 
@@ -503,7 +525,7 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
       }
 
       // 3. Synchronize product highlights in public.product_highlights
-      const { error: delHighErr } = await supabase
+      const { error: delHighErr } = await client
         .from('product_highlights')
         .delete()
         .eq('product_id', productId);
@@ -524,7 +546,7 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
         }));
 
       if (highlightsToInsert.length > 0) {
-        const { error: insHighErr } = await supabase
+        const { error: insHighErr } = await client
           .from('product_highlights')
           .insert(highlightsToInsert);
 
@@ -537,7 +559,6 @@ export async function saveProduct(product: Product): Promise<SaveResult> {
       console.error('Supabase saveProduct failed with exception:', e);
       return { success: false, error: e?.message || 'Unexpected database error while saving product.' };
     }
-  }
 
   // Update local override cache only after database operations succeed
   const normalizedProduct: Product = {
@@ -568,17 +589,23 @@ export async function deleteProduct(productId: string): Promise<SaveResult> {
     return { success: false, error: 'Product ID is required for deletion.' };
   }
 
-  if (isSupabaseConfigured() && supabase) {
-    try {
-      const { error } = await supabase.from('products').delete().eq('id', productId);
-      if (error) {
-        console.error('Supabase deleteProduct error:', error);
-        return { success: false, error: `Failed to delete product: ${error.message}` };
-      }
-    } catch (e: any) {
-      console.error('Supabase deleteProduct failed with exception:', e);
-      return { success: false, error: e?.message || 'Unexpected database error while deleting product.' };
+  const client = getSupabase() || supabase;
+  if (!isSupabaseConfigured() || !client) {
+    return {
+      success: false,
+      error: 'Supabase database is NOT connected. Please configure Supabase in Vercel.',
+    };
+  }
+
+  try {
+    const { error } = await client.from('products').delete().eq('id', productId);
+    if (error) {
+      console.error('Supabase deleteProduct error:', error);
+      return { success: false, error: `Failed to delete product: ${error.message}` };
     }
+  } catch (e: any) {
+    console.error('Supabase deleteProduct failed with exception:', e);
+    return { success: false, error: e?.message || 'Unexpected database error while deleting product.' };
   }
 
   const currentProducts = await fetchAllProductsAdmin();
@@ -600,17 +627,23 @@ export async function saveCategory(category: Category): Promise<SaveResult> {
     slug: category.slug.trim(),
   };
 
-  if (isSupabaseConfigured() && supabase) {
-    try {
-      const { error } = await supabase.from('categories').upsert(normalizedCategory, { onConflict: 'id' });
-      if (error) {
-        console.error('Supabase saveCategory failed:', error);
-        return { success: false, error: error.message };
-      }
-    } catch (e: any) {
-      console.error('Supabase saveCategory failed with exception:', e);
-      return { success: false, error: e?.message || 'Unexpected error while saving category.' };
+  const client = getSupabase() || supabase;
+  if (!isSupabaseConfigured() || !client) {
+    return {
+      success: false,
+      error: 'Supabase database is NOT connected. Please configure Supabase in Vercel.',
+    };
+  }
+
+  try {
+    const { error } = await client.from('categories').upsert(normalizedCategory, { onConflict: 'id' });
+    if (error) {
+      console.error('Supabase saveCategory failed:', error);
+      return { success: false, error: error.message };
     }
+  } catch (e: any) {
+    console.error('Supabase saveCategory failed with exception:', e);
+    return { success: false, error: e?.message || 'Unexpected error while saving category.' };
   }
 
   const currentCategories = await fetchAllCategoriesAdmin();
@@ -631,17 +664,23 @@ export async function deleteCategory(categoryId: string): Promise<SaveResult> {
     return { success: false, error: 'Category ID is required.' };
   }
 
-  if (isSupabaseConfigured() && supabase) {
-    try {
-      const { error } = await supabase.from('categories').delete().eq('id', categoryId);
-      if (error) {
-        console.error('Supabase deleteCategory failed:', error);
-        return { success: false, error: error.message };
-      }
-    } catch (e: any) {
-      console.error('Supabase deleteCategory failed with exception:', e);
-      return { success: false, error: e?.message || 'Unexpected error while deleting category.' };
+  const client = getSupabase() || supabase;
+  if (!isSupabaseConfigured() || !client) {
+    return {
+      success: false,
+      error: 'Supabase database is NOT connected. Please configure Supabase in Vercel.',
+    };
+  }
+
+  try {
+    const { error } = await client.from('categories').delete().eq('id', categoryId);
+    if (error) {
+      console.error('Supabase deleteCategory failed:', error);
+      return { success: false, error: error.message };
     }
+  } catch (e: any) {
+    console.error('Supabase deleteCategory failed with exception:', e);
+    return { success: false, error: e?.message || 'Unexpected error while deleting category.' };
   }
 
   const currentCategories = await fetchAllCategoriesAdmin();
@@ -655,46 +694,38 @@ export async function uploadProductImage(file: File): Promise<string> {
     throw new Error('No file provided for upload.');
   }
 
-  // 1. Try Supabase Storage if configured
-  if (isSupabaseConfigured() && supabase) {
-    const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-    const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-    const filePath = `products/${cleanFileName}`;
-
-    const { data, error } = await supabase.storage
-      .from('product-images')
-      .upload(filePath, file, {
-        cacheControl: '3600',
-        upsert: true,
-      });
-
-    if (error) {
-      console.error('Supabase storage upload error:', error);
-      throw new Error(`Storage upload failed: ${error.message}`);
-    }
-
-    if (data) {
-      const { data: publicData } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(filePath);
-
-      if (publicData?.publicUrl) {
-        return publicData.publicUrl;
-      }
-    }
-    throw new Error('Storage upload succeeded but could not generate public URL.');
+  const client = getSupabase() || supabase;
+  if (!isSupabaseConfigured() || !client) {
+    throw new Error(
+      'Cannot upload image: Cloud database is not connected. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel to sync images to mobile.'
+    );
   }
 
-  // 2. Only if Supabase is explicitly NOT configured (local development / offline demo fallback)
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      resolve(reader.result as string);
-    };
-    reader.onerror = (error) => {
-      reject(error);
-    };
-    reader.readAsDataURL(file);
-  });
+  const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+  const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+  const filePath = `products/${cleanFileName}`;
+
+  const { data, error } = await client.storage
+    .from('product-images')
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: true,
+    });
+
+  if (error) {
+    console.error('Supabase storage upload error:', error);
+    throw new Error(`Storage upload failed: ${error.message}`);
+  }
+
+  if (data) {
+    const { data: publicData } = client.storage
+      .from('product-images')
+      .getPublicUrl(filePath);
+
+    if (publicData?.publicUrl) {
+      return publicData.publicUrl;
+    }
+  }
+  throw new Error('Storage upload succeeded but could not generate public URL.');
 }
 
